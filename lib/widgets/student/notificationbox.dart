@@ -16,7 +16,7 @@ class StudentNotificationBox extends StatelessWidget {
           padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
           width: double.infinity,
           decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 223, 223, 223),
+            color: const Color.fromARGB(255, 240, 240, 240),
             borderRadius: BorderRadius.circular(15),
           ),
           child: Column(
@@ -32,7 +32,8 @@ class StudentNotificationBox extends StatelessWidget {
                     ),
                     child: Text(
                       not.event.org,
-                      style: TextStyle(fontSize: 11),
+                      style:
+                          TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
                     ),
                   ),
                   Spacer(),
@@ -67,6 +68,9 @@ class StudentNotificationBox extends StatelessWidget {
                   padding: WidgetStatePropertyAll(
                     EdgeInsets.all(0),
                   ),
+                  overlayColor: WidgetStatePropertyAll(
+                    const Color.fromARGB(14, 121, 85, 72),
+                  ),
                 ),
                 onPressed: () => {
                   Navigator.push(
@@ -77,7 +81,12 @@ class StudentNotificationBox extends StatelessWidget {
                     ),
                   ),
                 },
-                child: Text("Go to event"),
+                child: Text(
+                  "Go to event",
+                  style: TextStyle(
+                    color: Colors.brown,
+                  ),
+                ),
               ),
             ],
           ),

@@ -12,22 +12,41 @@ class StudentEvents extends StatefulWidget {
 }
 
 class _StudentEventsState extends State<StudentEvents> {
-  List list = events;
+  int i = 0;
+  List<Event> list = events;
+  List<Event> _list = events;
+  void search(String str) {
+    Set<Event> s = {};
+    s.addAll(list.where((s) => s.name.toLowerCase().contains(str)).toList());
+    s.addAll(list.where((s) => s.org.toLowerCase().contains(str)).toList());
+    s.addAll(
+        list.where((s) => s.venue.name.toLowerCase().contains(str)).toList());
+    setState(() {
+      _list = s.toList();
+    });
+  }
+
   void getAll() {
     setState(() {
-      // list = l1;
+      i = 0;
+      list = events;
+      _list = list;
     });
   }
 
   void getInterested() {
     setState(() {
-      // list = l2;
+      i = 1;
+      list = user.interested;
+      _list = list;
     });
   }
 
   void getRegistered() {
     setState(() {
-      // list = l3;
+      i = 2;
+      list = user.registered;
+      _list = list;
     });
   }
 
@@ -42,28 +61,88 @@ class _StudentEventsState extends State<StudentEvents> {
           children: [
             Padding(
               padding: EdgeInsets.all(20),
-              child: EventSearchBar(),
+              child: EventSearchBar(search),
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 TextButton(
+                  style: ButtonStyle(
+                    overlayColor: WidgetStatePropertyAll(
+                        const Color.fromARGB(36, 121, 85, 72)),
+                  ),
                   onPressed: () => {
                     getAll(),
                   },
-                  child: Text("ALL"),
+                  child: Column(
+                    children: [
+                      Text(
+                        "ALL",
+                        style: TextStyle(
+                          fontWeight:
+                              i == 0 ? FontWeight.bold : FontWeight.normal,
+                          color: Colors.black,
+                        ),
+                      ),
+                      Container(
+                        height: 2,
+                        color: i == 0 ? Colors.black : Colors.transparent,
+                        width: 20,
+                      ),
+                    ],
+                  ),
                 ),
                 TextButton(
+                  style: ButtonStyle(
+                    overlayColor: WidgetStatePropertyAll(
+                        const Color.fromARGB(36, 121, 85, 72)),
+                  ),
                   onPressed: () => {
                     getInterested(),
                   },
-                  child: Text("INTERESTED"),
+                  child: Column(
+                    children: [
+                      Text(
+                        "INTERESTED",
+                        style: TextStyle(
+                          fontWeight:
+                              i == 1 ? FontWeight.bold : FontWeight.normal,
+                          color: Colors.black,
+                        ),
+                      ),
+                      Container(
+                        height: 2,
+                        color: i == 1 ? Colors.black : Colors.transparent,
+                        width: 20,
+                      ),
+                    ],
+                  ),
                 ),
                 TextButton(
+                  style: ButtonStyle(
+                    overlayColor: WidgetStatePropertyAll(
+                        const Color.fromARGB(36, 121, 85, 72)),
+                  ),
                   onPressed: () => {
                     getRegistered(),
                   },
-                  child: Text("REGISTERED"),
+                  child: Column(
+                    children: [
+                      Text(
+                        "REGISTERED",
+                        style: TextStyle(
+                          fontWeight:
+                              i == 2 ? FontWeight.bold : FontWeight.normal,
+                          color: Colors.black,
+                        ),
+                      ),
+                      Container(
+                        height: 2,
+                        color: i == 2 ? Colors.black : Colors.transparent,
+                        width: 20,
+                      ),
+                    ],
+                  ),
                 ),
               ],
             ),
@@ -76,13 +155,35 @@ class _StudentEventsState extends State<StudentEvents> {
             SizedBox(
               height: 20,
             ),
-            ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-              itemBuilder: (context, index) => StudentEventBox(list[index]),
-              itemCount: list.length,
-              padding: EdgeInsets.fromLTRB(0, 0, 0, 70),
-            ),
+            _list.isEmpty
+                ? Padding(
+                    padding: EdgeInsets.all(40),
+                    child: Column(
+                      children: [
+                        Icon(
+                          Icons.event_busy,
+                          size: 80,
+                        ),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          "No events found",
+                          style: TextStyle(
+                            fontSize: 20,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                : ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) =>
+                        StudentEventBox(_list[index]),
+                    itemCount: _list.length,
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 70),
+                  ),
           ],
         ),
       ),

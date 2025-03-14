@@ -1,9 +1,29 @@
 import 'package:flutter/material.dart';
 
-class EventSearchBar extends StatelessWidget {
+class EventSearchBar extends StatefulWidget {
+  Function func = () {};
+
+  EventSearchBar(Function f, {super.key}) {
+    func = f;
+  }
+
+  @override
+  State<EventSearchBar> createState() => _EventSearchBarState();
+}
+
+class _EventSearchBarState extends State<EventSearchBar> {
+  TextEditingController tc = TextEditingController();
+  void setQuery(String t) {
+    widget.func(t);
+  }
+
   @override
   Widget build(BuildContext context) {
     return TextField(
+      controller: tc,
+      onChanged: (value) {
+        setQuery(value);
+      },
       decoration: InputDecoration(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30),

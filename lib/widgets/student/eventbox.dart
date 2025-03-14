@@ -5,18 +5,26 @@ import 'package:campus_event_app/screens/student/registerscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class StudentEventBox extends StatelessWidget {
+class StudentEventBox extends StatefulWidget {
   Event event = Event();
+  bool inter = false;
   StudentEventBox(Event e, {super.key}) {
     event = e;
+    inter = user.interested.contains(event);
   }
+
+  @override
+  State<StudentEventBox> createState() => _StudentEventBoxState();
+}
+
+class _StudentEventBoxState extends State<StudentEventBox> {
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         ExpansionTile(
           childrenPadding: EdgeInsets.fromLTRB(15, 0, 15, 15),
-          title: Text(event.name),
+          title: Text(widget.event.name),
           backgroundColor: const Color.fromARGB(255, 223, 223, 223),
           initiallyExpanded: true,
           collapsedBackgroundColor: const Color.fromARGB(255, 223, 223, 223),
@@ -36,7 +44,7 @@ class StudentEventBox extends StatelessWidget {
                   color: Colors.red,
                   child: ClipRRect(
                     child: Image.network(
-                      event.img,
+                      widget.event.img,
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -64,13 +72,13 @@ class StudentEventBox extends StatelessWidget {
                 SizedBox(
                   width: 5,
                 ),
-                Text(DateFormat('yMMMd').format(event.date)),
+                Text(DateFormat('yMMMd').format(widget.event.date)),
                 Spacer(),
                 Icon(Icons.alarm),
                 SizedBox(
                   width: 5,
                 ),
-                Text(event.start.format(context)),
+                Text(widget.event.start.format(context)),
               ],
             ),
             SizedBox(
@@ -82,7 +90,7 @@ class StudentEventBox extends StatelessWidget {
                 SizedBox(
                   width: 5,
                 ),
-                Text(event.venue.name),
+                Text(widget.event.venue.name),
                 Spacer(),
               ],
             ),
@@ -93,27 +101,81 @@ class StudentEventBox extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 ElevatedButton(
-                  onPressed: () => {},
+                  style: ButtonStyle(
+                    backgroundColor: WidgetStatePropertyAll(Colors.brown),
+                    overlayColor: WidgetStatePropertyAll(
+                        const Color.fromARGB(36, 121, 85, 72)),
+                    shape: WidgetStatePropertyAll(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    surfaceTintColor: WidgetStatePropertyAll(Colors.brown),
+                  ),
+                  onPressed: () => {
+                    setState(() {
+                      if (widget.inter) {
+                        user.removeInterested(widget.event);
+                        widget.inter = false;
+                      } else {
+                        user.addInterested(widget.event);
+                        widget.inter = true;
+                      }
+                    }),
+                  },
                   child: Row(
                     children: [
-                      Text("Interested"),
+                      Text(
+                        "Interested",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: widget.inter
+                              ? FontWeight.bold
+                              : FontWeight.normal,
+                        ),
+                      ),
                       SizedBox(
                         width: 5,
                       ),
-                      Icon(Icons.star_outline),
+                      widget.inter
+                          ? Icon(
+                              Icons.star,
+                              color: Colors.white,
+                            )
+                          : Icon(
+                              Icons.star_outline,
+                              color: Colors.white,
+                            ),
                     ],
                   ),
                 ),
                 ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: WidgetStatePropertyAll(Colors.brown),
+                    overlayColor: WidgetStatePropertyAll(
+                        const Color.fromARGB(36, 121, 85, 72)),
+                    shape: WidgetStatePropertyAll(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    surfaceTintColor: WidgetStatePropertyAll(Colors.brown),
+                  ),
                   onPressed: () => {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => StudentRegisterScreen(event.name),
+                        builder: (context) =>
+                            StudentRegisterScreen(widget.event.name),
                       ),
                     ),
                   },
-                  child: Text("Register"),
+                  child: Text(
+                    "View Event",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
                 ),
               ],
             )

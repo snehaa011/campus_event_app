@@ -1,6 +1,10 @@
+import 'package:campus_event_app/data/ashwin_test.dart';
+import 'package:campus_event_app/screens/student/eventhistoryscreen.dart';
 import 'package:flutter/material.dart';
 
 class StudentProfile extends StatelessWidget {
+  const StudentProfile({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -41,7 +45,7 @@ class StudentProfile extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          "NAME NAME NAME",
+                          user.name,
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
                             color: Colors.white,
@@ -51,7 +55,7 @@ class StudentProfile extends StatelessWidget {
                           maxLines: 2,
                         ),
                         Text(
-                          "email",
+                          user.email,
                           style: TextStyle(
                             color: Colors.white,
                             fontSize: 15,
@@ -107,7 +111,7 @@ class StudentProfile extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "B220000CS",
+                    user.rollno,
                     style: TextStyle(fontSize: 20),
                   ),
                   SizedBox(
@@ -121,7 +125,7 @@ class StudentProfile extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "CSE",
+                    user.branch,
                     style: TextStyle(fontSize: 20),
                   ),
                   SizedBox(
@@ -135,7 +139,7 @@ class StudentProfile extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "CS01",
+                    user.batch,
                     style: TextStyle(fontSize: 20),
                   ),
                   SizedBox(
@@ -156,7 +160,7 @@ class StudentProfile extends StatelessWidget {
                             ),
                           ),
                           Text(
-                            "9447064150",
+                            user.phoneno,
                             style: TextStyle(fontSize: 20),
                           ),
                         ],
@@ -173,7 +177,15 @@ class StudentProfile extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(10),
               child: TextButton(
-                onPressed: () => {},
+                onPressed: () => {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          StudentEventHistoryScreen(user.history),
+                    ),
+                  ),
+                },
                 child: Text("View event history"),
               ),
             ),

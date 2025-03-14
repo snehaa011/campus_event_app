@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 
 class EventCarousel extends StatelessWidget {
-  const EventCarousel({super.key});
+  List<Event> list = [];
+  EventCarousel(List<Event> l, {super.key}) {
+    list = l;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +17,7 @@ class EventCarousel extends StatelessWidget {
         autoPlay: true,
         enlargeCenterPage: false,
       ),
-      items: events.map((i) {
+      items: list.map((i) {
         return ClipRRect(
           borderRadius: BorderRadius.circular(15),
           child: StudentPopularEventBox(i),
