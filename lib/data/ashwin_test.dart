@@ -93,72 +93,78 @@ class Event {
   }
 }
 
-List<Event> events = [
-  Event.i(
-      "CoderKombat",
-      "CSEA",
-      TimeOfDay(hour: 9, minute: 0),
-      TimeOfDay(hour: 12, minute: 0),
-      DateTime(2024, 12, 23),
-      ssl,
-      false,
-      2,
-      100,
-      "https://media.istockphoto.com/id/1295274245/photo/random-multicolored-spheres-computer-generated-abstract-form-of-large-and-small-balls-3d.jpg?s=612x612&w=0&k=20&c=q7NOl28YxIIOqKu6em50VlKrg6ISFyVww_nLOCr5W_A="),
-  Event.i(
-      "Random bullshit nigga event",
-      "CSEA",
-      TimeOfDay(hour: 9, minute: 0),
-      TimeOfDay(hour: 12, minute: 0),
-      DateTime(2024, 12, 19),
-      nsl,
-      false,
-      1,
-      100,
-      "https://media.istockphoto.com/id/1295274245/photo/random-multicolored-spheres-computer-generated-abstract-form-of-large-and-small-balls-3d.jpg?s=612x612&w=0&k=20&c=q7NOl28YxIIOqKu6em50VlKrg6ISFyVww_nLOCr5W_A="),
-  Event.ii(
-      "Workshop about IoT Devices",
-      "IEEE",
-      TimeOfDay(hour: 19, minute: 0),
-      DateTime(2024, 12, 17),
-      false,
-      1,
-      100,
-      "https://media.istockphoto.com/id/1295274245/photo/random-multicolored-spheres-computer-generated-abstract-form-of-large-and-small-balls-3d.jpg?s=612x612&w=0&k=20&c=q7NOl28YxIIOqKu6em50VlKrg6ISFyVww_nLOCr5W_A="),
-  Event.i(
-      "EventP",
-      "CEA",
-      TimeOfDay(hour: 9, minute: 0),
-      TimeOfDay(hour: 12, minute: 0),
-      DateTime(2024, 12, 21),
-      oat,
-      false,
-      1,
-      100,
-      "https://media.istockphoto.com/id/1295274245/photo/random-multicolored-spheres-computer-generated-abstract-form-of-large-and-small-balls-3d.jpg?s=612x612&w=0&k=20&c=q7NOl28YxIIOqKu6em50VlKrg6ISFyVww_nLOCr5W_A="),
-  Event.i(
-      "EventQ",
-      "MEA",
-      TimeOfDay(hour: 9, minute: 0),
-      TimeOfDay(hour: 12, minute: 0),
-      DateTime(2024, 12, 24),
-      aud,
-      false,
-      1,
-      100,
-      "https://media.istockphoto.com/id/1295274245/photo/random-multicolored-spheres-computer-generated-abstract-form-of-large-and-small-balls-3d.jpg?s=612x612&w=0&k=20&c=q7NOl28YxIIOqKu6em50VlKrg6ISFyVww_nLOCr5W_A="),
-  Event.i(
-      "EVentR",
-      "EEA",
-      TimeOfDay(hour: 19, minute: 0),
-      TimeOfDay(hour: 21, minute: 0),
-      DateTime(2024, 12, 25),
-      oat,
-      false,
-      1,
-      100,
-      "https://media.istockphoto.com/id/1295274245/photo/random-multicolored-spheres-computer-generated-abstract-form-of-large-and-small-balls-3d.jpg?s=612x612&w=0&k=20&c=q7NOl28YxIIOqKu6em50VlKrg6ISFyVww_nLOCr5W_A="),
-];
+Event i = Event.i(
+  "CoderKombat",
+  "CSEA",
+  TimeOfDay(hour: 9, minute: 0),
+  TimeOfDay(hour: 12, minute: 0),
+  DateTime(2024, 12, 23),
+  ssl,
+  false,
+  2,
+  100,
+  "https://media.istockphoto.com/id/1295274245/photo/random-multicolored-spheres-computer-generated-abstract-form-of-large-and-small-balls-3d.jpg?s=612x612&w=0&k=20&c=q7NOl28YxIIOqKu6em50VlKrg6ISFyVww_nLOCr5W_A=",
+);
+Event ii = Event.i(
+  "Random bullshit nigga event",
+  "CSEA",
+  TimeOfDay(hour: 9, minute: 0),
+  TimeOfDay(hour: 12, minute: 0),
+  DateTime(2024, 12, 19),
+  nsl,
+  false,
+  1,
+  100,
+  "https://media.istockphoto.com/id/1295274245/photo/random-multicolored-spheres-computer-generated-abstract-form-of-large-and-small-balls-3d.jpg?s=612x612&w=0&k=20&c=q7NOl28YxIIOqKu6em50VlKrg6ISFyVww_nLOCr5W_A=",
+);
+Event iii = Event.ii(
+  "Workshop about IoT Devices",
+  "IEEE",
+  TimeOfDay(hour: 19, minute: 0),
+  DateTime(2024, 12, 17),
+  false,
+  1,
+  100,
+  "https://media.istockphoto.com/id/1295274245/photo/random-multicolored-spheres-computer-generated-abstract-form-of-large-and-small-balls-3d.jpg?s=612x612&w=0&k=20&c=q7NOl28YxIIOqKu6em50VlKrg6ISFyVww_nLOCr5W_A=",
+);
+
+Event iv = Event.i(
+  "EventP",
+  "CEA",
+  TimeOfDay(hour: 9, minute: 0),
+  TimeOfDay(hour: 12, minute: 0),
+  DateTime(2024, 12, 21),
+  oat,
+  false,
+  1,
+  100,
+  "https://media.istockphoto.com/id/1295274245/photo/random-multicolored-spheres-computer-generated-abstract-form-of-large-and-small-balls-3d.jpg?s=612x612&w=0&k=20&c=q7NOl28YxIIOqKu6em50VlKrg6ISFyVww_nLOCr5W_A=",
+);
+Event v = Event.i(
+  "EventQ",
+  "MEA",
+  TimeOfDay(hour: 9, minute: 0),
+  TimeOfDay(hour: 12, minute: 0),
+  DateTime(2024, 12, 24),
+  aud,
+  false,
+  1,
+  100,
+  "https://media.istockphoto.com/id/1295274245/photo/random-multicolored-spheres-computer-generated-abstract-form-of-large-and-small-balls-3d.jpg?s=612x612&w=0&k=20&c=q7NOl28YxIIOqKu6em50VlKrg6ISFyVww_nLOCr5W_A=",
+);
+Event vi = Event.i(
+  "EVentR",
+  "EEA",
+  TimeOfDay(hour: 19, minute: 0),
+  TimeOfDay(hour: 21, minute: 0),
+  DateTime(2024, 12, 25),
+  oat,
+  false,
+  1,
+  100,
+  "https://media.istockphoto.com/id/1295274245/photo/random-multicolored-spheres-computer-generated-abstract-form-of-large-and-small-balls-3d.jpg?s=612x612&w=0&k=20&c=q7NOl28YxIIOqKu6em50VlKrg6ISFyVww_nLOCr5W_A=",
+);
+List<Event> events = [i, ii, iii, iv, v, vi];
 
 class Notify {
   Event event = Event();
@@ -194,5 +200,32 @@ class User {
       phoneno = "";
   List<Event> interested = [];
   List<Event> registered = [];
-  List<Event> history = [];
+  List<Event> history = [iii];
+  User();
+  User.i(n, e, r, ba, br, ph) {
+    name = n;
+    email = e;
+    rollno = r;
+    batch = ba;
+    branch = br;
+    phoneno = ph;
+  }
+  void addInterested(Event e) {
+    interested.add(e);
+  }
+
+  void removeInterested(Event e) {
+    interested.remove(e);
+  }
+
+  void register(Event e) {
+    registered.add(e);
+  }
+
+  void participated(Event e) {
+    history.add(e);
+  }
 }
+
+User user = User.i("Ashwin A Nair", "ashwin_b220198cs@nitc.ac.in", "B220198CS",
+    "CS01", "CSE", "7738012855");
