@@ -2,12 +2,18 @@
 
 import 'package:flutter/material.dart';
 
-class StudentBottomBar extends StatelessWidget {
+class StudentBottomBar extends StatefulWidget {
   late Function func = () {};
   StudentBottomBar(Function f, {super.key}) {
     func = f;
   }
 
+  @override
+  State<StudentBottomBar> createState() => _StudentBottomBarState();
+}
+
+class _StudentBottomBarState extends State<StudentBottomBar> {
+  int i = 0;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -23,27 +29,63 @@ class StudentBottomBar extends StatelessWidget {
         children: [
           IconButton(
             onPressed: () => {
-              func(0),
+              setState(() {
+                i = 0;
+              }),
+              widget.func(0),
             },
-            icon: Icon(Icons.home),
+            icon: i == 0
+                ? Icon(
+                    Icons.home,
+                    color: Colors.black,
+                    size: 30,
+                  )
+                : Icon(Icons.home_outlined),
           ),
           IconButton(
             onPressed: () => {
-              func(1),
+              setState(() {
+                i = 1;
+              }),
+              widget.func(1),
             },
-            icon: Icon(Icons.event),
+            icon: i == 1
+                ? Icon(
+                    Icons.event,
+                    color: Colors.black,
+                    size: 30,
+                  )
+                : Icon(Icons.event_outlined),
           ),
           IconButton(
             onPressed: () => {
-              func(2),
+              setState(() {
+                i = 2;
+              }),
+              widget.func(2),
             },
-            icon: Icon(Icons.notifications),
+            icon: i == 2
+                ? Icon(
+                    Icons.notifications,
+                    color: Colors.black,
+                    size: 30,
+                  )
+                : Icon(Icons.notifications_outlined),
           ),
           IconButton(
             onPressed: () => {
-              func(3),
+              setState(() {
+                i = 3;
+              }),
+              widget.func(3),
             },
-            icon: Icon(Icons.account_circle),
+            icon: i == 3
+                ? Icon(
+                    Icons.account_circle,
+                    color: Colors.black,
+                    size: 30,
+                  )
+                : Icon(Icons.account_circle_outlined),
           ),
         ],
       ),

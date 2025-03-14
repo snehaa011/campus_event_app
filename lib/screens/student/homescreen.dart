@@ -38,7 +38,7 @@ class _StudentHomePageState extends State<StudentHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       appBar: AppBar(
         title: Text("Student"),
         actions: [
@@ -56,7 +56,7 @@ class _StudentHomePageState extends State<StudentHomePage> {
         ],
       ),
       body: Padding(
-        padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
+        padding: EdgeInsets.fromLTRB(0, 0, 0, 0),
         child: Stack(
           alignment: Alignment.bottomCenter,
           children: [

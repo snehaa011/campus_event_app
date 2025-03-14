@@ -1,13 +1,14 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:campus_event_app/data/test.dart';
+import 'package:campus_event_app/data/ashwin_test.dart';
 import 'package:campus_event_app/screens/student/registerscreen.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class StudentEventBox extends StatelessWidget {
-  String title = "";
-  StudentEventBox(String t, {super.key}) {
-    title = t;
+  Event event = Event();
+  StudentEventBox(Event e, {super.key}) {
+    event = e;
   }
   @override
   Widget build(BuildContext context) {
@@ -15,10 +16,10 @@ class StudentEventBox extends StatelessWidget {
       children: [
         ExpansionTile(
           childrenPadding: EdgeInsets.fromLTRB(15, 0, 15, 15),
-          title: Text(title),
-          backgroundColor: Colors.white,
+          title: Text(event.name),
+          backgroundColor: const Color.fromARGB(255, 223, 223, 223),
           initiallyExpanded: true,
-          collapsedBackgroundColor: Colors.white,
+          collapsedBackgroundColor: const Color.fromARGB(255, 223, 223, 223),
           collapsedShape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10),
           ),
@@ -33,6 +34,12 @@ class StudentEventBox extends StatelessWidget {
                   width: 100,
                   height: 100,
                   color: Colors.red,
+                  child: ClipRRect(
+                    child: Image.network(
+                      event.img,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
                 SizedBox(
                   width: 15,
@@ -50,6 +57,37 @@ class StudentEventBox extends StatelessWidget {
             ),
             SizedBox(
               height: 15,
+            ),
+            Row(
+              children: [
+                Icon(Icons.calendar_today),
+                SizedBox(
+                  width: 5,
+                ),
+                Text(DateFormat('yMMMd').format(event.date)),
+                Spacer(),
+                Icon(Icons.alarm),
+                SizedBox(
+                  width: 5,
+                ),
+                Text(event.start.format(context)),
+              ],
+            ),
+            SizedBox(
+              height: 10,
+            ),
+            Row(
+              children: [
+                Icon(Icons.location_on),
+                SizedBox(
+                  width: 5,
+                ),
+                Text(event.venue.name),
+                Spacer(),
+              ],
+            ),
+            SizedBox(
+              height: 10,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -71,7 +109,7 @@ class StudentEventBox extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => StudentRegisterScreen(title),
+                        builder: (context) => StudentRegisterScreen(event.name),
                       ),
                     ),
                   },

@@ -6,14 +6,17 @@ class StudentFilter extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemBuilder: (context, index) => ElevatedButton(
-        onPressed: () => {},
-        style: ButtonStyle(
-          shape: WidgetStatePropertyAll(
-            CircleBorder(),
+      itemBuilder: (context, index) => Padding(
+        padding: EdgeInsets.all(5),
+        child: ElevatedButton(
+          onPressed: () => {},
+          style: ButtonStyle(
+            shape: WidgetStatePropertyAll(
+              CircleBorder(),
+            ),
           ),
+          child: Text("text"),
         ),
-        child: Text("text"),
       ),
       itemCount: 7,
       scrollDirection: Axis.horizontal,

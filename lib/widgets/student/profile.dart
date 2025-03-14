@@ -6,21 +6,24 @@ class StudentProfile extends StatelessWidget {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      color: Colors.blue,
+      color: Colors.white,
       child: SingleChildScrollView(
         padding: EdgeInsets.fromLTRB(0, 0, 0, 140),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
-              width: double.infinity,
-              child: Center(
-                child: Text(
-                  "Profile",
-                  style: TextStyle(fontSize: 32),
-                ),
-              ),
-            ),
+            // SizedBox(
+            //   width: double.infinity,
+            //   child: Center(
+            //     child: Padding(
+            //       padding: EdgeInsets.all(20),
+            //       child: Text(
+            //         "Profile",
+            //         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+            //       ),
+            //     ),
+            //   ),
+            // ),
             Container(
               padding: EdgeInsets.fromLTRB(20, 30, 20, 30),
               width: double.infinity,
@@ -89,7 +92,7 @@ class StudentProfile extends StatelessWidget {
               ),
             ),
             Container(
-              padding: EdgeInsets.all(10),
+              padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -167,9 +170,12 @@ class StudentProfile extends StatelessWidget {
                 ],
               ),
             ),
-            TextButton(
-              onPressed: () => {},
-              child: Text("View event history"),
+            Padding(
+              padding: EdgeInsets.all(10),
+              child: TextButton(
+                onPressed: () => {},
+                child: Text("View event history"),
+              ),
             ),
           ],
         ),

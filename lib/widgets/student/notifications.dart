@@ -1,3 +1,4 @@
+import 'package:campus_event_app/data/ashwin_test.dart';
 import 'package:campus_event_app/widgets/student/notificationbox.dart';
 import 'package:flutter/material.dart';
 
@@ -9,14 +10,24 @@ class StudentNotifications extends StatelessWidget {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      color: Colors.green,
+      color: Colors.white,
       child: SingleChildScrollView(
         child: Column(
           children: [
+            Padding(
+              padding: EdgeInsets.all(20),
+              child: Text(
+                "Updates",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+              ),
+            ),
+            // SizedBox(height: 15),
             ListView.builder(
-              itemCount: 5,
+              itemCount: notifications.length,
               shrinkWrap: true,
-              itemBuilder: (context, index) => StudentNotificationBox(),
+              itemBuilder: (context, index) => StudentNotificationBox(
+                notifications[index],
+              ),
             ),
           ],
         ),

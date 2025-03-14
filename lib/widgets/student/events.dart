@@ -1,31 +1,33 @@
-import 'package:campus_event_app/data/test.dart';
+import 'package:campus_event_app/data/ashwin_test.dart';
 import 'package:campus_event_app/widgets/searchbar.dart';
 import 'package:campus_event_app/widgets/student/eventbox.dart';
 import 'package:campus_event_app/widgets/student/filter.dart';
 import 'package:flutter/material.dart';
 
 class StudentEvents extends StatefulWidget {
+  const StudentEvents({super.key});
+
   @override
   State<StudentEvents> createState() => _StudentEventsState();
 }
 
 class _StudentEventsState extends State<StudentEvents> {
-  List list = l1;
+  List list = events;
   void getAll() {
     setState(() {
-      list = l1;
+      // list = l1;
     });
   }
 
   void getInterested() {
     setState(() {
-      list = l2;
+      // list = l2;
     });
   }
 
   void getRegistered() {
     setState(() {
-      list = l3;
+      // list = l3;
     });
   }
 
@@ -34,11 +36,14 @@ class _StudentEventsState extends State<StudentEvents> {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      color: Colors.yellow,
+      color: Colors.white,
       child: SingleChildScrollView(
         child: Column(
           children: [
-            EventSearchBar(),
+            Padding(
+              padding: EdgeInsets.all(20),
+              child: EventSearchBar(),
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
@@ -65,7 +70,7 @@ class _StudentEventsState extends State<StudentEvents> {
             Container(
               padding: EdgeInsets.all(10),
               // width: double.infinity,
-              height: 80,
+              height: 100,
               child: StudentFilter(),
             ),
             SizedBox(
