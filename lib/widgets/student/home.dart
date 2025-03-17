@@ -31,7 +31,7 @@ class _StudentHomeState extends State<StudentHome> {
       width: double.infinity,
       color: Colors.white,
       child: SingleChildScrollView(
-        padding: EdgeInsets.fromLTRB(0, 0, 0, 80),
+        padding: EdgeInsets.fromLTRB(0, 0, 0, 150),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
