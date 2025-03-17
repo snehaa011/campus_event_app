@@ -21,123 +21,130 @@ class _StudentPopularEventBoxState extends State<StudentPopularEventBox> {
   Widget build(BuildContext context) {
     return Padding(
       padding: EdgeInsets.fromLTRB(10, 10, 10, 10),
-      child: Container(
-        padding: EdgeInsets.fromLTRB(10, 20, 10, 10),
-        decoration: BoxDecoration(
-          color: Color.fromARGB(255, 223, 223, 223),
-          borderRadius: BorderRadius.circular(10),
-        ),
-        child: Column(
-          children: [
-            Text(
-              widget.event.name,
-              style: TextStyle(fontSize: 20),
+      child: Column(
+        children: [
+          Container(
+            padding: EdgeInsets.fromLTRB(10, 20, 10, 10),
+            decoration: BoxDecoration(
+              color: Color.fromARGB(255, 223, 223, 223),
+              borderRadius: BorderRadius.circular(10),
             ),
-            SizedBox(
-              height: 10,
-            ),
-            Container(
-              width: double.infinity,
-              height: 200,
-              color: Colors.brown,
-              child: ClipRRect(
-                child: Image.network(
-                  widget.event.img,
-                  fit: BoxFit.cover,
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            Text(
-              content,
-              maxLines: 5,
-              style: TextStyle(
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
-                TextButton(
-                  style: ButtonStyle(
-                    overlayColor: WidgetStatePropertyAll(
-                        const Color.fromARGB(36, 121, 85, 72)),
-                  ),
-                  onPressed: () => {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            StudentRegisterScreen(widget.event),
-                      ),
-                    ),
-                  },
-                  child: Text(
-                    "View event",
-                    style: TextStyle(
-                      color: Colors.brown,
+                Text(
+                  widget.event.name,
+                  style: TextStyle(fontSize: 20),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  width: double.infinity,
+                  height: 200,
+                  color: Colors.brown,
+                  child: ClipRRect(
+                    child: Image.network(
+                      widget.event.img,
+                      fit: BoxFit.cover,
                     ),
                   ),
                 ),
-                if (!user.registered.contains(widget.event))
-                  ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: WidgetStatePropertyAll(Colors.brown),
-                      overlayColor: WidgetStatePropertyAll(
-                          const Color.fromARGB(36, 121, 85, 72)),
-                      shape: WidgetStatePropertyAll(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
+                SizedBox(
+                  height: 15,
+                ),
+                Text(
+                  content,
+                  maxLines: 5,
+                  style: TextStyle(
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TextButton(
+                      style: ButtonStyle(
+                        overlayColor: WidgetStatePropertyAll(
+                            const Color.fromARGB(36, 121, 85, 72)),
                       ),
-                      surfaceTintColor: WidgetStatePropertyAll(Colors.brown),
-                    ),
-                    onPressed: () => {
-                      setState(() {
-                        if (widget.inter) {
-                          widget.inter = false;
-                          user.removeInterested(widget.event);
-                        } else {
-                          widget.inter = true;
-                          user.addInterested(widget.event);
-                        }
-                      }),
-                    },
-                    child: Row(
-                      children: [
-                        Text(
-                          "Interested",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: widget.inter
-                                ? FontWeight.bold
-                                : FontWeight.normal,
+                      onPressed: () => {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                StudentRegisterScreen(widget.event),
                           ),
                         ),
-                        SizedBox(
-                          width: 5,
+                      },
+                      child: Text(
+                        "View event",
+                        style: TextStyle(
+                          color: Colors.brown,
                         ),
-                        widget.inter
-                            ? Icon(
-                                Icons.star,
-                                color: Colors.white,
-                              )
-                            : Icon(
-                                Icons.star_outline,
-                                color: Colors.white,
-                              ),
-                      ],
+                      ),
                     ),
-                  ),
+                    if (!user.registered.contains(widget.event))
+                      ElevatedButton(
+                        style: ButtonStyle(
+                          backgroundColor: WidgetStatePropertyAll(Colors.brown),
+                          overlayColor: WidgetStatePropertyAll(
+                              const Color.fromARGB(36, 121, 85, 72)),
+                          shape: WidgetStatePropertyAll(
+                            RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                          surfaceTintColor:
+                              WidgetStatePropertyAll(Colors.brown),
+                        ),
+                        onPressed: () => {
+                          setState(() {
+                            if (widget.inter) {
+                              widget.inter = false;
+                              user.removeInterested(widget.event);
+                            } else {
+                              widget.inter = true;
+                              user.addInterested(widget.event);
+                            }
+                          }),
+                        },
+                        child: Row(
+                          children: [
+                            Text(
+                              "Interested",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: widget.inter
+                                    ? FontWeight.bold
+                                    : FontWeight.normal,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            widget.inter
+                                ? Icon(
+                                    Icons.star,
+                                    color: Colors.white,
+                                  )
+                                : Icon(
+                                    Icons.star_outline,
+                                    color: Colors.white,
+                                  ),
+                          ],
+                        ),
+                      ),
+                  ],
+                )
               ],
-            )
-          ],
-        ),
+            ),
+          ),
+          Spacer(),
+        ],
       ),
     );
   }

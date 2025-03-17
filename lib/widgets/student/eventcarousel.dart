@@ -13,7 +13,7 @@ class EventCarousel extends StatelessWidget {
   Widget build(BuildContext context) {
     return CarouselSlider(
       options: CarouselOptions(
-        height: 480,
+        height: 600,
         autoPlay: true,
         enlargeCenterPage: false,
       ),
