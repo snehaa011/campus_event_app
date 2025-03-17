@@ -15,7 +15,9 @@ class StudentHomePage extends StatefulWidget {
 
 class _StudentHomePageState extends State<StudentHomePage> {
   Widget screen = StudentHome();
+  int v = 0;
   void setWidget(int i) {
+    v = i;
     if (i == 0) {
       setState(() {
         screen = StudentHome();
@@ -40,19 +42,26 @@ class _StudentHomePageState extends State<StudentHomePage> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 255, 255, 255),
       appBar: AppBar(
-        title: Text("Student"),
+        backgroundColor: Colors.white,
+        // title: Text("Student"),
         actions: [
-          IconButton(
-            onPressed: () {
-              Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => LoginScreen(),
-                  ),
-                  (Route<dynamic> route) => false);
-            },
-            icon: Icon(Icons.logout),
-          ),
+          if (v == 3)
+            TextButton(
+              onPressed: () {
+                Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LoginScreen(),
+                    ),
+                    (Route<dynamic> route) => false);
+              },
+              child: Text(
+                "Logout",
+                style: TextStyle(
+                  color: Colors.brown,
+                ),
+              ),
+            ),
         ],
       ),
       body: Padding(

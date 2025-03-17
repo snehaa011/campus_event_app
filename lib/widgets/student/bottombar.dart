@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:campus_event_app/data/ashwin_test.dart';
 import 'package:flutter/material.dart';
 
 class StudentBottomBar extends StatefulWidget {
@@ -62,6 +63,7 @@ class _StudentBottomBarState extends State<StudentBottomBar> {
               setState(() {
                 i = 2;
               }),
+              user.lv = notifications[0].id,
               widget.func(2),
             },
             icon: i == 2
@@ -70,7 +72,9 @@ class _StudentBottomBarState extends State<StudentBottomBar> {
                     color: Colors.black,
                     size: 30,
                   )
-                : Icon(Icons.notifications_outlined),
+                : user.lv == notifications[0].id
+                    ? Icon(Icons.notifications_outlined)
+                    : Icon(Icons.notifications_active_outlined),
           ),
           IconButton(
             onPressed: () => {

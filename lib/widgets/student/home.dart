@@ -11,8 +11,8 @@ class StudentHome extends StatefulWidget {
 }
 
 class _StudentHomeState extends State<StudentHome> {
-  List<Event> list = events;
-  List<Event> _list = events;
+  List<Event> list = events.sublist(1, 3);
+  List<Event> _list = events.sublist(1, 3);
   void search(String str) {
     Set<Event> s = {};
     s.addAll(list.where((s) => s.name.toLowerCase().contains(str)).toList());

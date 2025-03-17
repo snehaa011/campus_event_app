@@ -1,0 +1,2 @@
+C:/flutterapps/campus_event_app/android/app/.cxx/RelWithDebInfo/716a6r2o/x86_64/CMakeFiles/edit_cache.dir
+C:/flutterapps/campus_event_app/android/app/.cxx/RelWithDebInfo/716a6r2o/x86_64/CMakeFiles/rebuild_cache.dir

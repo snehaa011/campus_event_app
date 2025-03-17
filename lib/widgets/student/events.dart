@@ -16,6 +16,7 @@ class _StudentEventsState extends State<StudentEvents> {
   List<Event> list = events;
   List<Event> _list = events;
   void search(String str) {
+    str = str.toLowerCase();
     Set<Event> s = {};
     s.addAll(list.where((s) => s.name.toLowerCase().contains(str)).toList());
     s.addAll(list.where((s) => s.org.toLowerCase().contains(str)).toList());
@@ -23,6 +24,13 @@ class _StudentEventsState extends State<StudentEvents> {
         list.where((s) => s.venue.name.toLowerCase().contains(str)).toList());
     setState(() {
       _list = s.toList();
+    });
+  }
+
+  void searchOrg(String str) {
+    str = str.toLowerCase();
+    setState(() {
+      _list = list.where((s) => s.org.toLowerCase().contains(str)).toList();
     });
   }
 
@@ -150,7 +158,7 @@ class _StudentEventsState extends State<StudentEvents> {
               padding: EdgeInsets.all(10),
               // width: double.infinity,
               height: 100,
-              child: StudentFilter(),
+              child: StudentFilter(searchOrg),
             ),
             SizedBox(
               height: 20,

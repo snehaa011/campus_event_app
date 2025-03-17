@@ -41,7 +41,7 @@ class _StudentEventBoxState extends State<StudentEventBox> {
                 Container(
                   width: 100,
                   height: 100,
-                  color: Colors.red,
+                  color: Colors.brown,
                   child: ClipRRect(
                     child: Image.network(
                       widget.event.img,
@@ -100,55 +100,56 @@ class _StudentEventBoxState extends State<StudentEventBox> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor: WidgetStatePropertyAll(Colors.brown),
-                    overlayColor: WidgetStatePropertyAll(
-                        const Color.fromARGB(36, 121, 85, 72)),
-                    shape: WidgetStatePropertyAll(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    surfaceTintColor: WidgetStatePropertyAll(Colors.brown),
-                  ),
-                  onPressed: () => {
-                    setState(() {
-                      if (widget.inter) {
-                        user.removeInterested(widget.event);
-                        widget.inter = false;
-                      } else {
-                        user.addInterested(widget.event);
-                        widget.inter = true;
-                      }
-                    }),
-                  },
-                  child: Row(
-                    children: [
-                      Text(
-                        "Interested",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: widget.inter
-                              ? FontWeight.bold
-                              : FontWeight.normal,
+                if (!user.registered.contains(widget.event))
+                  ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: WidgetStatePropertyAll(Colors.brown),
+                      overlayColor: WidgetStatePropertyAll(
+                          const Color.fromARGB(36, 121, 85, 72)),
+                      shape: WidgetStatePropertyAll(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      widget.inter
-                          ? Icon(
-                              Icons.star,
-                              color: Colors.white,
-                            )
-                          : Icon(
-                              Icons.star_outline,
-                              color: Colors.white,
-                            ),
-                    ],
+                      surfaceTintColor: WidgetStatePropertyAll(Colors.brown),
+                    ),
+                    onPressed: () => {
+                      setState(() {
+                        if (widget.inter) {
+                          user.removeInterested(widget.event);
+                          widget.inter = false;
+                        } else {
+                          user.addInterested(widget.event);
+                          widget.inter = true;
+                        }
+                      }),
+                    },
+                    child: Row(
+                      children: [
+                        Text(
+                          "Interested",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: widget.inter
+                                ? FontWeight.bold
+                                : FontWeight.normal,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        widget.inter
+                            ? Icon(
+                                Icons.star,
+                                color: Colors.white,
+                              )
+                            : Icon(
+                                Icons.star_outline,
+                                color: Colors.white,
+                              ),
+                      ],
+                    ),
                   ),
-                ),
                 ElevatedButton(
                   style: ButtonStyle(
                     backgroundColor: WidgetStatePropertyAll(Colors.brown),
@@ -166,7 +167,7 @@ class _StudentEventBoxState extends State<StudentEventBox> {
                       context,
                       MaterialPageRoute(
                         builder: (context) =>
-                            StudentRegisterScreen(widget.event.name),
+                            StudentRegisterScreen(widget.event),
                       ),
                     ),
                   },

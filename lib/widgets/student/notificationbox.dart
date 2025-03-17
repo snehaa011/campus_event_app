@@ -76,8 +76,7 @@ class StudentNotificationBox extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) =>
-                          StudentRegisterScreen(not.event.name),
+                      builder: (context) => StudentRegisterScreen(not.event),
                     ),
                   ),
                 },

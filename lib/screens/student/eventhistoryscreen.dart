@@ -1,6 +1,8 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:campus_event_app/data/ashwin_test.dart';
+import 'package:campus_event_app/screens/student/registerscreen.dart';
+import 'package:campus_event_app/widgets/student/historyeventbox.dart';
 import 'package:flutter/material.dart';
 
 class StudentEventHistoryScreen extends StatelessWidget {
@@ -13,14 +15,14 @@ class StudentEventHistoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("History"),
+        backgroundColor: Colors.white,
+        title: Text("Event History"),
       ),
+      backgroundColor: Colors.white,
       body: SingleChildScrollView(
         child: ListView.builder(
           itemCount: history.length,
-          itemBuilder: (context, index) => ListTile(
-            title: Text(history[index].name),
-          ),
+          itemBuilder: (context, index) => StudentHistoryBox(history[index]),
           shrinkWrap: true,
         ),
       ),

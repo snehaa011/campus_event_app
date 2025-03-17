@@ -167,11 +167,13 @@ Event vi = Event.i(
 List<Event> events = [i, ii, iii, iv, v, vi];
 
 class Notify {
+  String id = "";
   Event event = Event();
   TimeOfDay time = TimeOfDay(hour: 0, minute: 0);
   DateTime date = DateTime(0);
   Notify();
-  Notify.i(Event e, TimeOfDay ti, DateTime d) {
+  Notify.i(String i, Event e, TimeOfDay ti, DateTime d) {
+    id = i;
     event = e;
     time = ti;
     date = d;
@@ -180,11 +182,13 @@ class Notify {
 
 List<Notify> notifications = [
   Notify.i(
+    "abc",
     events[0],
     TimeOfDay(hour: 09, minute: 45),
     DateTime.now(),
   ),
   Notify.i(
+    "def",
     events[3],
     TimeOfDay(hour: 13, minute: 44),
     DateTime.now(),
@@ -197,7 +201,8 @@ class User {
       rollno = "",
       batch = "",
       branch = "",
-      phoneno = "";
+      phoneno = "",
+      lv = "";
   List<Event> interested = [];
   List<Event> registered = [];
   List<Event> history = [iii];
@@ -229,3 +234,5 @@ class User {
 
 User user = User.i("Ashwin A Nair", "ashwin_b220198cs@nitc.ac.in", "B220198CS",
     "CS01", "CSE", "7738012855");
+
+List<String> org = ['CSEA', 'ECEA', 'IEEE', 'MEA', 'CEA', 'EEA'];

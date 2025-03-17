@@ -1,12 +1,29 @@
 import 'package:campus_event_app/data/ashwin_test.dart';
 import 'package:campus_event_app/screens/student/eventhistoryscreen.dart';
+import 'package:campus_event_app/widgets/student/phonebox.dart';
 import 'package:flutter/material.dart';
 
-class StudentProfile extends StatelessWidget {
-  const StudentProfile({super.key});
+class StudentProfile extends StatefulWidget {
+  StudentProfile({super.key});
+
+  @override
+  State<StudentProfile> createState() => _StudentProfileState();
+}
+
+class _StudentProfileState extends State<StudentProfile> {
+  TextEditingController tc = TextEditingController();
+
+  bool b = false;
+  void setVal(String str) {
+    setState(() {
+      user.phoneno = str;
+      b = false;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    tc.text = user.phoneno;
     return Container(
       height: double.infinity,
       width: double.infinity,
@@ -16,18 +33,6 @@ class StudentProfile extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // SizedBox(
-            //   width: double.infinity,
-            //   child: Center(
-            //     child: Padding(
-            //       padding: EdgeInsets.all(20),
-            //       child: Text(
-            //         "Profile",
-            //         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
-            //       ),
-            //     ),
-            //   ),
-            // ),
             Container(
               padding: EdgeInsets.fromLTRB(20, 30, 20, 30),
               width: double.infinity,
@@ -72,6 +77,7 @@ class StudentProfile extends StatelessWidget {
                         // height: 80,
                         padding: EdgeInsets.all(10),
                         child: CircleAvatar(
+                          backgroundColor: Colors.white,
                           radius: 40,
                         ),
                       ),
@@ -83,11 +89,15 @@ class StudentProfile extends StatelessWidget {
                           shape: WidgetStatePropertyAll(
                             CircleBorder(),
                           ),
+                          backgroundColor: WidgetStatePropertyAll(
+                            Colors.white,
+                          ),
                         ),
                         onPressed: () => {},
                         child: Icon(
                           Icons.edit,
                           size: 10,
+                          color: Colors.brown,
                         ),
                       ),
                     ],
@@ -159,15 +169,36 @@ class StudentProfile extends StatelessWidget {
                               fontSize: 20,
                             ),
                           ),
-                          Text(
-                            user.phoneno,
-                            style: TextStyle(fontSize: 20),
+                          SizedBox(
+                            height: 15,
                           ),
+                          // Text(
+                          //   user.phoneno,
+                          //   style: TextStyle(fontSize: 20),
+                          // ),
+                          SizedBox(
+                            // height: 50,
+                            width: MediaQuery.of(context).size.width - 200,
+                            child: StudentPhoneBox(tc, setVal, b),
+                          )
                         ],
                       ),
                       ElevatedButton(
-                        onPressed: () => {},
-                        child: Icon(Icons.edit),
+                        style: ButtonStyle(
+                          backgroundColor: WidgetStatePropertyAll(Colors.brown),
+                          shape: WidgetStatePropertyAll(
+                            CircleBorder(),
+                          ),
+                        ),
+                        onPressed: () => {
+                          setState(() {
+                            b = true;
+                          })
+                        },
+                        child: Icon(
+                          Icons.edit,
+                          color: Colors.white,
+                        ),
                       ),
                     ],
                   ),
@@ -177,6 +208,11 @@ class StudentProfile extends StatelessWidget {
             Padding(
               padding: EdgeInsets.all(10),
               child: TextButton(
+                style: ButtonStyle(
+                  overlayColor: WidgetStatePropertyAll(
+                      const Color.fromARGB(36, 121, 85, 72)),
+                  surfaceTintColor: WidgetStatePropertyAll(Colors.brown),
+                ),
                 onPressed: () => {
                   Navigator.push(
                     context,
@@ -186,7 +222,10 @@ class StudentProfile extends StatelessWidget {
                     ),
                   ),
                 },
-                child: Text("View event history"),
+                child: Text(
+                  "View event history",
+                  style: TextStyle(color: Colors.brown),
+                ),
               ),
             ),
           ],

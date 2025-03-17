@@ -39,7 +39,7 @@ class _StudentPopularEventBoxState extends State<StudentPopularEventBox> {
             Container(
               width: double.infinity,
               height: 200,
-              color: Colors.red,
+              color: Colors.brown,
               child: ClipRRect(
                 child: Image.network(
                   widget.event.img,
@@ -73,7 +73,7 @@ class _StudentPopularEventBoxState extends State<StudentPopularEventBox> {
                       context,
                       MaterialPageRoute(
                         builder: (context) =>
-                            StudentRegisterScreen(widget.event.name),
+                            StudentRegisterScreen(widget.event),
                       ),
                     ),
                   },
@@ -84,55 +84,56 @@ class _StudentPopularEventBoxState extends State<StudentPopularEventBox> {
                     ),
                   ),
                 ),
-                ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor: WidgetStatePropertyAll(Colors.brown),
-                    overlayColor: WidgetStatePropertyAll(
-                        const Color.fromARGB(36, 121, 85, 72)),
-                    shape: WidgetStatePropertyAll(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    surfaceTintColor: WidgetStatePropertyAll(Colors.brown),
-                  ),
-                  onPressed: () => {
-                    setState(() {
-                      if (widget.inter) {
-                        widget.inter = false;
-                        user.removeInterested(widget.event);
-                      } else {
-                        widget.inter = true;
-                        user.addInterested(widget.event);
-                      }
-                    }),
-                  },
-                  child: Row(
-                    children: [
-                      Text(
-                        "Interested",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: widget.inter
-                              ? FontWeight.bold
-                              : FontWeight.normal,
+                if (!user.registered.contains(widget.event))
+                  ElevatedButton(
+                    style: ButtonStyle(
+                      backgroundColor: WidgetStatePropertyAll(Colors.brown),
+                      overlayColor: WidgetStatePropertyAll(
+                          const Color.fromARGB(36, 121, 85, 72)),
+                      shape: WidgetStatePropertyAll(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
                         ),
                       ),
-                      SizedBox(
-                        width: 5,
-                      ),
-                      widget.inter
-                          ? Icon(
-                              Icons.star,
-                              color: Colors.white,
-                            )
-                          : Icon(
-                              Icons.star_outline,
-                              color: Colors.white,
-                            ),
-                    ],
+                      surfaceTintColor: WidgetStatePropertyAll(Colors.brown),
+                    ),
+                    onPressed: () => {
+                      setState(() {
+                        if (widget.inter) {
+                          widget.inter = false;
+                          user.removeInterested(widget.event);
+                        } else {
+                          widget.inter = true;
+                          user.addInterested(widget.event);
+                        }
+                      }),
+                    },
+                    child: Row(
+                      children: [
+                        Text(
+                          "Interested",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontWeight: widget.inter
+                                ? FontWeight.bold
+                                : FontWeight.normal,
+                          ),
+                        ),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        widget.inter
+                            ? Icon(
+                                Icons.star,
+                                color: Colors.white,
+                              )
+                            : Icon(
+                                Icons.star_outline,
+                                color: Colors.white,
+                              ),
+                      ],
+                    ),
                   ),
-                ),
               ],
             )
           ],
