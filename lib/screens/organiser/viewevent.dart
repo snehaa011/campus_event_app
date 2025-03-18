@@ -10,6 +10,8 @@ class ViewEventPage extends StatefulWidget {
 class _ViewEventPageState extends State<ViewEventPage> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      
+    );
   }
 }
