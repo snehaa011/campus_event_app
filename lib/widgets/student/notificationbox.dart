@@ -1,3 +1,5 @@
+// ignore_for_file: must_be_immutable
+
 import 'package:campus_event_app/data/ashwin_test.dart';
 import 'package:campus_event_app/screens/student/registerscreen.dart';
 import 'package:flutter/material.dart';

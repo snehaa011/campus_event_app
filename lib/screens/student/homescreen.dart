@@ -1,3 +1,6 @@
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:campus_event_app/auth_service.dart';
 import 'package:campus_event_app/screens/loginscreen.dart';
 import 'package:campus_event_app/widgets/student/bottombar.dart';
 import 'package:campus_event_app/widgets/student/events.dart';
@@ -7,8 +10,8 @@ import 'package:campus_event_app/widgets/student/profile.dart';
 import 'package:flutter/material.dart';
 
 class StudentHomePage extends StatefulWidget {
-  const StudentHomePage({super.key});
-
+  StudentHomePage({super.key});
+  final AuthService _authService = AuthService();
   @override
   State<StudentHomePage> createState() => _StudentHomePageState();
 }
@@ -47,7 +50,8 @@ class _StudentHomePageState extends State<StudentHomePage> {
         actions: [
           if (v == 3)
             TextButton(
-              onPressed: () {
+              onPressed: () async {
+                await widget._authService.signOut();
                 Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(

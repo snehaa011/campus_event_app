@@ -1,15 +1,15 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:campus_event_app/data/ashwin_test.dart';
+import 'package:campus_event_app/data/data.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class StudentRegisterScreen extends StatefulWidget {
   Event event = Event();
-  bool b = false;
   StudentRegisterScreen(Event e, {super.key}) {
     event = e;
-    b = user.registered.contains(event);
+    // student.checkInterested(event.name, currentUser?.email as String);
   }
 
   @override
@@ -17,6 +17,21 @@ class StudentRegisterScreen extends StatefulWidget {
 }
 
 class _StudentRegisterScreenState extends State<StudentRegisterScreen> {
+  bool b = false;
+  void registeredStatus() async {
+    bool r = await student.checkRegistered(
+        widget.event.name, currentUser?.email as String);
+    setState(() {
+      b = r;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    registeredStatus();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,7 +97,7 @@ class _StudentRegisterScreenState extends State<StudentRegisterScreen> {
                       SizedBox(
                         width: 5,
                       ),
-                      Text(widget.event.venue.name),
+                      Text(widget.event.venue),
                       Spacer(),
                     ],
                   ),
@@ -102,7 +117,12 @@ class _StudentRegisterScreenState extends State<StudentRegisterScreen> {
                       surfaceTintColor: WidgetStatePropertyAll(Colors.brown),
                     ),
                     onPressed: () => {
-                      if (!widget.b) user.register(widget.event),
+                      if (!b)
+                        {
+                          student.addRegistered(
+                              widget.event.name, currentUser?.email as String),
+                          user.register(widget.event),
+                        },
                       showAdaptiveDialog(
                         context: context,
                         builder: (context) => Dialog(
@@ -130,14 +150,14 @@ class _StudentRegisterScreenState extends State<StudentRegisterScreen> {
                         ),
                       ),
                       setState(() {
-                        widget.b = true;
+                        b = true;
                       }),
                     },
                     child: SizedBox(
                       width: double.infinity,
                       child: Center(
                         child: Text(
-                          widget.b ? "Registered" : "Register",
+                          b ? "Registered" : "Register",
                           style: TextStyle(
                             color: Colors.white,
                           ),

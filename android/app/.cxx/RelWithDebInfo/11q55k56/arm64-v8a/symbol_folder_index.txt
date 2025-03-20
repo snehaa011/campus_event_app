@@ -1,0 +1,1 @@
+C:\flutterapps\campus_event_app\build\app\intermediates\cxx\RelWithDebInfo\11q55k56\obj\arm64-v8a

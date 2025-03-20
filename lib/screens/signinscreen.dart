@@ -1,16 +1,17 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, use_build_context_synchronously
 
+import 'package:campus_event_app/auth_service.dart';
+import 'package:campus_event_app/data/data.dart';
 import 'package:campus_event_app/screens/admin/homescreen.dart';
 import 'package:campus_event_app/screens/organiser/homescreen.dart';
 import 'package:campus_event_app/screens/student/homescreen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class SignInScreen extends StatelessWidget {
-  late String user = "";
-  SignInScreen(String u, {super.key}) {
-    user = u;
-  }
-
+  final String str;
+  final AuthService _authService = AuthService();
+  SignInScreen(this.str, {super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,26 +35,44 @@ class SignInScreen extends StatelessWidget {
                   ),
                 ),
               ),
-              onPressed: () => {
-                if (user == 'student')
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => StudentHomePage()),
-                      (Route<dynamic> route) => false)
-                else if (user == 'organiser')
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => OrganiserHomePage()),
-                      (Route<dynamic> route) => false)
-                else if (user == 'admin')
-                  Navigator.pushAndRemoveUntil(
-                      context,
-                      MaterialPageRoute(builder: (context) => AdminHomePage()),
-                      (Route<dynamic> route) => false)
-                else
-                  Navigator.pop(context),
+              onPressed: () async {
+                User? user = await _authService.signInWithGoogle();
+                if (user != null) {
+                  if (str == 'student') {
+                    if (!await student.checkStudent(user.email)) {
+                      student.addStudent("students", user.email as String,
+                          user.displayName as String);
+                    }
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => StudentHomePage(),
+                        ),
+                        (Route<dynamic> route) => false);
+                  } else if (str == 'organiser') {
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => OrganiserHomePage(),
+                        ),
+                        (Route<dynamic> route) => false);
+                  } else if (str == 'admin') {
+                    Navigator.pushAndRemoveUntil(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => AdminHomePage(),
+                        ),
+                        (Route<dynamic> route) => false);
+                  } else {
+                    Navigator.pop(context);
+                  }
+                } else {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text("Only @nitc.ac.in emails are allowed"),
+                    ),
+                  );
+                }
               },
               child: Text(
                 "Sign In with Google",

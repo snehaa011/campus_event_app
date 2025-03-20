@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
-List<String> l1 = ["skibidi", "gooning", "edging", "rizz"];
-List<String> l2 = ["gyatt", "looksmaxxing"];
-List<String> l3 = ["kai cenat", "fanum tax"];
 var content =
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 
@@ -62,31 +60,27 @@ class Event {
   TimeOfDay start = TimeOfDay(hour: 0, minute: 0);
   TimeOfDay? end;
   DateTime date = DateTime(0000);
-  Venue venue = def;
-  bool interested = false;
+  String venue = "";
   int noOfParticpiants = 1;
   double regfee = 0;
   Event() {}
-  Event.i(String n, String o, TimeOfDay s, TimeOfDay e, DateTime d, Venue v,
-      bool i, int np, double p, String im) {
-    name = n;
-    org = o;
-    start = s;
-    end = e;
-    date = d;
-    venue = v;
-    interested = i;
-    noOfParticpiants = np;
-    regfee = p;
-    img = im;
-  }
-  Event.ii(String n, String o, TimeOfDay s, DateTime d, bool i, int np,
+  Event.i(String n, String o, TimeOfDay s, DateTime d, String v, int np,
       double p, String im) {
     name = n;
     org = o;
     start = s;
     date = d;
-    interested = i;
+    venue = v;
+    noOfParticpiants = np;
+    regfee = p;
+    img = im;
+  }
+  Event.ii(String n, String o, TimeOfDay s, DateTime d, int np, double p,
+      String im) {
+    name = n;
+    org = o;
+    start = s;
+    date = d;
     noOfParticpiants = np;
     regfee = p;
     img = im;
@@ -97,10 +91,8 @@ Event i = Event.i(
   "CoderKombat",
   "CSEA",
   TimeOfDay(hour: 9, minute: 0),
-  TimeOfDay(hour: 12, minute: 0),
   DateTime(2024, 12, 23),
-  ssl,
-  false,
+  ssl.name,
   2,
   100,
   "https://media.istockphoto.com/id/1295274245/photo/random-multicolored-spheres-computer-generated-abstract-form-of-large-and-small-balls-3d.jpg?s=612x612&w=0&k=20&c=q7NOl28YxIIOqKu6em50VlKrg6ISFyVww_nLOCr5W_A=",
@@ -109,10 +101,8 @@ Event ii = Event.i(
   "Random bullshit nigga event",
   "CSEA",
   TimeOfDay(hour: 9, minute: 0),
-  TimeOfDay(hour: 12, minute: 0),
   DateTime(2024, 12, 19),
-  nsl,
-  false,
+  nsl.name,
   1,
   100,
   "https://media.istockphoto.com/id/1295274245/photo/random-multicolored-spheres-computer-generated-abstract-form-of-large-and-small-balls-3d.jpg?s=612x612&w=0&k=20&c=q7NOl28YxIIOqKu6em50VlKrg6ISFyVww_nLOCr5W_A=",
@@ -122,7 +112,6 @@ Event iii = Event.ii(
   "IEEE",
   TimeOfDay(hour: 19, minute: 0),
   DateTime(2024, 12, 17),
-  false,
   1,
   100,
   "https://media.istockphoto.com/id/1295274245/photo/random-multicolored-spheres-computer-generated-abstract-form-of-large-and-small-balls-3d.jpg?s=612x612&w=0&k=20&c=q7NOl28YxIIOqKu6em50VlKrg6ISFyVww_nLOCr5W_A=",
@@ -132,10 +121,8 @@ Event iv = Event.i(
   "EventP",
   "CEA",
   TimeOfDay(hour: 9, minute: 0),
-  TimeOfDay(hour: 12, minute: 0),
   DateTime(2024, 12, 21),
-  oat,
-  false,
+  oat.name,
   1,
   100,
   "https://media.istockphoto.com/id/1295274245/photo/random-multicolored-spheres-computer-generated-abstract-form-of-large-and-small-balls-3d.jpg?s=612x612&w=0&k=20&c=q7NOl28YxIIOqKu6em50VlKrg6ISFyVww_nLOCr5W_A=",
@@ -144,10 +131,8 @@ Event v = Event.i(
   "EventQ",
   "MEA",
   TimeOfDay(hour: 9, minute: 0),
-  TimeOfDay(hour: 12, minute: 0),
   DateTime(2024, 12, 24),
-  aud,
-  false,
+  aud.name,
   1,
   100,
   "https://media.istockphoto.com/id/1295274245/photo/random-multicolored-spheres-computer-generated-abstract-form-of-large-and-small-balls-3d.jpg?s=612x612&w=0&k=20&c=q7NOl28YxIIOqKu6em50VlKrg6ISFyVww_nLOCr5W_A=",
@@ -156,15 +141,13 @@ Event vi = Event.i(
   "EVentR",
   "EEA",
   TimeOfDay(hour: 19, minute: 0),
-  TimeOfDay(hour: 21, minute: 0),
   DateTime(2024, 12, 25),
-  oat,
-  false,
+  oat.name,
   1,
   100,
   "https://media.istockphoto.com/id/1295274245/photo/random-multicolored-spheres-computer-generated-abstract-form-of-large-and-small-balls-3d.jpg?s=612x612&w=0&k=20&c=q7NOl28YxIIOqKu6em50VlKrg6ISFyVww_nLOCr5W_A=",
 );
-List<Event> events = [i, ii, iii, iv, v, vi];
+// List<Event> events = [i, ii, iii, iv, v, vi];
 
 class Notify {
   String id = "";
@@ -183,19 +166,19 @@ class Notify {
 List<Notify> notifications = [
   Notify.i(
     "abc",
-    events[0],
+    i,
     TimeOfDay(hour: 09, minute: 45),
     DateTime.now(),
   ),
   Notify.i(
     "def",
-    events[3],
+    ii,
     TimeOfDay(hour: 13, minute: 44),
     DateTime.now(),
   ),
 ];
 
-class User {
+class Useri {
   String name = "",
       email = "",
       rollno = "",
@@ -206,8 +189,8 @@ class User {
   List<Event> interested = [];
   List<Event> registered = [];
   List<Event> history = [iii];
-  User();
-  User.i(n, e, r, ba, br, ph) {
+  Useri();
+  Useri.i(n, e, r, ba, br, ph) {
     name = n;
     email = e;
     rollno = r;
@@ -232,7 +215,21 @@ class User {
   }
 }
 
-User user = User.i("Ashwin A Nair", "ashwin_b220198cs@nitc.ac.in", "B220198CS",
-    "CS01", "CSE", "7738012855");
+Useri user = Useri.i("Ashwin A Nair", "ashwin_b220198cs@nitc.ac.in",
+    "B220198CS", "CS01", "CSE", "7738012855");
 
 List<String> org = ['CSEA', 'ECEA', 'IEEE', 'MEA', 'CEA', 'EEA'];
+
+void fetchDocument() async {
+  FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  // Reference to the document
+  DocumentSnapshot doc = await firestore.collection('test').doc('test').get();
+
+  if (doc.exists) {
+    Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+    print("Name: ${data['text']}");
+  } else {
+    print("Document does not exist");
+  }
+}

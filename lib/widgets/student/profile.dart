@@ -141,17 +141,17 @@ class _StudentProfileState extends State<StudentProfile> {
                   SizedBox(
                     height: 10,
                   ),
-                  Text(
-                    "Batch",
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
-                  ),
-                  Text(
-                    user.batch,
-                    style: TextStyle(fontSize: 20),
-                  ),
+                  // Text(
+                  //   "Batch",
+                  //   style: TextStyle(
+                  //     fontWeight: FontWeight.bold,
+                  //     fontSize: 20,
+                  //   ),
+                  // ),
+                  // Text(
+                  //   user.batch,
+                  //   style: TextStyle(fontSize: 20),
+                  // ),
                   SizedBox(
                     height: 10,
                   ),

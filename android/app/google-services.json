@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "953989752029",
+    "firebase_url": "https://campus-event-app-b9bdb-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "campus-event-app-b9bdb",
+    "storage_bucket": "campus-event-app-b9bdb.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:953989752029:android:34894ab7a699ae0dce2734",
+        "android_client_info": {
+          "package_name": "com.example.campus_event_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "953989752029-sl0g7kvt3cqglp8j04l0ucr7o25n3vmo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.campus_event_app",
+            "certificate_hash": "a3cc44bc34b008d60174bf7352c314a2ed129309"
+          }
+        },
+        {
+          "client_id": "953989752029-rm1a350l7rughrrenkbp3883dgth5pq7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6jVrqoD1VNvKhZ3jiMr9MKH2sNsBzzt4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "953989752029-rm1a350l7rughrrenkbp3883dgth5pq7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

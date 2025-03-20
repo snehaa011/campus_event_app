@@ -1,25 +1,49 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:campus_event_app/data/ashwin_test.dart';
+import 'package:campus_event_app/data/data.dart';
 import 'package:campus_event_app/screens/student/registerscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class StudentEventBox extends StatefulWidget {
   Event event = Event();
-  bool inter = false;
   StudentEventBox(Event e, {super.key}) {
     event = e;
-    inter = user.interested.contains(event);
   }
-
   @override
   State<StudentEventBox> createState() => _StudentEventBoxState();
 }
 
 class _StudentEventBoxState extends State<StudentEventBox> {
+  bool inter = false;
+
+  Future<void> interestedStatus() async {
+    bool b = await student.checkInterested(
+        widget.event.name, currentUser?.email as String);
+    if (mounted) {
+      setState(() {
+        inter = b;
+      });
+    }
+  }
+
+  Future<void> ine() async {
+    inter = await student.checkInterested(
+        widget.event.name, currentUser?.email as String);
+    print("ine called");
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    interestedStatus();
+  }
+
   @override
   Widget build(BuildContext context) {
+    // interestedStatus();
+    ine();
     return Column(
       children: [
         ExpansionTile(
@@ -90,7 +114,7 @@ class _StudentEventBoxState extends State<StudentEventBox> {
                 SizedBox(
                   width: 5,
                 ),
-                Text(widget.event.venue.name),
+                Text(widget.event.venue),
                 Spacer(),
               ],
             ),
@@ -100,56 +124,53 @@ class _StudentEventBoxState extends State<StudentEventBox> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                if (!user.registered.contains(widget.event))
-                  ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: WidgetStatePropertyAll(Colors.brown),
-                      overlayColor: WidgetStatePropertyAll(
-                          const Color.fromARGB(36, 121, 85, 72)),
-                      shape: WidgetStatePropertyAll(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                ElevatedButton(
+                  style: ButtonStyle(
+                    backgroundColor: WidgetStatePropertyAll(Colors.brown),
+                    overlayColor: WidgetStatePropertyAll(
+                        const Color.fromARGB(36, 121, 85, 72)),
+                    shape: WidgetStatePropertyAll(
+                      RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    surfaceTintColor: WidgetStatePropertyAll(Colors.brown),
+                  ),
+                  onPressed: () async {
+                    if (inter) {
+                      await student.removeInterested(
+                          widget.event.name, currentUser?.email as String);
+                    } else {
+                      await student.addInterested(
+                          widget.event.name, currentUser?.email as String);
+                    }
+                    await interestedStatus();
+                  },
+                  child: Row(
+                    children: [
+                      Text(
+                        "Interested",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight:
+                              inter ? FontWeight.bold : FontWeight.normal,
                         ),
                       ),
-                      surfaceTintColor: WidgetStatePropertyAll(Colors.brown),
-                    ),
-                    onPressed: () => {
-                      setState(() {
-                        if (widget.inter) {
-                          user.removeInterested(widget.event);
-                          widget.inter = false;
-                        } else {
-                          user.addInterested(widget.event);
-                          widget.inter = true;
-                        }
-                      }),
-                    },
-                    child: Row(
-                      children: [
-                        Text(
-                          "Interested",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: widget.inter
-                                ? FontWeight.bold
-                                : FontWeight.normal,
-                          ),
-                        ),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        widget.inter
-                            ? Icon(
-                                Icons.star,
-                                color: Colors.white,
-                              )
-                            : Icon(
-                                Icons.star_outline,
-                                color: Colors.white,
-                              ),
-                      ],
-                    ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      inter
+                          ? Icon(
+                              Icons.star,
+                              color: Colors.white,
+                            )
+                          : Icon(
+                              Icons.star_outline,
+                              color: Colors.white,
+                            ),
+                    ],
                   ),
+                ),
                 ElevatedButton(
                   style: ButtonStyle(
                     backgroundColor: WidgetStatePropertyAll(Colors.brown),

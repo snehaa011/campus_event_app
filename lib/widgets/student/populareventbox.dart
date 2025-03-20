@@ -1,15 +1,14 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:campus_event_app/data/ashwin_test.dart';
+import 'package:campus_event_app/data/data.dart';
 import 'package:campus_event_app/screens/student/registerscreen.dart';
 import 'package:flutter/material.dart';
 
 class StudentPopularEventBox extends StatefulWidget {
   Event event = Event();
-  bool inter = false;
   StudentPopularEventBox(Event e, {super.key}) {
     event = e;
-    inter = user.interested.contains(event);
   }
 
   @override
@@ -17,6 +16,21 @@ class StudentPopularEventBox extends StatefulWidget {
 }
 
 class _StudentPopularEventBoxState extends State<StudentPopularEventBox> {
+  bool inter = false;
+  Future<void> interestedStatus() async {
+    bool b = await student.checkInterested(
+        widget.event.name, currentUser?.email as String);
+    setState(() {
+      inter = b;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    interestedStatus();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -103,11 +117,15 @@ class _StudentPopularEventBoxState extends State<StudentPopularEventBox> {
                         ),
                         onPressed: () => {
                           setState(() {
-                            if (widget.inter) {
-                              widget.inter = false;
+                            if (inter) {
+                              inter = false;
+                              student.removeInterested(widget.event.name,
+                                  currentUser?.email as String);
                               user.removeInterested(widget.event);
                             } else {
-                              widget.inter = true;
+                              inter = true;
+                              student.addInterested(widget.event.name,
+                                  currentUser?.email as String);
                               user.addInterested(widget.event);
                             }
                           }),
@@ -118,15 +136,14 @@ class _StudentPopularEventBoxState extends State<StudentPopularEventBox> {
                               "Interested",
                               style: TextStyle(
                                 color: Colors.white,
-                                fontWeight: widget.inter
-                                    ? FontWeight.bold
-                                    : FontWeight.normal,
+                                fontWeight:
+                                    inter ? FontWeight.bold : FontWeight.normal,
                               ),
                             ),
                             SizedBox(
                               width: 5,
                             ),
-                            widget.inter
+                            inter
                                 ? Icon(
                                     Icons.star,
                                     color: Colors.white,

@@ -1,4 +1,5 @@
 import 'package:campus_event_app/data/ashwin_test.dart';
+import 'package:campus_event_app/data/data.dart';
 import 'package:campus_event_app/widgets/searchbar.dart';
 import 'package:campus_event_app/widgets/student/eventcarousel.dart';
 import 'package:flutter/material.dart';
@@ -11,14 +12,27 @@ class StudentHome extends StatefulWidget {
 }
 
 class _StudentHomeState extends State<StudentHome> {
-  List<Event> list = events.sublist(1, 3);
-  List<Event> _list = events.sublist(1, 3);
+  List<Event> list = [];
+  List<Event> _list = [];
+  void fetchEvents() async {
+    List<Event> l = await eventer.getEvents();
+    setState(() {
+      list = l;
+      _list = l;
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fetchEvents();
+  }
+
   void search(String str) {
     Set<Event> s = {};
     s.addAll(list.where((s) => s.name.toLowerCase().contains(str)).toList());
     s.addAll(list.where((s) => s.org.toLowerCase().contains(str)).toList());
-    s.addAll(
-        list.where((s) => s.venue.name.toLowerCase().contains(str)).toList());
+    s.addAll(list.where((s) => s.venue.toLowerCase().contains(str)).toList());
     setState(() {
       _list = s.toList();
     });

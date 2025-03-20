@@ -1,4 +1,5 @@
 import 'package:campus_event_app/data/ashwin_test.dart';
+import 'package:campus_event_app/data/data.dart';
 import 'package:campus_event_app/widgets/searchbar.dart';
 import 'package:campus_event_app/widgets/student/eventbox.dart';
 import 'package:campus_event_app/widgets/student/filter.dart';
@@ -13,15 +14,45 @@ class StudentEvents extends StatefulWidget {
 
 class _StudentEventsState extends State<StudentEvents> {
   int i = 0;
-  List<Event> list = events;
-  List<Event> _list = events;
+  List<Event> list = [];
+  List<Event> _list = [];
+
+  @override
+  void initState() {
+    super.initState();
+    fetchEvents();
+  }
+
+  void fetchEvents() async {
+    List<Event> l = await eventer.getEvents();
+    setState(() {
+      list = l;
+      _list = l;
+    });
+  }
+
+  void fetchInterested() async {
+    List<Event> l = await student.getInterested();
+    setState(() {
+      list = l;
+      _list = l;
+    });
+  }
+
+  void fetchRegistered() async {
+    List<Event> l = await student.getRegistered();
+    setState(() {
+      list = l;
+      _list = l;
+    });
+  }
+
   void search(String str) {
     str = str.toLowerCase();
     Set<Event> s = {};
     s.addAll(list.where((s) => s.name.toLowerCase().contains(str)).toList());
     s.addAll(list.where((s) => s.org.toLowerCase().contains(str)).toList());
-    s.addAll(
-        list.where((s) => s.venue.name.toLowerCase().contains(str)).toList());
+    s.addAll(list.where((s) => s.venue.toLowerCase().contains(str)).toList());
     setState(() {
       _list = s.toList();
     });
@@ -35,26 +66,29 @@ class _StudentEventsState extends State<StudentEvents> {
   }
 
   void getAll() {
+    print(
+        "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc");
+
+    fetchEvents();
     setState(() {
       i = 0;
-      list = events;
-      _list = list;
     });
   }
 
   void getInterested() {
+    print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+    fetchInterested();
     setState(() {
       i = 1;
-      list = user.interested;
-      _list = list;
     });
   }
 
   void getRegistered() {
+    print("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
+
+    fetchRegistered();
     setState(() {
       i = 2;
-      list = user.registered;
-      _list = list;
     });
   }
 
