@@ -8,30 +8,26 @@ import 'package:intl/intl.dart';
 
 class StudentEventBox extends StatefulWidget {
   Event event = Event();
+  bool inter = false;
   StudentEventBox(Event e, {super.key}) {
     event = e;
   }
+
   @override
   State<StudentEventBox> createState() => _StudentEventBoxState();
 }
 
 class _StudentEventBoxState extends State<StudentEventBox> {
-  bool inter = false;
-
+  bool load = false;
   Future<void> interestedStatus() async {
     bool b = await student.checkInterested(
         widget.event.name, currentUser?.email as String);
     if (mounted) {
       setState(() {
-        inter = b;
+        widget.inter = b;
+        load = true;
       });
     }
-  }
-
-  Future<void> ine() async {
-    inter = await student.checkInterested(
-        widget.event.name, currentUser?.email as String);
-    print("ine called");
   }
 
   @override
@@ -42,171 +38,157 @@ class _StudentEventBoxState extends State<StudentEventBox> {
 
   @override
   Widget build(BuildContext context) {
-    // interestedStatus();
-    ine();
-    return Column(
-      children: [
-        ExpansionTile(
-          childrenPadding: EdgeInsets.fromLTRB(15, 0, 15, 15),
-          title: Text(widget.event.name),
-          backgroundColor: const Color.fromARGB(255, 223, 223, 223),
-          initiallyExpanded: true,
-          collapsedBackgroundColor: const Color.fromARGB(255, 223, 223, 223),
-          collapsedShape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10),
-          ),
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: [
-                Container(
-                  width: 100,
-                  height: 100,
-                  color: Colors.brown,
-                  child: ClipRRect(
-                    child: Image.network(
-                      widget.event.img,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+    return !load
+        ? Container(
+            color: Colors.red,
+            width: 100,
+            height: 100,
+          )
+        : Column(
+            children: [
+              ExpansionTile(
+                childrenPadding: EdgeInsets.fromLTRB(15, 0, 15, 15),
+                title: Text(widget.event.name),
+                backgroundColor: const Color.fromARGB(255, 223, 223, 223),
+                initiallyExpanded: true,
+                collapsedBackgroundColor:
+                    const Color.fromARGB(255, 223, 223, 223),
+                collapsedShape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
                 ),
-                SizedBox(
-                  width: 15,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
                 ),
-                Expanded(
-                  child: Text(
-                    content,
-                    maxLines: 5,
-                    style: TextStyle(
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            Row(
-              children: [
-                Icon(Icons.calendar_today),
-                SizedBox(
-                  width: 5,
-                ),
-                Text(DateFormat('yMMMd').format(widget.event.date)),
-                Spacer(),
-                Icon(Icons.alarm),
-                SizedBox(
-                  width: 5,
-                ),
-                Text(widget.event.start.format(context)),
-              ],
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Row(
-              children: [
-                Icon(Icons.location_on),
-                SizedBox(
-                  width: 5,
-                ),
-                Text(widget.event.venue),
-                Spacer(),
-              ],
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor: WidgetStatePropertyAll(Colors.brown),
-                    overlayColor: WidgetStatePropertyAll(
-                        const Color.fromARGB(36, 121, 85, 72)),
-                    shape: WidgetStatePropertyAll(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    surfaceTintColor: WidgetStatePropertyAll(Colors.brown),
-                  ),
-                  onPressed: () async {
-                    if (inter) {
-                      await student.removeInterested(
-                          widget.event.name, currentUser?.email as String);
-                    } else {
-                      await student.addInterested(
-                          widget.event.name, currentUser?.email as String);
-                    }
-                    await interestedStatus();
-                  },
-                  child: Row(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Text(
-                        "Interested",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight:
-                              inter ? FontWeight.bold : FontWeight.normal,
+                      Container(
+                        width: 100,
+                        height: 100,
+                        color: Colors.brown,
+                        child: ClipRRect(
+                          child: Image.network(
+                            widget.event.img,
+                            fit: BoxFit.cover,
+                          ),
                         ),
                       ),
                       SizedBox(
-                        width: 5,
+                        width: 15,
                       ),
-                      inter
-                          ? Icon(
-                              Icons.star,
-                              color: Colors.white,
-                            )
-                          : Icon(
-                              Icons.star_outline,
-                              color: Colors.white,
-                            ),
+                      Expanded(
+                        child: Text(
+                          content,
+                          maxLines: 5,
+                          style: TextStyle(
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ),
                     ],
                   ),
-                ),
-                ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor: WidgetStatePropertyAll(Colors.brown),
-                    overlayColor: WidgetStatePropertyAll(
-                        const Color.fromARGB(36, 121, 85, 72)),
-                    shape: WidgetStatePropertyAll(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                    surfaceTintColor: WidgetStatePropertyAll(Colors.brown),
+                  SizedBox(
+                    height: 15,
                   ),
-                  onPressed: () => {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            StudentRegisterScreen(widget.event),
+                  Row(
+                    children: [
+                      Icon(Icons.calendar_today),
+                      SizedBox(
+                        width: 5,
                       ),
-                    ),
-                  },
-                  child: Text(
-                    "View Event",
-                    style: TextStyle(
-                      color: Colors.white,
-                    ),
+                      Text(DateFormat('yMMMd').format(widget.event.date)),
+                      Spacer(),
+                      Icon(Icons.alarm),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text(widget.event.start.format(context)),
+                    ],
                   ),
-                ),
-              ],
-            )
-          ],
-        ),
-        SizedBox(
-          height: 15,
-        ),
-      ],
-    );
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    children: [
+                      Icon(Icons.location_on),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text(widget.event.venue),
+                      Spacer(),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      ElevatedButton(
+                        style: bs,
+                        onPressed: () async {
+                          if (widget.inter) {
+                            await student.removeInterested(widget.event.name,
+                                currentUser?.email as String);
+                          } else {
+                            await student.addInterested(widget.event.name,
+                                currentUser?.email as String);
+                          }
+                          await interestedStatus();
+                        },
+                        child: Row(
+                          children: [
+                            Text(
+                              "Interested",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontWeight: widget.inter
+                                    ? FontWeight.bold
+                                    : FontWeight.normal,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 5,
+                            ),
+                            widget.inter
+                                ? Icon(
+                                    Icons.star,
+                                    color: Colors.white,
+                                  )
+                                : Icon(
+                                    Icons.star_outline,
+                                    color: Colors.white,
+                                  ),
+                          ],
+                        ),
+                      ),
+                      ElevatedButton(
+                        style: bs,
+                        onPressed: () => {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  StudentRegisterScreen(widget.event),
+                            ),
+                          ),
+                        },
+                        child: Text(
+                          "View Event",
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+              SizedBox(
+                height: 15,
+              ),
+            ],
+          );
   }
 }

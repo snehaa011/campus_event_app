@@ -1,3 +1,4 @@
+import 'package:campus_event_app/data/ashwin_test.dart';
 import 'package:campus_event_app/screens/signinscreen.dart';
 import 'package:flutter/material.dart';
 
@@ -7,6 +8,7 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 212, 196, 191),
       body: Padding(
         padding: EdgeInsets.fromLTRB(20, 20, 20, 20),
         child: Center(
@@ -15,27 +17,16 @@ class LoginScreen extends StatelessWidget {
               children: [
                 CircleAvatar(
                   radius: 80,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(80),
+                    child: Image.network("https://i.ibb.co/CKHbJtD6/NITC.png"),
+                  ),
                 ),
                 SizedBox(
                   height: 40,
                 ),
                 ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor: WidgetStatePropertyAll(
-                      const Color.fromARGB(255, 25, 99, 211),
-                    ),
-                    padding: WidgetStatePropertyAll(
-                      EdgeInsets.fromLTRB(50, 20, 50, 20),
-                    ),
-                    fixedSize: WidgetStatePropertyAll(
-                      Size.fromWidth(MediaQuery.of(context).size.width / 2),
-                    ),
-                    shape: WidgetStatePropertyAll(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                  ),
+                  style: lgn,
                   onPressed: () => {
                     Navigator.push(
                       context,
@@ -53,22 +44,7 @@ class LoginScreen extends StatelessWidget {
                   height: 20,
                 ),
                 ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor: WidgetStatePropertyAll(
-                      const Color.fromARGB(255, 25, 99, 211),
-                    ),
-                    padding: WidgetStatePropertyAll(
-                      EdgeInsets.fromLTRB(50, 20, 50, 20),
-                    ),
-                    fixedSize: WidgetStatePropertyAll(
-                      Size.fromWidth(MediaQuery.of(context).size.width / 2),
-                    ),
-                    shape: WidgetStatePropertyAll(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                  ),
+                  style: lgn,
                   onPressed: () => {
                     Navigator.push(
                       context,
@@ -86,22 +62,7 @@ class LoginScreen extends StatelessWidget {
                   height: 20,
                 ),
                 ElevatedButton(
-                  style: ButtonStyle(
-                    backgroundColor: WidgetStatePropertyAll(
-                      const Color.fromARGB(255, 25, 99, 211),
-                    ),
-                    padding: WidgetStatePropertyAll(
-                      EdgeInsets.fromLTRB(50, 20, 50, 20),
-                    ),
-                    fixedSize: WidgetStatePropertyAll(
-                      Size.fromWidth(MediaQuery.of(context).size.width / 2),
-                    ),
-                    shape: WidgetStatePropertyAll(
-                      RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                    ),
-                  ),
+                  style: lgn,
                   onPressed: () => {
                     Navigator.push(
                       context,

@@ -178,7 +178,7 @@ List<Notify> notifications = [
   ),
 ];
 
-class Useri {
+class UserClass {
   String name = "",
       email = "",
       rollno = "",
@@ -189,8 +189,8 @@ class Useri {
   List<Event> interested = [];
   List<Event> registered = [];
   List<Event> history = [iii];
-  Useri();
-  Useri.i(n, e, r, ba, br, ph) {
+  UserClass();
+  UserClass.i(n, e, r, ba, br, ph) {
     name = n;
     email = e;
     rollno = r;
@@ -215,7 +215,7 @@ class Useri {
   }
 }
 
-Useri user = Useri.i("Ashwin A Nair", "ashwin_b220198cs@nitc.ac.in",
+UserClass user = UserClass.i("Ashwin A Nair", "ashwin_b220198cs@nitc.ac.in",
     "B220198CS", "CS01", "CSE", "7738012855");
 
 List<String> org = ['CSEA', 'ECEA', 'IEEE', 'MEA', 'CEA', 'EEA'];
@@ -233,3 +233,30 @@ void fetchDocument() async {
     print("Document does not exist");
   }
 }
+
+ButtonStyle bs = ButtonStyle(
+  backgroundColor: WidgetStatePropertyAll(Colors.brown),
+  overlayColor: WidgetStatePropertyAll(const Color.fromARGB(36, 121, 85, 72)),
+  shape: WidgetStatePropertyAll(
+    RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(10),
+    ),
+  ),
+  surfaceTintColor: WidgetStatePropertyAll(Colors.brown),
+);
+ButtonStyle lgn = ButtonStyle(
+  backgroundColor: WidgetStatePropertyAll(
+    Colors.brown,
+  ),
+  padding: WidgetStatePropertyAll(
+    EdgeInsets.fromLTRB(50, 20, 50, 20),
+  ),
+  // fixedSize: WidgetStatePropertyAll(
+  //   Size.fromWidth(MediaQuery.of(context).size.width / 2),
+  // ),
+  shape: WidgetStatePropertyAll(
+    RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(10),
+    ),
+  ),
+);

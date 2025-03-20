@@ -22,7 +22,10 @@ class EventCarousel extends StatelessWidget {
       items: list.map((i) {
         return ClipRRect(
           borderRadius: BorderRadius.circular(15),
-          child: StudentPopularEventBox(i),
+          child: StudentPopularEventBox(
+            i,
+            key: ValueKey(i.name),
+          ),
         );
       }).toList(),
     );

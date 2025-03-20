@@ -103,18 +103,7 @@ class _StudentPopularEventBoxState extends State<StudentPopularEventBox> {
                     ),
                     if (!user.registered.contains(widget.event))
                       ElevatedButton(
-                        style: ButtonStyle(
-                          backgroundColor: WidgetStatePropertyAll(Colors.brown),
-                          overlayColor: WidgetStatePropertyAll(
-                              const Color.fromARGB(36, 121, 85, 72)),
-                          shape: WidgetStatePropertyAll(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                          ),
-                          surfaceTintColor:
-                              WidgetStatePropertyAll(Colors.brown),
-                        ),
+                        style: bs,
                         onPressed: () => {
                           setState(() {
                             if (inter) {

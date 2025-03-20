@@ -60,14 +60,10 @@ class _StudentHomeState extends State<StudentHome> {
                 ),
               ),
             ),
-
             Padding(
               padding: EdgeInsets.all(20),
               child: EventSearchBar(search),
             ),
-            // SizedBox(
-            //   height: 15,
-            // ),
             Padding(
               padding: EdgeInsets.all(20),
               child: Text(

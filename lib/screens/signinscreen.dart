@@ -15,13 +15,14 @@ class SignInScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: const Color.fromARGB(255, 212, 196, 191),
       body: Padding(
           padding: EdgeInsets.fromLTRB(20, 10, 20, 10),
           child: Center(
             child: ElevatedButton(
               style: ButtonStyle(
                 backgroundColor: WidgetStatePropertyAll(
-                  const Color.fromARGB(255, 25, 99, 211),
+                  Colors.brown,
                 ),
                 padding: WidgetStatePropertyAll(
                   EdgeInsets.fromLTRB(0, 20, 0, 20),
@@ -40,8 +41,8 @@ class SignInScreen extends StatelessWidget {
                 if (user != null) {
                   if (str == 'student') {
                     if (!await student.checkStudent(user.email)) {
-                      student.addStudent("students", user.email as String,
-                          user.displayName as String);
+                      student.addStudent(
+                          user.email as String, user.displayName as String);
                     }
                     Navigator.pushAndRemoveUntil(
                         context,
@@ -74,11 +75,24 @@ class SignInScreen extends StatelessWidget {
                   );
                 }
               },
-              child: Text(
-                "Sign In with Google",
-                style: TextStyle(
-                  color: Colors.white,
-                ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  CircleAvatar(
+                    radius: 15,
+                    child: Image.network(
+                        "https://static.vecteezy.com/system/resources/previews/022/613/027/non_2x/google-icon-logo-symbol-free-png.png"),
+                  ),
+                  SizedBox(
+                    width: 10,
+                  ),
+                  Text(
+                    "Sign In with Google",
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                  ),
+                ],
               ),
             ),
           )),

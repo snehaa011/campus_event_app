@@ -73,8 +73,6 @@ class _StudentProfileState extends State<StudentProfile> {
                     alignment: Alignment.bottomRight,
                     children: [
                       Container(
-                        // width: 80,
-                        // height: 80,
                         padding: EdgeInsets.all(10),
                         child: CircleAvatar(
                           backgroundColor: Colors.white,
@@ -141,17 +139,6 @@ class _StudentProfileState extends State<StudentProfile> {
                   SizedBox(
                     height: 10,
                   ),
-                  // Text(
-                  //   "Batch",
-                  //   style: TextStyle(
-                  //     fontWeight: FontWeight.bold,
-                  //     fontSize: 20,
-                  //   ),
-                  // ),
-                  // Text(
-                  //   user.batch,
-                  //   style: TextStyle(fontSize: 20),
-                  // ),
                   SizedBox(
                     height: 10,
                   ),
@@ -172,12 +159,7 @@ class _StudentProfileState extends State<StudentProfile> {
                           SizedBox(
                             height: 15,
                           ),
-                          // Text(
-                          //   user.phoneno,
-                          //   style: TextStyle(fontSize: 20),
-                          // ),
                           SizedBox(
-                            // height: 50,
                             width: MediaQuery.of(context).size.width - 200,
                             child: StudentPhoneBox(tc, setVal, b),
                           )

@@ -28,7 +28,24 @@ class Student {
     return doc.exists ? true : false;
   }
 
-  void addStudent(String collection, String email, String name) async {
+  Future<UserClass> getStudent() async {
+    UserClass ui = UserClass();
+    await students.doc(currentUser?.email).get().then((doc) {
+      if (doc.exists) {
+        var data = doc.data() as Map<String, dynamic>;
+        ui.name = data['name'];
+        ui.email = data['email'];
+        ui.branch = data['branch'];
+        ui.rollno = data['rollno'];
+        ui.phoneno = data['phoneno'];
+        // ui.history = data['history'];
+      }
+    });
+    print(ui.name);
+    return ui;
+  }
+
+  void addStudent(String email, String name) async {
     final student = {
       'name': name,
       'email': email,

@@ -23,28 +23,26 @@ class _StudentEventsState extends State<StudentEvents> {
     fetchEvents();
   }
 
-  void fetchEvents() async {
-    List<Event> l = await eventer.getEvents();
+  void set(List<Event> l) {
     setState(() {
       list = l;
       _list = l;
     });
+  }
+
+  void fetchEvents() async {
+    List<Event> l = await eventer.getEvents();
+    set(l);
   }
 
   void fetchInterested() async {
     List<Event> l = await student.getInterested();
-    setState(() {
-      list = l;
-      _list = l;
-    });
+    set(l);
   }
 
   void fetchRegistered() async {
     List<Event> l = await student.getRegistered();
-    setState(() {
-      list = l;
-      _list = l;
-    });
+    set(l);
   }
 
   void search(String str) {
@@ -65,31 +63,25 @@ class _StudentEventsState extends State<StudentEvents> {
     });
   }
 
-  void getAll() {
-    print(
-        "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc");
-
-    fetchEvents();
+  void setVal(int x) {
     setState(() {
-      i = 0;
+      i = x;
     });
+  }
+
+  void getAll() {
+    fetchEvents();
+    setVal(0);
   }
 
   void getInterested() {
-    print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
     fetchInterested();
-    setState(() {
-      i = 1;
-    });
+    setVal(1);
   }
 
   void getRegistered() {
-    print("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb");
-
     fetchRegistered();
-    setState(() {
-      i = 2;
-    });
+    setVal(2);
   }
 
   @override
@@ -221,8 +213,10 @@ class _StudentEventsState extends State<StudentEvents> {
                 : ListView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemBuilder: (context, index) =>
-                        StudentEventBox(_list[index]),
+                    itemBuilder: (context, index) => StudentEventBox(
+                      _list[index],
+                      key: ValueKey(_list[index].name),
+                    ),
                     itemCount: _list.length,
                     padding: EdgeInsets.fromLTRB(0, 0, 0, 70),
                   ),
