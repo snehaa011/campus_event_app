@@ -2,7 +2,6 @@ import 'package:campus_event_app/data/sneha_test.dart';
 import 'package:campus_event_app/screens/LoginScreen.dart';
 import 'package:campus_event_app/screens/organiser/createevent.dart';
 import 'package:campus_event_app/screens/organiser/profilepage.dart';
-import 'package:campus_event_app/screens/organiser/eventpage.dart';
 import 'package:campus_event_app/widgets/organiser/eventtile.dart';
 import 'package:campus_event_app/widgets/searchbar.dart';
 import 'package:flutter/material.dart';

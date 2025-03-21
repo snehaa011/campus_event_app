@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-Future<void> selectTime(BuildContext context, Function(TimeOfDay) setTime) async {
+Future<void> selectTime(BuildContext context, Function(TimeOfDay) setTime, TimeOfDay? t) async {
     final TimeOfDay? pickedTime = await showTimePicker(
       builder: (context, child) {
         return Theme(
@@ -24,7 +24,7 @@ Future<void> selectTime(BuildContext context, Function(TimeOfDay) setTime) async
         );
       },
       context: context,
-      initialTime: TimeOfDay.now(),
+      initialTime: t??TimeOfDay.now(),
     );
     if (pickedTime != null) {
       setTime(pickedTime);

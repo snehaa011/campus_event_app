@@ -28,13 +28,34 @@ class Venue {
   void addEvent(Event v) {
     events.add(v);
   }
-  void sortEvents(){
-    events.sort((a,b){
+  void sortEvents(List<Event> ev){
+    ev.sort((a,b){
       if (a.date.compareTo(b.date)==0){
         return a.start.compareTo(b.start);
       }
       return a.date.compareTo(b.date);
     });
+  }
+  List<Event> getEventsByDate(DateTime reqd){
+    List<Event> evd=[];
+    evd.addAll(events.where((e) => e.date.compareTo(reqd)==0));
+    sortEvents(evd);
+    return evd;
+  }
+  bool checkAvl(TimeOfDay start, TimeOfDay end, DateTime day){
+    List<Event> occupied = getEventsByDate(day);
+    bool f=true;
+    for (Event e in occupied){
+      if (start.compareTo(e.start)<0 && end.compareTo(e.start)<=0){
+        f=true;
+      }
+      else if (start.compareTo(e.end)>=0 && end.compareTo(e.end)>0){
+        f=true;
+      }else{
+        f=false;
+      }
+    }
+    return f;
   }
   //sort events on time and find available slots to choose from once a venue is selected
   // if no venue is selected prompt to choose a venue first
@@ -83,7 +104,7 @@ class Event {
   String status = ""; // active/closed/past/pending
   // upload poster and documents for approval to firebase and retrieve here
   TimeOfDay start = TimeOfDay(hour: 0, minute: 0);
-  TimeOfDay? end;
+  TimeOfDay end = TimeOfDay(hour: 0, minute: 0);
   DateTime date = DateTime(0000);
   late Venue venue;
   int maxParticpiants = 1;
@@ -101,6 +122,7 @@ class Event {
     maxParticpiants = np;
     regfee = p;
     desc = dp;
+    venue.addEvent(this);
   }
   Event.variable(String n, String o, TimeOfDay s, DateTime d, bool i, int np,
       double p, String dp) {
@@ -115,7 +137,6 @@ class Event {
 
   void approveEvent(){
     approved=true;
-    venue.addEvent(this);
   }
 
   void updateStatus(){
