@@ -43,9 +43,9 @@ class DefaultFirebaseOptions {
     appId: '1:953989752029:android:34894ab7a699ae0dce2734',
     messagingSenderId: '953989752029',
     projectId: 'campus-event-app-b9bdb',
-    databaseURL:
-        'https://campus-event-app-b9bdb-default-rtdb.asia-southeast1.firebasedatabase.app/',
-    storageBucket: 'campus-event-app-b9bdb.firebasestorage.app',
+    // databaseURL:
+    //     'https://campus-event-app-b9bdb-default-rtdb.asia-southeast1.firebasedatabase.app/',
+    // storageBucket: 'campus-event-app-b9bdb.firebasestorage.app',
   );
 }
 

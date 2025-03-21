@@ -3,6 +3,7 @@ import 'package:campus_event_app/data/data.dart';
 import 'package:campus_event_app/widgets/searchbar.dart';
 import 'package:campus_event_app/widgets/student/eventbox.dart';
 import 'package:campus_event_app/widgets/student/filter.dart';
+import 'package:campus_event_app/widgets/student/shimmereventbox.dart';
 import 'package:flutter/material.dart';
 
 class StudentEvents extends StatefulWidget {
@@ -13,6 +14,7 @@ class StudentEvents extends StatefulWidget {
 }
 
 class _StudentEventsState extends State<StudentEvents> {
+  bool load = true;
   int i = 0;
   List<Event> list = [];
   List<Event> _list = [];
@@ -24,10 +26,13 @@ class _StudentEventsState extends State<StudentEvents> {
   }
 
   void set(List<Event> l) {
-    setState(() {
-      list = l;
-      _list = l;
-    });
+    if (mounted) {
+      setState(() {
+        list = l;
+        _list = l;
+        load = false;
+      });
+    }
   }
 
   void fetchEvents() async {
@@ -51,35 +56,56 @@ class _StudentEventsState extends State<StudentEvents> {
     s.addAll(list.where((s) => s.name.toLowerCase().contains(str)).toList());
     s.addAll(list.where((s) => s.org.toLowerCase().contains(str)).toList());
     s.addAll(list.where((s) => s.venue.toLowerCase().contains(str)).toList());
-    setState(() {
-      _list = s.toList();
-    });
+    if (mounted) {
+      setState(() {
+        _list = s.toList();
+      });
+    }
   }
 
   void searchOrg(String str) {
     str = str.toLowerCase();
-    setState(() {
-      _list = list.where((s) => s.org.toLowerCase().contains(str)).toList();
-    });
+    if (mounted) {
+      setState(() {
+        _list = list.where((s) => s.org.toLowerCase() == str).toList();
+      });
+    }
   }
 
   void setVal(int x) {
-    setState(() {
-      i = x;
-    });
+    if (mounted) {
+      setState(() {
+        i = x;
+      });
+    }
   }
 
   void getAll() {
+    if (mounted) {
+      setState(() {
+        load = true;
+      });
+    }
     fetchEvents();
     setVal(0);
   }
 
   void getInterested() {
+    if (mounted) {
+      setState(() {
+        load = true;
+      });
+    }
     fetchInterested();
     setVal(1);
   }
 
   void getRegistered() {
+    if (mounted) {
+      setState(() {
+        load = true;
+      });
+    }
     fetchRegistered();
     setVal(2);
   }
@@ -189,37 +215,46 @@ class _StudentEventsState extends State<StudentEvents> {
             SizedBox(
               height: 20,
             ),
-            _list.isEmpty
-                ? Padding(
-                    padding: EdgeInsets.all(40),
-                    child: Column(
-                      children: [
-                        Icon(
-                          Icons.event_busy,
-                          size: 80,
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          "No events found",
-                          style: TextStyle(
-                            fontSize: 20,
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                : ListView.builder(
+            load
+                ? ListView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
-                    itemBuilder: (context, index) => StudentEventBox(
-                      _list[index],
-                      key: ValueKey(_list[index].name),
-                    ),
-                    itemCount: _list.length,
+                    itemBuilder: (context, index) => StudentShimmerEventBox(),
+                    itemCount: 3,
                     padding: EdgeInsets.fromLTRB(0, 0, 0, 70),
-                  ),
+                  )
+                : _list.isEmpty
+                    ? Padding(
+                        padding: EdgeInsets.all(40),
+                        child: Column(
+                          children: [
+                            Icon(
+                              Icons.event_busy,
+                              size: 80,
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              "No events found",
+                              style: TextStyle(
+                                fontSize: 20,
+                              ),
+                            ),
+                          ],
+                        ),
+                      )
+                    : ListView.builder(
+                        physics: NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        itemBuilder: (context, index) => StudentEventBox(
+                          _list[index],
+                          key: ValueKey(
+                              DateTime.now().millisecondsSinceEpoch + index),
+                        ),
+                        itemCount: _list.length,
+                        padding: EdgeInsets.fromLTRB(0, 0, 0, 70),
+                      )
           ],
         ),
       ),

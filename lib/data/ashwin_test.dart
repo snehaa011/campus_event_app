@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -63,7 +65,7 @@ class Event {
   String venue = "";
   int noOfParticpiants = 1;
   double regfee = 0;
-  Event() {}
+  Event();
   Event.i(String n, String o, TimeOfDay s, DateTime d, String v, int np,
       double p, String im) {
     name = n;
@@ -215,8 +217,8 @@ class UserClass {
   }
 }
 
-UserClass user = UserClass.i("Ashwin A Nair", "ashwin_b220198cs@nitc.ac.in",
-    "B220198CS", "CS01", "CSE", "7738012855");
+// UserClass user = UserClass.i("Ashwin A Nair", "ashwin_b220198cs@nitc.ac.in",
+//     "B220198CS", "CS01", "CSE", "7738012855");
 
 List<String> org = ['CSEA', 'ECEA', 'IEEE', 'MEA', 'CEA', 'EEA'];
 

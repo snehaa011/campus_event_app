@@ -21,9 +21,11 @@ class _StudentRegisterScreenState extends State<StudentRegisterScreen> {
   void registeredStatus() async {
     bool r = await student.checkRegistered(
         widget.event.name, currentUser?.email as String);
-    setState(() {
-      b = r;
-    });
+    if (mounted) {
+      setState(() {
+        b = r;
+      });
+    }
   }
 
   @override
@@ -104,67 +106,69 @@ class _StudentRegisterScreenState extends State<StudentRegisterScreen> {
                   SizedBox(
                     height: 20,
                   ),
-                  ElevatedButton(
-                    style: ButtonStyle(
-                      backgroundColor: WidgetStatePropertyAll(Colors.brown),
-                      overlayColor: WidgetStatePropertyAll(
-                          const Color.fromARGB(36, 121, 85, 72)),
-                      shape: WidgetStatePropertyAll(
-                        RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
+                  if (DateTime.now().compareTo(widget.event.date) == -1)
+                    ElevatedButton(
+                      style: ButtonStyle(
+                        backgroundColor: WidgetStatePropertyAll(Colors.brown),
+                        overlayColor: WidgetStatePropertyAll(
+                            const Color.fromARGB(36, 121, 85, 72)),
+                        shape: WidgetStatePropertyAll(
+                          RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
                         ),
+                        surfaceTintColor: WidgetStatePropertyAll(Colors.brown),
                       ),
-                      surfaceTintColor: WidgetStatePropertyAll(Colors.brown),
-                    ),
-                    onPressed: () => {
-                      if (!b)
-                        {
-                          student.addRegistered(
-                              widget.event.name, currentUser?.email as String),
-                          user.register(widget.event),
-                        },
-                      showAdaptiveDialog(
-                        context: context,
-                        builder: (context) => Dialog(
-                          backgroundColor: Colors.white,
-                          child: Padding(
-                            padding: EdgeInsets.all(20),
-                            child: Column(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Text("You have successfully registered"),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                Icon(
-                                  Icons.check,
-                                  size: 60,
-                                  color: Colors.green,
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                              ],
+                      onPressed: () => {
+                        if (!b)
+                          {
+                            student.addRegistered(widget.event.name,
+                                currentUser?.email as String),
+                            // user.register(widget.event),
+                          },
+                        showAdaptiveDialog(
+                          context: context,
+                          builder: (context) => Dialog(
+                            backgroundColor: Colors.white,
+                            child: Padding(
+                              padding: EdgeInsets.all(20),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text("You have successfully registered"),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Icon(
+                                    Icons.check,
+                                    size: 60,
+                                    color: Colors.green,
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        if (mounted)
+                          setState(() {
+                            b = true;
+                          }),
+                      },
+                      child: SizedBox(
+                        width: double.infinity,
+                        child: Center(
+                          child: Text(
+                            b ? "Registered" : "Register",
+                            style: TextStyle(
+                              color: Colors.white,
                             ),
                           ),
                         ),
                       ),
-                      setState(() {
-                        b = true;
-                      }),
-                    },
-                    child: SizedBox(
-                      width: double.infinity,
-                      child: Center(
-                        child: Text(
-                          b ? "Registered" : "Register",
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
                     ),
-                  ),
                 ],
               ),
             ),

@@ -14,9 +14,11 @@ class StudentBottomBar extends StatefulWidget {
 class _StudentBottomBarState extends State<StudentBottomBar> {
   int i = 0;
   void func(int x) {
-    setState(() {
-      i = x;
-    });
+    if (mounted) {
+      setState(() {
+        i = x;
+      });
+    }
     widget.func(x);
   }
 

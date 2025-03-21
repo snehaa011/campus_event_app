@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:campus_event_app/data/ashwin_test.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -30,7 +32,7 @@ class Student {
 
   Future<UserClass> getStudent() async {
     UserClass ui = UserClass();
-    await students.doc(currentUser?.email).get().then((doc) {
+    await students.doc(currentUser?.email).get().then((doc) async {
       if (doc.exists) {
         var data = doc.data() as Map<String, dynamic>;
         ui.name = data['name'];
@@ -38,7 +40,8 @@ class Student {
         ui.branch = data['branch'];
         ui.rollno = data['rollno'];
         ui.phoneno = data['phoneno'];
-        // ui.history = data['history'];
+        ui.history = await getHistory();
+        print(ui.history);
       }
     });
     print(ui.name);
@@ -144,6 +147,32 @@ class Student {
     return list;
   }
 
+  Future<List<Event>> getHistory() async {
+    List<Event> r = await getRegistered();
+    for (Event i in r) {
+      if (i.date.compareTo(DateTime.now()) == -1) {
+        addHistory(i.name, currentUser?.email as String);
+      }
+    }
+
+    await students.doc(currentUser?.email).get().then((doc) {
+      if (doc.exists) {
+        var data = doc.data() as Map<String, dynamic>;
+        history = data['history'];
+        print(history);
+      }
+    });
+    List<Event> list = [];
+    for (String id in history) {
+      DocumentSnapshot doc =
+          await FirebaseFirestore.instance.collection("events").doc(id).get();
+      if (doc.exists) {
+        list.add(convert(doc));
+      }
+    }
+    return list;
+  }
+
   Event convert(DocumentSnapshot obj) {
     Map<String, dynamic> map = obj.data() as Map<String, dynamic>;
     return Event.i(
@@ -153,7 +182,7 @@ class Student {
         map['date'].toDate(),
         map['venue'],
         map['np'],
-        map['regfee'],
+        (map['regfee'] as num).toDouble(),
         map['img']);
   }
 }
@@ -171,7 +200,7 @@ class Events {
         map['date'].toDate(),
         map['venue'],
         map['np'],
-        map['regfee'],
+        (map['regfee'] as num).toDouble(),
         map['img']);
   }
 

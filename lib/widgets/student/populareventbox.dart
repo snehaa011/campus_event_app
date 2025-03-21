@@ -20,9 +20,11 @@ class _StudentPopularEventBoxState extends State<StudentPopularEventBox> {
   Future<void> interestedStatus() async {
     bool b = await student.checkInterested(
         widget.event.name, currentUser?.email as String);
-    setState(() {
-      inter = b;
-    });
+    if (mounted) {
+      setState(() {
+        inter = b;
+      });
+    }
   }
 
   @override
@@ -58,11 +60,11 @@ class _StudentPopularEventBoxState extends State<StudentPopularEventBox> {
                   height: 200,
                   color: Colors.brown,
                   child: ClipRRect(
-                    child: Image.network(
-                      widget.event.img,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
+                      // child: Image.network(
+                      //   widget.event.img,
+                      //   fit: BoxFit.cover,
+                      // ),
+                      ),
                 ),
                 SizedBox(
                   height: 15,
@@ -101,49 +103,47 @@ class _StudentPopularEventBoxState extends State<StudentPopularEventBox> {
                         ),
                       ),
                     ),
-                    if (!user.registered.contains(widget.event))
-                      ElevatedButton(
-                        style: bs,
-                        onPressed: () => {
+                    ElevatedButton(
+                      style: bs,
+                      onPressed: () => {
+                        if (mounted)
                           setState(() {
                             if (inter) {
                               inter = false;
                               student.removeInterested(widget.event.name,
                                   currentUser?.email as String);
-                              user.removeInterested(widget.event);
                             } else {
                               inter = true;
                               student.addInterested(widget.event.name,
                                   currentUser?.email as String);
-                              user.addInterested(widget.event);
                             }
                           }),
-                        },
-                        child: Row(
-                          children: [
-                            Text(
-                              "Interested",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight:
-                                    inter ? FontWeight.bold : FontWeight.normal,
-                              ),
+                      },
+                      child: Row(
+                        children: [
+                          Text(
+                            "Interested",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight:
+                                  inter ? FontWeight.bold : FontWeight.normal,
                             ),
-                            SizedBox(
-                              width: 5,
-                            ),
-                            inter
-                                ? Icon(
-                                    Icons.star,
-                                    color: Colors.white,
-                                  )
-                                : Icon(
-                                    Icons.star_outline,
-                                    color: Colors.white,
-                                  ),
-                          ],
-                        ),
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          inter
+                              ? Icon(
+                                  Icons.star,
+                                  color: Colors.white,
+                                )
+                              : Icon(
+                                  Icons.star_outline,
+                                  color: Colors.white,
+                                ),
+                        ],
                       ),
+                    ),
                   ],
                 )
               ],

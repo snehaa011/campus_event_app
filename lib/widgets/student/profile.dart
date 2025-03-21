@@ -1,6 +1,10 @@
+// ignore_for_file: prefer_const_constructors_in_immutables, avoid_print
+
 import 'package:campus_event_app/data/ashwin_test.dart';
+import 'package:campus_event_app/data/data.dart';
 import 'package:campus_event_app/screens/student/eventhistoryscreen.dart';
 import 'package:campus_event_app/widgets/student/phonebox.dart';
+import 'package:campus_event_app/widgets/student/shimmercontainer.dart';
 import 'package:flutter/material.dart';
 
 class StudentProfile extends StatefulWidget {
@@ -11,14 +15,32 @@ class StudentProfile extends StatefulWidget {
 }
 
 class _StudentProfileState extends State<StudentProfile> {
+  bool load = true;
+  UserClass user = UserClass();
   TextEditingController tc = TextEditingController();
+  void fetch() async {
+    UserClass u = await student.getStudent();
+    print(u.history);
+    setState(() {
+      user = u;
+      load = false;
+    });
+  }
 
   bool b = false;
   void setVal(String str) {
-    setState(() {
-      user.phoneno = str;
-      b = false;
-    });
+    if (mounted) {
+      setState(() {
+        user.phoneno = str;
+        b = false;
+      });
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    fetch();
   }
 
   @override
@@ -49,23 +71,34 @@ class _StudentProfileState extends State<StudentProfile> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(
-                          user.name,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                            fontSize: 25,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                          maxLines: 2,
+                        load
+                            ? StudentShimmerContainer(
+                                height: 40,
+                              )
+                            : Text(
+                                user.name,
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                  fontSize: 25,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                maxLines: 2,
+                              ),
+                        SizedBox(
+                          height: 5,
                         ),
-                        Text(
-                          user.email,
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 15,
-                          ),
-                        ),
+                        load
+                            ? StudentShimmerContainer(
+                                height: 30,
+                              )
+                            : Text(
+                                user.email,
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 15,
+                                ),
+                              ),
                       ],
                     ),
                   ),
@@ -118,10 +151,14 @@ class _StudentProfileState extends State<StudentProfile> {
                       fontSize: 20,
                     ),
                   ),
-                  Text(
-                    user.rollno,
-                    style: TextStyle(fontSize: 20),
-                  ),
+                  load
+                      ? StudentShimmerContainer(
+                          height: 26,
+                        )
+                      : Text(
+                          user.rollno,
+                          style: TextStyle(fontSize: 20),
+                        ),
                   SizedBox(
                     height: 10,
                   ),
@@ -132,10 +169,14 @@ class _StudentProfileState extends State<StudentProfile> {
                       fontSize: 20,
                     ),
                   ),
-                  Text(
-                    user.branch,
-                    style: TextStyle(fontSize: 20),
-                  ),
+                  load
+                      ? StudentShimmerContainer(
+                          height: 26,
+                        )
+                      : Text(
+                          user.branch,
+                          style: TextStyle(fontSize: 20),
+                        ),
                   SizedBox(
                     height: 10,
                   ),
@@ -173,9 +214,10 @@ class _StudentProfileState extends State<StudentProfile> {
                           ),
                         ),
                         onPressed: () => {
-                          setState(() {
-                            b = true;
-                          })
+                          if (mounted)
+                            setState(() {
+                              b = true;
+                            })
                         },
                         child: Icon(
                           Icons.edit,

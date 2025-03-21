@@ -22,21 +22,29 @@ class _StudentHomePageState extends State<StudentHomePage> {
   void setWidget(int i) {
     v = i;
     if (i == 0) {
-      setState(() {
-        screen = StudentHome();
-      });
+      if (mounted) {
+        setState(() {
+          screen = StudentHome();
+        });
+      }
     } else if (i == 1) {
-      setState(() {
-        screen = StudentEvents();
-      });
+      if (mounted) {
+        setState(() {
+          screen = StudentEvents();
+        });
+      }
     } else if (i == 2) {
-      setState(() {
-        screen = StudentNotifications();
-      });
+      if (mounted) {
+        setState(() {
+          screen = StudentNotifications();
+        });
+      }
     } else if (i == 3) {
-      setState(() {
-        screen = StudentProfile();
-      });
+      if (mounted) {
+        setState(() {
+          screen = StudentProfile();
+        });
+      }
     }
   }
 

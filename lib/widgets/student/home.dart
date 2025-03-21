@@ -2,6 +2,7 @@ import 'package:campus_event_app/data/ashwin_test.dart';
 import 'package:campus_event_app/data/data.dart';
 import 'package:campus_event_app/widgets/searchbar.dart';
 import 'package:campus_event_app/widgets/student/eventcarousel.dart';
+import 'package:campus_event_app/widgets/student/shimmercarousel.dart';
 import 'package:flutter/material.dart';
 
 class StudentHome extends StatefulWidget {
@@ -12,14 +13,18 @@ class StudentHome extends StatefulWidget {
 }
 
 class _StudentHomeState extends State<StudentHome> {
+  bool load = true;
   List<Event> list = [];
   List<Event> _list = [];
   void fetchEvents() async {
     List<Event> l = await eventer.getEvents();
-    setState(() {
-      list = l;
-      _list = l;
-    });
+    if (mounted) {
+      setState(() {
+        list = l;
+        _list = l;
+        load = false;
+      });
+    }
   }
 
   @override
@@ -33,9 +38,11 @@ class _StudentHomeState extends State<StudentHome> {
     s.addAll(list.where((s) => s.name.toLowerCase().contains(str)).toList());
     s.addAll(list.where((s) => s.org.toLowerCase().contains(str)).toList());
     s.addAll(list.where((s) => s.venue.toLowerCase().contains(str)).toList());
-    setState(() {
-      _list = s.toList();
-    });
+    if (mounted) {
+      setState(() {
+        _list = s.toList();
+      });
+    }
   }
 
   @override
@@ -75,29 +82,31 @@ class _StudentHomeState extends State<StudentHome> {
                 ),
               ),
             ),
-            _list.isEmpty
-                ? Container(
-                    width: double.infinity,
-                    padding: EdgeInsets.all(40),
-                    child: Column(
-                      children: [
-                        Icon(
-                          Icons.event_busy,
-                          size: 80,
+            load
+                ? StudentShimmerCarousel()
+                : _list.isEmpty
+                    ? Container(
+                        width: double.infinity,
+                        padding: EdgeInsets.all(40),
+                        child: Column(
+                          children: [
+                            Icon(
+                              Icons.event_busy,
+                              size: 80,
+                            ),
+                            SizedBox(
+                              height: 10,
+                            ),
+                            Text(
+                              "No events found",
+                              style: TextStyle(
+                                fontSize: 20,
+                              ),
+                            ),
+                          ],
                         ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          "No events found",
-                          style: TextStyle(
-                            fontSize: 20,
-                          ),
-                        ),
-                      ],
-                    ),
-                  )
-                : EventCarousel(_list)
+                      )
+                    : EventCarousel(_list)
           ],
         ),
       ),
