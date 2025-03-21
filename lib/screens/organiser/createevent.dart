@@ -1,5 +1,9 @@
+import 'package:campus_event_app/data/sneha_test.dart';
 import 'package:campus_event_app/widgets/organiser/button.dart';
+import 'package:campus_event_app/widgets/organiser/datepicker.dart';
+import 'package:campus_event_app/widgets/organiser/infosheet.dart';
 import 'package:flutter/material.dart';
+import 'package:campus_event_app/widgets/organiser/timepicker.dart';
 
 class CreateEvent extends StatefulWidget {
   const CreateEvent({super.key});
@@ -9,7 +13,14 @@ class CreateEvent extends StatefulWidget {
 }
 
 class _CreateEventState extends State<CreateEvent> {
-  TextEditingController? _eventName, _desc;
+  final TextEditingController _eventName=TextEditingController(), _desc=TextEditingController();
+  String? name, desc;
+  TimeOfDay? start, end;
+  DateTime? date;
+  Venue? venue;
+  double? regfee;
+  int? maxParticpiants;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,84 +31,176 @@ class _CreateEventState extends State<CreateEvent> {
               },
               icon: Icon(Icons.arrow_back)),
           title: Text('Create new event')),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20.0),
-        child: Column(
-          children: [
-            Container(
-              height: MediaQuery.of(context).size.height*0.75,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: Column(
+            children: [
+              Column(
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(6.0),
                     child: TextFormField(
                       controller: _eventName,
+                      cursorColor: const Color.fromARGB(255, 52, 34, 31),
                       style: TextStyle(color: Colors.white),
                       decoration: InputDecoration(
                         filled: true,
-                        fillColor: const Color.fromARGB(255, 108, 103, 103),
+                        fillColor: const Color.fromARGB(255, 125, 123, 123),
                         hintText: 'Enter event name',
                         hintStyle: TextStyle(color: Colors.white),
                         contentPadding: EdgeInsets.all(20),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: const Color.fromARGB(255, 52, 34, 31),
+                              width: 1.5),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5),
+                            borderSide: BorderSide.none),
                       ),
                     ),
                   ),
                   createButton(
-                      Colors.brown, Colors.white, Icons.location_on, 'Venue'),
+                      Colors.white,
+                      Colors.brown,
+                      Icons.event,
+                      'Date',
+                      () => selectDate(context, setDate),
+                      date != null
+                          ? "${date?.day.toString().padLeft(2, '0')}-${date?.month.toString().padLeft(2, '0')}-${date?.year}"
+                          : null),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       Expanded(
-                          child: createButton(Colors.white, Colors.brown,
-                              Icons.access_alarm, 'Time')),
+                        child: createButton(
+                            Colors.white,
+                            Colors.brown,
+                            Icons.access_alarm,
+                            'Start Time',
+                            () => selectTime(context, setStartTime),
+                            start != null
+                                ? "Start: ${start?.format(context)}"
+                                : null),
+                      ),
                       Expanded(
-                          child: createButton(
-                              Colors.white, Colors.brown, Icons.event, 'Date')),
+                        child: createButton(
+                            Colors.white,
+                            Colors.brown,
+                            Icons.access_alarm,
+                            'End Time',
+                            () => selectTime(context, setEndTime),
+                            end != null
+                                ? "End: ${end?.format(context)}"
+                                : null),
+                      ),
                     ],
                   ),
+                  createButton(Colors.brown, Colors.white, Icons.location_on,
+                      'Venue', () => {}, venue?.name),
                   Padding(
                     padding: const EdgeInsets.all(6.0),
                     child: TextField(
                       keyboardType: TextInputType.multiline,
                       controller: _desc,
+                      cursorColor: const Color.fromARGB(255, 52, 34, 31),
                       maxLines: 4,
                       style: TextStyle(color: Colors.white),
                       decoration: InputDecoration(
                         filled: true,
-                        fillColor: const Color.fromARGB(255, 108, 103, 103),
+                        fillColor: const Color.fromARGB(255, 125, 123, 123),
                         hintText: 'Enter description',
                         hintStyle: TextStyle(color: Colors.white),
                         contentPadding: EdgeInsets.all(20),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: const Color.fromARGB(255, 52, 34, 31),
+                              width: 1.5),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5),
+                            borderSide: BorderSide.none),
                       ),
                     ),
                   ),
-                  createButton(Colors.white, Colors.brown,
-                      Icons.add_circle_outline, 'Set registration fees'),
+                  createButton(
+                      Colors.white,
+                      Colors.brown,
+                      Icons.add_circle_outline,
+                      'Add more information',
+                      () => moreInfo(context, setRegFee, setMp, regfee, maxParticpiants),
+                      null),
                   createButton(Colors.brown, Colors.white, Icons.attach_file,
-                      'Upload document'),
+                      'Upload document', () => {}, null),
                 ],
               ),
-            ),
-            SizedBox(
-              height: MediaQuery.of(context).size.height*0.05,
-            ),
-            SizedBox(
-              height: 40,
-              child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  shape: BeveledRectangleBorder(
-                      borderRadius: BorderRadius.circular(2)),
-                  backgroundColor: const Color.fromARGB(255, 125, 105, 98),
-                  foregroundColor: Colors.white,
-                ),
-                onPressed: () {},
-                child: Center(child: Text('Create Event')),
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.05,
               ),
-            )
-          ],
+              SizedBox(
+                height: 40,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    shape: BeveledRectangleBorder(
+                        borderRadius: BorderRadius.circular(2)),
+                    backgroundColor: const Color.fromARGB(255, 125, 105, 98),
+                    foregroundColor: Colors.white,
+                  ),
+                  onPressed: () {},
+                  child: Center(child: Text('Create Event')),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
   }
+  
+  void setStartTime(TimeOfDay? p) {
+    setState(() {
+      if (end != null) {
+        if (end!.compareTo(p!) > 0) {
+          start = p;
+        }
+      }
+      else{
+        start=p;
+      }
+    });
+  }
+
+  void setEndTime(TimeOfDay? p) {
+    setState(() {
+      if (start != null) {
+        if (start!.compareTo(p!) < 0) {
+          end = p;
+        }
+      }
+      else{
+        end=p;
+      }
+    });
+  }
+
+  void setDate(DateTime? p){
+    setState(() {
+        if (p!.isAfter(DateTime.now())) {
+          date = p;
+        }
+      });
+  }
+
+  void setRegFee(double? f){
+    setState(() {
+      regfee=f;
+    });
+  }
+
+  void setMp(int? mp){
+    setState(() {
+      maxParticpiants=mp;
+    });
+  }
+
 }

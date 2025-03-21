@@ -2,7 +2,7 @@ import 'package:campus_event_app/data/sneha_test.dart';
 import 'package:campus_event_app/screens/LoginScreen.dart';
 import 'package:campus_event_app/screens/organiser/createevent.dart';
 import 'package:campus_event_app/screens/organiser/profilepage.dart';
-import 'package:campus_event_app/screens/organiser/viewevent.dart';
+import 'package:campus_event_app/screens/organiser/eventpage.dart';
 import 'package:campus_event_app/widgets/organiser/eventtile.dart';
 import 'package:campus_event_app/widgets/searchbar.dart';
 import 'package:flutter/material.dart';
@@ -16,20 +16,63 @@ class OrganiserHomePage extends StatefulWidget {
 
 class _OrganiserHomePageState extends State<OrganiserHomePage> {
   List<Event> list = events;
-  List<Event> resultlist = events;
-  int p=0;
+  late List<Event> resultlist;
+  int p = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    getActive();
+  }
 
   void search(String str) {
     str = str.toLowerCase();
     Set<Event> s = {};
     s.addAll(list.where((s) => s.name.toLowerCase().contains(str)).toList());
     s.addAll(list.where((s) => s.date.toString().contains(str)).toList());
-    s.addAll(list.where((s) => s.venue.name.toLowerCase().contains(str)).toList());
+    s.addAll(
+        list.where((s) => s.venue.name.toLowerCase().contains(str)).toList());
     setState(() {
       resultlist = s.toList();
     });
   }
 
+  void updateEventStatus() {
+    for (var e in list) {
+      e.approved = true; //to be removed
+      e.updateStatus();
+    }
+  }
+
+  void getActive() {
+    Set<Event> s = {};
+    p = 0;
+    updateEventStatus();
+    s.addAll(list.where((e) => e.status == 'active' || e.status == 'closed'));
+    setState(() {
+      resultlist = s.toList();
+    });
+  }
+
+  void getPast() {
+    Set<Event> s = {};
+    p = 1;
+    updateEventStatus();
+    s.addAll(list.where((e) => e.status == 'past'));
+    setState(() {
+      resultlist = s.toList();
+    });
+  }
+
+  void getPending() {
+    Set<Event> s = {};
+    p = 2;
+    updateEventStatus();
+    s.addAll(list.where((e) => e.status == 'pending'));
+    setState(() {
+      resultlist = s.toList();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,11 +81,11 @@ class _OrganiserHomePageState extends State<OrganiserHomePage> {
         leading: IconButton(
           onPressed: () {
             Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => OrganiserProfilePage(),
-                ),
-              );
+              context,
+              MaterialPageRoute(
+                builder: (context) => OrganiserProfilePage(),
+              ),
+            );
           },
           icon: Icon(
             Icons.account_circle_outlined,
@@ -104,7 +147,7 @@ class _OrganiserHomePageState extends State<OrganiserHomePage> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(20.0),
+          padding: const EdgeInsets.all(10.0),
           child: Column(
             children: [
               Padding(
@@ -119,9 +162,7 @@ class _OrganiserHomePageState extends State<OrganiserHomePage> {
                       overlayColor: WidgetStatePropertyAll(
                           const Color.fromARGB(36, 121, 85, 72)),
                     ),
-                    onPressed: () => {
-            
-                    },
+                    onPressed: () => {getActive()},
                     child: Column(
                       children: [
                         Text(
@@ -145,9 +186,7 @@ class _OrganiserHomePageState extends State<OrganiserHomePage> {
                       overlayColor: WidgetStatePropertyAll(
                           const Color.fromARGB(36, 121, 85, 72)),
                     ),
-                    onPressed: () => {
-                      
-                    },
+                    onPressed: () => {getPast()},
                     child: Column(
                       children: [
                         Text(
@@ -171,8 +210,7 @@ class _OrganiserHomePageState extends State<OrganiserHomePage> {
                       overlayColor: WidgetStatePropertyAll(
                           const Color.fromARGB(36, 121, 85, 72)),
                     ),
-                    onPressed: () => {
-                    },
+                    onPressed: () => {getPending()},
                     child: Column(
                       children: [
                         Text(

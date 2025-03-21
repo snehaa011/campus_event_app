@@ -3,6 +3,16 @@ import 'package:flutter/material.dart';
 var content =
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 
+extension TimeOfDayExtension on TimeOfDay {
+  int compareTo(TimeOfDay other) {
+    if (hour < other.hour) return -1;
+    if (hour > other.hour) return 1;
+    if (minute < other.minute) return -1;
+    if (minute > other.minute) return 1;
+    return 0;
+  }
+}
+
 class Venue {
   String name = "";
   String url = "";
@@ -18,7 +28,14 @@ class Venue {
   void addEvent(Event v) {
     events.add(v);
   }
-
+  void sortEvents(){
+    events.sort((a,b){
+      if (a.date.compareTo(b.date)==0){
+        return a.start.compareTo(b.start);
+      }
+      return a.date.compareTo(b.date);
+    });
+  }
   //sort events on time and find available slots to choose from once a venue is selected
   // if no venue is selected prompt to choose a venue first
   // should we give the option to choose duration and show available times?
@@ -50,12 +67,13 @@ Venue nsl = Venue(
     TimeOfDay(hour: 9, minute: 0),
     TimeOfDay(hour: 11, minute: 45),
     "https://www.ft.com/__origami/service/image/v2/images/raw/ftcms%3Af1627e9c-e2ce-4bad-ab16-1ba4028d97c0?source=next-article&fit=scale-down&quality=highest&width=1440&dpr=1");
-Venue def = Venue(
+Venue ab = Venue(
     "Aryabhatta",
     TimeOfDay(hour: 10, minute: 0),
     TimeOfDay(hour: 20, minute: 0),
     "https://www.letsbuild.com/wp-content/uploads/2023/07/types-of-buildings-construction.jpeg");
 
+List<Venue> allvenue = [ccc,ssl,oat,aud,nsl,ab];
 class Event {
   String name = "";
   String org = "";
@@ -67,7 +85,7 @@ class Event {
   TimeOfDay start = TimeOfDay(hour: 0, minute: 0);
   TimeOfDay? end;
   DateTime date = DateTime(0000);
-  Venue venue = def;
+  late Venue venue;
   int maxParticpiants = 1;
   // list of Students registered
   double regfee = 0;
@@ -97,6 +115,7 @@ class Event {
 
   void approveEvent(){
     approved=true;
+    venue.addEvent(this);
   }
 
   void updateStatus(){
