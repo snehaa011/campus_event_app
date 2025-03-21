@@ -1,4 +1,5 @@
 import 'package:campus_event_app/data/sneha_test.dart';
+import 'package:campus_event_app/screens/organiser/venue.dart';
 import 'package:campus_event_app/widgets/organiser/button.dart';
 import 'package:campus_event_app/widgets/organiser/datepicker.dart';
 import 'package:campus_event_app/widgets/organiser/infosheet.dart';
@@ -13,7 +14,8 @@ class CreateEvent extends StatefulWidget {
 }
 
 class _CreateEventState extends State<CreateEvent> {
-  final TextEditingController _eventName=TextEditingController(), _desc=TextEditingController();
+  final TextEditingController _eventName = TextEditingController(),
+      _desc = TextEditingController();
   String? name, desc;
   TimeOfDay? start, end;
   DateTime? date;
@@ -59,6 +61,9 @@ class _CreateEventState extends State<CreateEvent> {
                             borderRadius: BorderRadius.circular(5),
                             borderSide: BorderSide.none),
                       ),
+                      onEditingComplete: () {
+                        name=_eventName.text;
+                      },
                     ),
                   ),
                   createButton(
@@ -66,7 +71,7 @@ class _CreateEventState extends State<CreateEvent> {
                       Colors.brown,
                       Icons.event,
                       'Date',
-                      () => selectDate(context, setDate),
+                      () => selectDate(context, setDate, date),
                       date != null
                           ? "${date?.day.toString().padLeft(2, '0')}-${date?.month.toString().padLeft(2, '0')}-${date?.year}"
                           : null),
@@ -78,7 +83,7 @@ class _CreateEventState extends State<CreateEvent> {
                             Colors.brown,
                             Icons.access_alarm,
                             'Start Time',
-                            () => selectTime(context, setStartTime),
+                            () => selectTime(context, setStartTime, start),
                             start != null
                                 ? "Start: ${start?.format(context)}"
                                 : null),
@@ -89,15 +94,35 @@ class _CreateEventState extends State<CreateEvent> {
                             Colors.brown,
                             Icons.access_alarm,
                             'End Time',
-                            () => selectTime(context, setEndTime),
+                            () => selectTime(context, setEndTime, end),
                             end != null
                                 ? "End: ${end?.format(context)}"
                                 : null),
                       ),
                     ],
                   ),
-                  createButton(Colors.brown, Colors.white, Icons.location_on,
-                      'Venue', () => {}, venue?.name),
+                  createButton(
+                      Colors.brown, Colors.white, Icons.location_on, 'Venue',
+                      () {
+                    if (start != null && end != null && date != null) {
+                      if (start!.compareTo(end!) < 0) {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => VenuePage(
+                              start: start!,
+                              end: end!,
+                              date: date!,
+                              changeStart: setStartTime,
+                              changeEnd: setEndTime,
+                              changeDate: setDate,
+                              setVenue: setVenue,
+                            ),
+                          ),
+                        );
+                      }
+                    }
+                  }, venue?.name),
                   Padding(
                     padding: const EdgeInsets.all(6.0),
                     child: TextField(
@@ -121,6 +146,9 @@ class _CreateEventState extends State<CreateEvent> {
                             borderRadius: BorderRadius.circular(5),
                             borderSide: BorderSide.none),
                       ),
+                      onEditingComplete: (){
+                        desc=_desc.text;
+                      },
                     ),
                   ),
                   createButton(
@@ -128,7 +156,8 @@ class _CreateEventState extends State<CreateEvent> {
                       Colors.brown,
                       Icons.add_circle_outline,
                       'Add more information',
-                      () => moreInfo(context, setRegFee, setMp, regfee, maxParticpiants),
+                      () => moreInfo(
+                          context, setRegFee, setMp, regfee, maxParticpiants),
                       null),
                   createButton(Colors.brown, Colors.white, Icons.attach_file,
                       'Upload document', () => {}, null),
@@ -156,51 +185,42 @@ class _CreateEventState extends State<CreateEvent> {
       ),
     );
   }
-  
+
   void setStartTime(TimeOfDay? p) {
     setState(() {
-      if (end != null) {
-        if (end!.compareTo(p!) > 0) {
-          start = p;
-        }
-      }
-      else{
-        start=p;
-      }
+      start = p;
     });
   }
 
   void setEndTime(TimeOfDay? p) {
     setState(() {
-      if (start != null) {
-        if (start!.compareTo(p!) < 0) {
-          end = p;
-        }
+      end = p;
+    });
+  }
+
+  void setDate(DateTime? p) {
+    setState(() {
+      if (p!.isAfter(DateTime.now())) {
+        date = p;
       }
-      else{
-        end=p;
-      }
     });
   }
 
-  void setDate(DateTime? p){
+  void setRegFee(double? f) {
     setState(() {
-        if (p!.isAfter(DateTime.now())) {
-          date = p;
-        }
-      });
-  }
-
-  void setRegFee(double? f){
-    setState(() {
-      regfee=f;
+      regfee = f;
     });
   }
 
-  void setMp(int? mp){
+  void setMp(int? mp) {
     setState(() {
-      maxParticpiants=mp;
+      maxParticpiants = mp;
     });
   }
 
+  void setVenue(Venue? v){
+    setState(() {
+      venue = v;
+    });
+  }
 }
