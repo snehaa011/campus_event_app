@@ -60,11 +60,11 @@ class _StudentPopularEventBoxState extends State<StudentPopularEventBox> {
                   height: 200,
                   color: Colors.brown,
                   child: ClipRRect(
-                      // child: Image.network(
-                      //   widget.event.img,
-                      //   fit: BoxFit.cover,
-                      // ),
-                      ),
+                    child: Image.network(
+                      widget.event.img,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
                 SizedBox(
                   height: 15,

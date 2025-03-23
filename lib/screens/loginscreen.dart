@@ -16,6 +16,7 @@ class LoginScreen extends StatelessWidget {
             child: Column(
               children: [
                 CircleAvatar(
+                  backgroundColor: Colors.white,
                   radius: 80,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(80),

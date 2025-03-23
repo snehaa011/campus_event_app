@@ -60,12 +60,12 @@ class _StudentEventBoxState extends State<StudentEventBox> {
                   width: 100,
                   height: 100,
                   color: Colors.brown,
-                  // child: ClipRRect(
-                  //   child: Image.network(
-                  //     widget.event.img,
-                  //     fit: BoxFit.cover,
-                  //   ),
-                  // ),
+                  child: ClipRRect(
+                    child: Image.network(
+                      widget.event.img,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
                 ),
                 SizedBox(
                   width: 15,

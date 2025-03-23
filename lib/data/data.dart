@@ -48,6 +48,13 @@ class Student {
     return ui;
   }
 
+  void updatePhoneNumber(String str) async {
+    final data = {
+      'phoneno': str,
+    };
+    await students.doc(currentUser?.email).update(data);
+  }
+
   void addStudent(String email, String name) async {
     final student = {
       'name': name,
@@ -212,6 +219,60 @@ class Events {
     }
     return list;
   }
+
+  Future<void> addRegistration(String name) async {
+    final data = {
+      'participants': FieldValue.arrayUnion([currentUser?.email])
+    };
+    await events.doc(name).update(data);
+  }
 }
 
 Events eventer = Events();
+
+class Not {
+  Future<List<Notify>> getNotifications() async {
+    CollectionReference notifications =
+        FirebaseFirestore.instance.collection('notifications');
+    QuerySnapshot querySnapshot = await notifications.get();
+    List<Notify> list = [];
+    for (var doc in querySnapshot.docs) {
+      list.add(convert(doc));
+    }
+    return list;
+  }
+
+  Notify convert(QueryDocumentSnapshot doc) {
+    Map<String, dynamic> map = doc.data() as Map<String, dynamic>;
+    return Notify(
+      map['title'],
+      map['name'],
+      map['org'],
+      map['content'],
+      map['date'].toDate(),
+      TimeOfDay.fromDateTime(
+        map['time'].toDate(),
+      ),
+    );
+  }
+
+  Future<Event> getEvent(String name) async {
+    CollectionReference events =
+        FirebaseFirestore.instance.collection('events');
+    // DocumentSnapshot doc = await events.doc(name).get();
+    QuerySnapshot querySnapshot =
+        await events.where(FieldPath.documentId, isEqualTo: name).get();
+    var doc = querySnapshot.docs.isNotEmpty ? querySnapshot.docs.first : null;
+    return eventer.convert(doc!);
+  }
+}
+
+Not noti = Not();
+
+class Notify {
+  String title = "", name = "", org = "", content = "";
+  DateTime date = DateTime(0);
+  TimeOfDay time = TimeOfDay.now();
+  Notify(this.title, this.name, this.org, this.content, this.date, this.time);
+  Notify.i();
+}

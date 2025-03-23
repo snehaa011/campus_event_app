@@ -1,17 +1,25 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:campus_event_app/data/ashwin_test.dart';
+import 'package:campus_event_app/data/data.dart';
 import 'package:campus_event_app/screens/student/registerscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class StudentNotificationBox extends StatelessWidget {
-  Notify not = Notify();
+  Notify not = Notify.i();
+  Event event = Event();
   StudentNotificationBox(Notify n, {super.key}) {
     not = n;
   }
+  void getEvent() async {
+    event = await noti.getEvent(not.name);
+    // print(event.name);
+  }
+
   @override
   Widget build(BuildContext context) {
+    getEvent();
     return Column(
       children: [
         Container(
@@ -33,7 +41,7 @@ class StudentNotificationBox extends StatelessWidget {
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: Text(
-                      not.event.org,
+                      not.org,
                       style:
                           TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
                     ),
@@ -56,14 +64,26 @@ class StudentNotificationBox extends StatelessWidget {
                 height: 10,
               ),
               Text(
-                not.event.name,
+                not.title,
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                 ),
               ),
+              SizedBox(
+                height: 5,
+              ),
               Text(
-                content,
-                maxLines: 1,
+                not.name,
+                style: TextStyle(
+                  fontWeight: FontWeight.w400,
+                ),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Text(
+                not.content,
+                // maxLines: 1,
               ),
               TextButton(
                 style: ButtonStyle(
@@ -78,7 +98,7 @@ class StudentNotificationBox extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => StudentRegisterScreen(not.event),
+                      builder: (context) => StudentRegisterScreen(event),
                     ),
                   ),
                 },

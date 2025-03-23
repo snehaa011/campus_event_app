@@ -21,14 +21,17 @@ class _StudentProfileState extends State<StudentProfile> {
   void fetch() async {
     UserClass u = await student.getStudent();
     print(u.history);
-    setState(() {
-      user = u;
-      load = false;
-    });
+    if (mounted) {
+      setState(() {
+        user = u;
+        load = false;
+      });
+    }
   }
 
   bool b = false;
   void setVal(String str) {
+    student.updatePhoneNumber(str);
     if (mounted) {
       setState(() {
         user.phoneno = str;
@@ -102,36 +105,18 @@ class _StudentProfileState extends State<StudentProfile> {
                       ],
                     ),
                   ),
-                  Stack(
-                    alignment: Alignment.bottomRight,
-                    children: [
-                      Container(
-                        padding: EdgeInsets.all(10),
-                        child: CircleAvatar(
-                          backgroundColor: Colors.white,
-                          radius: 40,
+                  Container(
+                    padding: EdgeInsets.all(10),
+                    child: CircleAvatar(
+                      backgroundColor: Colors.white,
+                      radius: 40,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(
+                          40,
                         ),
+                        child: Image.network(currentUser?.photoURL as String),
                       ),
-                      ElevatedButton(
-                        style: ButtonStyle(
-                          padding: WidgetStatePropertyAll(
-                            EdgeInsets.zero,
-                          ),
-                          shape: WidgetStatePropertyAll(
-                            CircleBorder(),
-                          ),
-                          backgroundColor: WidgetStatePropertyAll(
-                            Colors.white,
-                          ),
-                        ),
-                        onPressed: () => {},
-                        child: Icon(
-                          Icons.edit,
-                          size: 10,
-                          color: Colors.brown,
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ],
               ),

@@ -31,7 +31,7 @@ class _EventSearchBarState extends State<EventSearchBar> {
           borderRadius: BorderRadius.circular(30),
           borderSide: BorderSide.none,
         ),
-        fillColor: Colors.grey,
+        fillColor: const Color.fromARGB(255, 199, 199, 199),
         filled: true,
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30),

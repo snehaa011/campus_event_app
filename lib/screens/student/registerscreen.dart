@@ -124,6 +124,7 @@ class _StudentRegisterScreenState extends State<StudentRegisterScreen> {
                           {
                             student.addRegistered(widget.event.name,
                                 currentUser?.email as String),
+                            eventer.addRegistration(widget.event.name),
                             // user.register(widget.event),
                           },
                         showAdaptiveDialog(

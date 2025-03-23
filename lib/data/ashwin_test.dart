@@ -151,34 +151,34 @@ Event vi = Event.i(
 );
 // List<Event> events = [i, ii, iii, iv, v, vi];
 
-class Notify {
-  String id = "";
-  Event event = Event();
-  TimeOfDay time = TimeOfDay(hour: 0, minute: 0);
-  DateTime date = DateTime(0);
-  Notify();
-  Notify.i(String i, Event e, TimeOfDay ti, DateTime d) {
-    id = i;
-    event = e;
-    time = ti;
-    date = d;
-  }
-}
+// class Notify {
+//   String id = "";
+//   Event event = Event();
+//   TimeOfDay time = TimeOfDay(hour: 0, minute: 0);
+//   DateTime date = DateTime(0);
+//   Notify();
+//   Notify.i(String i, Event e, TimeOfDay ti, DateTime d) {
+//     id = i;
+//     event = e;
+//     time = ti;
+//     date = d;
+//   }
+// }
 
-List<Notify> notifications = [
-  Notify.i(
-    "abc",
-    i,
-    TimeOfDay(hour: 09, minute: 45),
-    DateTime.now(),
-  ),
-  Notify.i(
-    "def",
-    ii,
-    TimeOfDay(hour: 13, minute: 44),
-    DateTime.now(),
-  ),
-];
+// List<Notify> notifications = [
+//   Notify.i(
+//     "abc",
+//     i,
+//     TimeOfDay(hour: 09, minute: 45),
+//     DateTime.now(),
+//   ),
+//   Notify.i(
+//     "def",
+//     ii,
+//     TimeOfDay(hour: 13, minute: 44),
+//     DateTime.now(),
+//   ),
+// ];
 
 class UserClass {
   String name = "",
