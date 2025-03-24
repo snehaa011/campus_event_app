@@ -1,4 +1,5 @@
 import 'package:campus_event_app/data/eventmodel.dart';
+import 'package:campus_event_app/data/functions.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
