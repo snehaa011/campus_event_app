@@ -1,4 +1,5 @@
-import 'package:campus_event_app/data/sneha_test.dart';
+import 'package:campus_event_app/data/eventmodel.dart';
+import 'package:campus_event_app/data/venuemodel.dart';
 import 'package:campus_event_app/widgets/organiser/dialogbox.dart';
 import 'package:flutter/material.dart';
 
@@ -29,8 +30,8 @@ Widget VenueTile(Venue v, bool complete, Function(Venue?) setVenue, DateTime? da
                         foregroundColor: const Color.fromARGB(255, 60, 47, 42)
                       ),
                       child: Text('Schedule'),
-                      onPressed: () {if (date!=null){
-                        List<Event> occupied = v.getEventsByDate(date);
+                      onPressed: () async{if (date!=null) {
+                        List<Event> occupied = await v.getEventsByDate(date);
                         dialogBox(context, occupied);
                       }},
                     ),

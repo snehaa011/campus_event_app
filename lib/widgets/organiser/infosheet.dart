@@ -54,6 +54,7 @@ void moreInfo(
                           // onFieldSubmitted: (value) {
                           //   setMp(int.tryParse(_mp.text));
                           // },
+                          keyboardType: TextInputType.number,
                           controller: _mp,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
@@ -79,6 +80,7 @@ void moreInfo(
                           // onFieldSubmitted: (value){
                           //   setRegFee(double.tryParse(_fees.text));
                           // },
+                          keyboardType: TextInputType.number,
                           controller: _fees,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),

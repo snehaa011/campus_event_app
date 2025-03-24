@@ -1,7 +1,7 @@
 import 'package:campus_event_app/data/sneha_test.dart';
 import 'package:campus_event_app/screens/LoginScreen.dart';
 import 'package:campus_event_app/screens/organiser/createevent.dart';
-import 'package:campus_event_app/screens/organiser/profilepage.dart';
+import 'package:campus_event_app/screens/organiser/notifpage.dart';
 import 'package:campus_event_app/widgets/organiser/eventtile.dart';
 import 'package:campus_event_app/widgets/searchbar.dart';
 import 'package:flutter/material.dart';
@@ -77,33 +77,20 @@ class _OrganiserHomePageState extends State<OrganiserHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          onPressed: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => OrganiserProfilePage(),
-              ),
-            );
-          },
-          icon: Icon(
-            Icons.account_circle_outlined,
-            size: 32,
-          ),
-        ),
+        title: Text("Organisation", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),),
         actions: [
           IconButton(
             onPressed: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => CreateEvent(),
+                  builder: (context) => ViewNotificationPage(),
                 ),
               );
             },
             icon: Icon(
               Icons.notifications_none,
-              size: 32,
+              size: 28,
             ),
           ),
           IconButton(
@@ -115,7 +102,7 @@ class _OrganiserHomePageState extends State<OrganiserHomePage> {
                   ),
                   (Route<dynamic> route) => false);
             },
-            icon: Icon(Icons.logout),
+            icon: Icon(Icons.logout, size: 28,),
           ),
         ],
       ),

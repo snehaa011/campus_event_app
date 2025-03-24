@@ -43,6 +43,9 @@ class Venue {
     return evd;
   }
   bool checkAvl(TimeOfDay start, TimeOfDay end, DateTime day){
+    if (start.compareTo(open)<0 || start.compareTo(close)>=0 || end.compareTo(close)>0){
+      return false;
+    }
     List<Event> occupied = getEventsByDate(day);
     bool f=true;
     for (Event e in occupied){
@@ -101,18 +104,18 @@ class Event {
   String img = "";
   String desc = "";
   bool approved = false;
-  String status = ""; // active/closed/past/pending
+  String status = "pending"; // active/closed/past/pending
   // upload poster and documents for approval to firebase and retrieve here
   TimeOfDay start = TimeOfDay(hour: 0, minute: 0);
   TimeOfDay end = TimeOfDay(hour: 0, minute: 0);
   DateTime date = DateTime(0000);
   late Venue venue;
-  int maxParticpiants = 1;
+  int? maxParticpiants;
   // list of Students registered
-  double regfee = 0;
+  double? regfee;
   Event() {}
   Event.fixed(String n, String o, TimeOfDay s, TimeOfDay e, DateTime d, Venue v,
-      int np, double p, String dp) {
+      int? np, double? p, String dp) {
     name = n;
     org = o;
     start = s;
@@ -140,7 +143,7 @@ class Event {
   }
 
   void updateStatus(){
-    status = approved? date.compareTo(DateTime.now())>0? maxParticpiants<100? "active":"closed" : "past" : "pending";
+    status = approved? date.compareTo(DateTime.now())>0? maxParticpiants==null? "active":"closed" : "past" : "pending";
   }
 }
 
@@ -169,3 +172,20 @@ Event ii = Event.fixed(
 Event iii = Event.fixed("Quiz", "CSEA", TimeOfDay(hour: 12, minute: 0), TimeOfDay(hour: 12, minute: 30), DateTime(2025,04,24), ssl, 200, 0, content);
 
 List<Event> events = [i,ii,iii];
+
+class Notify{
+  Event event=Event();
+  String msg = "";
+  Notify(){
+
+  }
+  Notify.event(Event e, String m){
+    event = e;
+    msg = m;
+  }
+}
+
+Notify n1 = Notify.event(i, "has been approved");
+Notify n2 = Notify.event(ii, "has reached maximum participants!");
+
+List<Notify> notifications = [n1,n2];

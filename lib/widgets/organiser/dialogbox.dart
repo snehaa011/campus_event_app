@@ -1,4 +1,4 @@
-import 'package:campus_event_app/data/sneha_test.dart';
+import 'package:campus_event_app/data/eventmodel.dart';
 import 'package:flutter/material.dart';
 
 void dialogBox(context, List<Event> occupied) {

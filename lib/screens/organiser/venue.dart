@@ -1,4 +1,5 @@
-import 'package:campus_event_app/data/sneha_test.dart';
+import 'package:campus_event_app/data/functions.dart';
+import 'package:campus_event_app/data/venuemodel.dart';
 import 'package:campus_event_app/widgets/organiser/datepicker.dart';
 import 'package:campus_event_app/widgets/organiser/smallbutton.dart';
 import 'package:campus_event_app/widgets/organiser/timepicker.dart';
@@ -13,7 +14,7 @@ class VenuePage extends StatefulWidget {
   final Function(TimeOfDay?) changeStart;
   final Function(TimeOfDay?) changeEnd;
   final Function(DateTime?) changeDate;
-  final Function(Venue?) setVenue;
+  final void Function(Venue?) setVenue;
 
   const VenuePage({
     required this.start,
@@ -32,10 +33,11 @@ class VenuePage extends StatefulWidget {
 
 class _VenuePageState extends State<VenuePage> {
   late List<Venue> list;
-  late List<Venue> resultlist;
+  List<Venue> resultlist=[];
   late TimeOfDay start;
   late TimeOfDay end;
   late DateTime date;
+  late List<Venue> allvenue;
 
   @override
   void initState() {
@@ -81,10 +83,15 @@ class _VenuePageState extends State<VenuePage> {
     });
   }
 
-  void filter() {
+  void filter() async{
+    allvenue = await getVenues();
     Set<Venue> s = {};
-    s.addAll(allvenue
-        .where((v) => v.checkAvl(start, end, date)));
+    for (var v in allvenue){
+      bool avl = await v.isAvailable(start, end, date);
+      if (avl){
+        s.add(v);
+      }
+    }
     setState(() {
       list = s.toList();
       resultlist = list;

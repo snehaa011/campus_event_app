@@ -1,11 +1,15 @@
 import 'package:campus_event_app/data/sneha_test.dart';
+import 'package:campus_event_app/screens/organiser/eventpage.dart';
 import 'package:flutter/material.dart';
 
 Widget EventTile(Event e, context) {
   return Padding(
     padding: const EdgeInsets.all(10.0),
     child: ElevatedButton(
-      onPressed: () {},
+      onPressed: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (context) => ViewEventPage(event: e,)));
+      },
       style: ElevatedButton.styleFrom(
         foregroundColor: Colors.black,
         padding: EdgeInsets.all(0),
@@ -29,7 +33,7 @@ Widget EventTile(Event e, context) {
                 Text(
                   e.name,
                   style: TextStyle(
-                    fontSize:  MediaQuery.of(context).size.width * 0.04,
+                    fontSize: MediaQuery.of(context).size.width * 0.04,
                     fontWeight: FontWeight.w600,
                   ),
                 ),
@@ -64,9 +68,7 @@ Widget EventTile(Event e, context) {
                       width: MediaQuery.of(context).size.width * 0.01,
                     ),
                     Text(
-                      e.end != null
-                          ? "${e.start.format(context)}-${e.end?.format(context)}"
-                          : e.start.format(context),
+                      "${e.start.format(context)}-${e.end.format(context)}",
                       style: TextStyle(
                           fontSize: MediaQuery.of(context).size.width * 0.04),
                     )

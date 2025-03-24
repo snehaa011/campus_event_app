@@ -1,4 +1,6 @@
-import 'package:campus_event_app/data/sneha_test.dart';
+import 'package:campus_event_app/data/eventmodel.dart';
+import 'package:campus_event_app/data/functions.dart';
+import 'package:campus_event_app/data/venuemodel.dart';
 import 'package:campus_event_app/screens/organiser/venue.dart';
 import 'package:campus_event_app/widgets/organiser/button.dart';
 import 'package:campus_event_app/widgets/organiser/datepicker.dart';
@@ -62,7 +64,13 @@ class _CreateEventState extends State<CreateEvent> {
                             borderSide: BorderSide.none),
                       ),
                       onEditingComplete: () {
-                        name=_eventName.text;
+                        name = _eventName.text;
+                      },
+                      onChanged: (value) {
+                        name = value;
+                      },
+                      onFieldSubmitted: (value){
+                        name=value;
                       },
                     ),
                   ),
@@ -146,8 +154,14 @@ class _CreateEventState extends State<CreateEvent> {
                             borderRadius: BorderRadius.circular(5),
                             borderSide: BorderSide.none),
                       ),
-                      onEditingComplete: (){
-                        desc=_desc.text;
+                      onEditingComplete: () {
+                        desc = _desc.text;
+                      },
+                      onChanged: (value) {
+                        desc = value;
+                      },
+                      onSubmitted: (value){
+                        desc=value;
                       },
                     ),
                   ),
@@ -175,7 +189,24 @@ class _CreateEventState extends State<CreateEvent> {
                     backgroundColor: const Color.fromARGB(255, 125, 105, 98),
                     foregroundColor: Colors.white,
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    print("$name $start $end $date ${venue?.name} $desc");
+                    
+                    if (name != null &&
+                        start != null &&
+                        end != null &&
+                        date != null &&
+                        venue != null &&
+                        desc !=null
+                        ) {
+                          Event e = Event(name: name!, org: "CSEA", desc: desc!, approved: false, start: start!, end: end!, date: date!, venue: venue!.name, maxParticipants: maxParticpiants, regFee: regfee, status: "pending");
+                      e.addEvent();
+                      Navigator.pop(context);
+                    }else{
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar
+                      (content: Text('Fill all fields')));
+                    }
+                  },
                   child: Center(child: Text('Create Event')),
                 ),
               )
@@ -218,7 +249,7 @@ class _CreateEventState extends State<CreateEvent> {
     });
   }
 
-  void setVenue(Venue? v){
+  void setVenue(Venue? v) {
     setState(() {
       venue = v;
     });
