@@ -1,16 +1,22 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:campus_event_app/data/sneha_test.dart';
+import 'package:campus_event_app/data/eventmodel.dart';
+import 'package:campus_event_app/data/notifmodel.dart';
 import 'package:campus_event_app/screens/organiser/eventpage.dart';
 import 'package:flutter/material.dart';
 
 class NotificationBox extends StatelessWidget {
-  Notify not = Notify();
-  NotificationBox(Notify n, {super.key}) {
+  late Notif not;
+  late Event e;
+  NotificationBox(Notif n, {super.key}) {
     not = n;
+  }
+  void fetchData() async{
+    e = await not.getEvent();
   }
   @override
   Widget build(BuildContext context) {
+    fetchData();
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Container(
@@ -24,7 +30,7 @@ class NotificationBox extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "${not.event.name} ${not.msg}",
+              "${not.event} ${not.msg}",
               style: TextStyle(
                 fontWeight: FontWeight.bold,
               ),
@@ -42,7 +48,7 @@ class NotificationBox extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ViewEventPage(event: not.event),
+                    builder: (context) => ViewEventPage(event: e),
                   ),
                 ),
               },

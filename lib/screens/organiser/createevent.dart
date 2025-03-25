@@ -17,13 +17,26 @@ class CreateEvent extends StatefulWidget {
 
 class _CreateEventState extends State<CreateEvent> {
   final TextEditingController _eventName = TextEditingController(),
-      _desc = TextEditingController();
+      _desc = TextEditingController(),
+      _img = TextEditingController();
   String? name, desc;
   TimeOfDay? start, end;
   DateTime? date;
   Venue? venue;
   double? regfee;
   int? maxParticpiants;
+  String? img;
+  String orgname = "";
+
+  @override
+  void initState() {
+    super.initState();
+    getUser().then((value) {
+      setState(() {
+        orgname = value;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -165,6 +178,38 @@ class _CreateEventState extends State<CreateEvent> {
                       },
                     ),
                   ),
+                  Padding(
+                    padding: const EdgeInsets.all(6.0),
+                    child: TextFormField(
+                      controller: _eventName,
+                      cursorColor: const Color.fromARGB(255, 52, 34, 31),
+                      style: TextStyle(color: Colors.white),
+                      decoration: InputDecoration(
+                        filled: true,
+                        fillColor: const Color.fromARGB(255, 125, 123, 123),
+                        hintText: 'Add poster URL',
+                        hintStyle: TextStyle(color: Colors.white),
+                        contentPadding: EdgeInsets.all(20),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                              color: const Color.fromARGB(255, 52, 34, 31),
+                              width: 1.5),
+                        ),
+                        enabledBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5),
+                            borderSide: BorderSide.none),
+                      ),
+                      onEditingComplete: () {
+                        img = _img.text;
+                      },
+                      onChanged: (value) {
+                        img = value;
+                      },
+                      onFieldSubmitted: (value){
+                        img=value;
+                      },
+                    ),
+                  ),
                   createButton(
                       Colors.white,
                       Colors.brown,
@@ -173,8 +218,8 @@ class _CreateEventState extends State<CreateEvent> {
                       () => moreInfo(
                           context, setRegFee, setMp, regfee, maxParticpiants),
                       null),
-                  createButton(Colors.brown, Colors.white, Icons.attach_file,
-                      'Upload document', () => {}, null),
+                  // createButton(Colors.brown, Colors.white, Icons.attach_file,
+                  //     'Upload document', () => {}, null),
                 ],
               ),
               SizedBox(
@@ -197,9 +242,10 @@ class _CreateEventState extends State<CreateEvent> {
                         end != null &&
                         date != null &&
                         venue != null &&
-                        desc !=null
+                        desc !=null &&
+                        img != null
                         ) {
-                          Event e = Event(name: name!, org: "CSEA", desc: desc!, approved: false, start: start!, end: end!, date: date!, venue: venue!.name, maxParticipants: maxParticpiants, regFee: regfee, status: "pending");
+                          Event e = Event(name: name!, org: orgname, desc: desc!, approved: false, start: start!, end: end!, date: date!, venue: venue!.name, maxParticipants: maxParticpiants, regFee: regfee, status: "pending", img: img!);
                       e.addEvent();
                       Navigator.pop(context);
                     }else{

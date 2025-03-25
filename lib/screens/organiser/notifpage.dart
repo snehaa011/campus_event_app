@@ -1,4 +1,4 @@
-import 'package:campus_event_app/data/sneha_test.dart';
+import 'package:campus_event_app/data/notifmodel.dart';
 import 'package:campus_event_app/widgets/organiser/notifbox.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +10,21 @@ class ViewNotificationPage extends StatefulWidget {
 }
 
 class _ViewNotificationPageState extends State<ViewNotificationPage> {
+  List<Notif> list=[];
+
+  @override
+  void initState(){
+    super.initState();
+    fetchData();
+  }
+
+  void fetchData() async{
+    List<Notif> l = await getNotifs();
+    setState(() {
+      list = l;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,10 +42,10 @@ class _ViewNotificationPageState extends State<ViewNotificationPage> {
         color: Colors.white,
         child: SingleChildScrollView(
           child: ListView.builder(
-            itemCount: notifications.length,
+            itemCount: list.length,
             shrinkWrap: true,
             itemBuilder: (context, index) => NotificationBox(
-              notifications[index],
+              list[index],
             ),
           ),
         ),

@@ -1,3 +1,4 @@
+import 'package:campus_event_app/data/notifmodel.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
@@ -8,7 +9,7 @@ CollectionReference events = FirebaseFirestore.instance.collection('events');
 class Event {
   String name;
   String org;
-  String? img;
+  String img;
   String desc;
   bool approved;
   String status; // active/closed/past/pending
@@ -24,7 +25,7 @@ class Event {
   Event({
     required this.name,
     required this.org,
-    this.img,
+    required this.img,
     required this.desc,
     required this.approved,
     required this.status,
@@ -84,6 +85,13 @@ class Event {
     await docRef.update({'approved': true});
     approved = true;
     await updateStatus();
+    addNotif(name, "has been approved", true);
+  }
+
+  Future<void> decline() async {
+    final docRef = FirebaseFirestore.instance.collection('events').doc(name);
+    await docRef.update({'status': "declined"});
+    addNotif(name, "has been declined", true);
   }
 
   /// **Method to update the event status in Firestore**

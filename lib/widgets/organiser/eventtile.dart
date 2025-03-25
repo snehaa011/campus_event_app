@@ -1,4 +1,4 @@
-import 'package:campus_event_app/data/sneha_test.dart';
+import 'package:campus_event_app/data/eventmodel.dart';
 import 'package:campus_event_app/screens/organiser/eventpage.dart';
 import 'package:flutter/material.dart';
 
@@ -47,7 +47,7 @@ Widget EventTile(Event e, context) {
                       width: MediaQuery.of(context).size.width * 0.01,
                     ),
                     Text(
-                      e.venue.name,
+                      e.venue,
                       style: TextStyle(
                           fontSize: MediaQuery.of(context).size.width * 0.04),
                     ),

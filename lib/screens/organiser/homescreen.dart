@@ -1,4 +1,5 @@
-import 'package:campus_event_app/data/sneha_test.dart';
+import 'package:campus_event_app/data/functions.dart';
+import 'package:campus_event_app/data/eventmodel.dart';
 import 'package:campus_event_app/screens/LoginScreen.dart';
 import 'package:campus_event_app/screens/organiser/createevent.dart';
 import 'package:campus_event_app/screens/organiser/notifpage.dart';
@@ -14,14 +15,15 @@ class OrganiserHomePage extends StatefulWidget {
 }
 
 class _OrganiserHomePageState extends State<OrganiserHomePage> {
-  List<Event> list = events;
-  late List<Event> resultlist;
+  String orgname = "";
+  List<Event> list = [];
+  List<Event> resultlist = [];
   int p = 0;
 
   @override
   void initState() {
     super.initState();
-    getActive();
+    fetchData();
   }
 
   void search(String str) {
@@ -29,8 +31,7 @@ class _OrganiserHomePageState extends State<OrganiserHomePage> {
     Set<Event> s = {};
     s.addAll(list.where((s) => s.name.toLowerCase().contains(str)).toList());
     s.addAll(list.where((s) => s.date.toString().contains(str)).toList());
-    s.addAll(
-        list.where((s) => s.venue.name.toLowerCase().contains(str)).toList());
+    s.addAll(list.where((s) => s.venue.toLowerCase().contains(str)).toList());
     setState(() {
       resultlist = s.toList();
     });
@@ -38,9 +39,22 @@ class _OrganiserHomePageState extends State<OrganiserHomePage> {
 
   void updateEventStatus() {
     for (var e in list) {
-      e.approved = true; //to be removed
+      // e.approved = true; //to be removed
       e.updateStatus();
     }
+  }
+
+  Future<void> fetchData() async {
+    String user = await getUser();
+    print(user);
+    List<Event> events = await getEvents();
+
+    setState(() {
+      orgname = user;
+      list = events;
+    });
+
+    getActive(); // Run this only after list is updated
   }
 
   void getActive() {
@@ -77,7 +91,10 @@ class _OrganiserHomePageState extends State<OrganiserHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Organisation", style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),),
+        title: Text(
+          orgname,
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+        ),
         actions: [
           IconButton(
             onPressed: () {
@@ -102,7 +119,10 @@ class _OrganiserHomePageState extends State<OrganiserHomePage> {
                   ),
                   (Route<dynamic> route) => false);
             },
-            icon: Icon(Icons.logout, size: 28,),
+            icon: Icon(
+              Icons.logout,
+              size: 28,
+            ),
           ),
         ],
       ),

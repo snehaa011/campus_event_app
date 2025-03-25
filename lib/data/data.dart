@@ -224,6 +224,7 @@ class Events {
     final data = {
       'participants': FieldValue.arrayUnion([currentUser?.email])
     };
+    // check if it reached max and update staus and maybe send notif    
     await events.doc(name).update(data);
   }
 }
