@@ -24,13 +24,14 @@ TimeOfDay timestampToTimeOfDay(Timestamp timestamp) {
 
 Future<String> getUser() async{
   User? currentUser = FirebaseAuth.instance.currentUser;
+  String s = "";
   await FirebaseFirestore.instance.collection('organizers').doc(currentUser?.email).get().then((doc) async{
     if (doc.exists){
       var data = doc.data() as Map<String, dynamic>;
-      return data['name'];
+      s= data['name'];
     }
   });
-  return "";
+  return s;
 }
 //use await in a future void fn and assign to string s = await getUser()
 // or getUser.then((value){ s = value})

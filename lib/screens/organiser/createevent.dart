@@ -142,6 +142,13 @@ class _CreateEventState extends State<CreateEvent> {
                           ),
                         );
                       }
+                      else{
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar
+                      (content: Text('Start time should be before end time!')));
+                      }
+                    }else{
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar
+                      (content: Text('Time and date required!')));
                     }
                   }, venue?.name),
                   Padding(
@@ -245,7 +252,7 @@ class _CreateEventState extends State<CreateEvent> {
                         desc !=null &&
                         img != null
                         ) {
-                          Event e = Event(name: name!, org: orgname, desc: desc!, approved: false, start: start!, end: end!, date: date!, venue: venue!.name, maxParticipants: maxParticpiants, regFee: regfee, status: "pending", img: img!);
+                          Event e = Event(name: name!, org: orgname, desc: desc!, approved: false, start: start!, end: end!, date: date!, venue: venue!.name, maxParticipants: maxParticpiants, regFee: regfee ?? 0, status: "pending", img: img!);
                       e.addEvent();
                       Navigator.pop(context);
                     }else{

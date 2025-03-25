@@ -1,6 +1,7 @@
 import 'package:campus_event_app/data/functions.dart';
 import 'package:campus_event_app/data/venuemodel.dart';
 import 'package:campus_event_app/widgets/organiser/datepicker.dart';
+import 'package:campus_event_app/widgets/organiser/shimmervenuetile.dart';
 import 'package:campus_event_app/widgets/organiser/smallbutton.dart';
 import 'package:campus_event_app/widgets/organiser/timepicker.dart';
 import 'package:campus_event_app/widgets/organiser/venuetile.dart';
@@ -33,11 +34,12 @@ class VenuePage extends StatefulWidget {
 
 class _VenuePageState extends State<VenuePage> {
   late List<Venue> list;
-  List<Venue> resultlist=[];
+  List<Venue> resultlist = [];
   late TimeOfDay start;
   late TimeOfDay end;
   late DateTime date;
   late List<Venue> allvenue;
+  bool loading = true;
 
   @override
   void initState() {
@@ -83,12 +85,16 @@ class _VenuePageState extends State<VenuePage> {
     });
   }
 
-  void filter() async{
+  void filter() async {
+    setState(() {
+      loading = true;
+    });
+    
     allvenue = await getVenues();
     Set<Venue> s = {};
-    for (var v in allvenue){
+    for (var v in allvenue) {
       bool avl = await v.isAvailable(start, end, date);
-      if (avl){
+      if (avl) {
         s.add(v);
       }
     }
@@ -99,6 +105,7 @@ class _VenuePageState extends State<VenuePage> {
         print(v.name);
       }
     });
+    loading=false;
   }
 
   @override
@@ -152,51 +159,71 @@ class _VenuePageState extends State<VenuePage> {
                   Padding(
                     padding: const EdgeInsets.all(3.0),
                     child: ElevatedButton(
-                      onPressed: () {filter();},
+                      onPressed: () {
+                        if (start.compareTo(end) < 0) {
+                          filter();
+                        } else {
+                          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              content: Text(
+                                  'Start time should be before end time!')));
+                        }
+                      },
                       child: Icon(Icons.check),
                       style: ElevatedButton.styleFrom(
-                        fixedSize: Size.fromHeight(50),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
-                        padding: EdgeInsets.all(2),
-                          backgroundColor: const Color.fromARGB(255, 64, 49, 44),
+                          fixedSize: Size.fromHeight(50),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(50)),
+                          padding: EdgeInsets.all(2),
+                          backgroundColor:
+                              const Color.fromARGB(255, 64, 49, 44),
                           foregroundColor:
                               const Color.fromARGB(255, 229, 229, 229)),
                     ),
                   )
                 ],
               ),
-              resultlist.isEmpty
-                  ? Padding(
-                      padding: EdgeInsets.all(40),
-                      child: Column(
-                        children: [
-                          Icon(
-                            Icons.event_busy,
-                            size: 80,
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            "No venue available",
-                            style: TextStyle(
-                              fontSize: 20,
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                  : ListView.builder(
+              loading
+                  ? ListView.builder(
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
-                      itemBuilder: (context, index) => VenueTile(
-                          resultlist[index],
-                          (start.compareTo(end) < 0),
-                          widget.setVenue, date,
-                          context),
-                      itemCount: resultlist.length,
+                      itemBuilder: (context, index) =>
+                          ShimmerVenueTile(context),
+                      itemCount: 3,
                       padding: EdgeInsets.fromLTRB(0, 0, 0, 70),
-                    ),
+                    )
+                  : resultlist.isEmpty
+                      ? Padding(
+                          padding: EdgeInsets.all(40),
+                          child: Column(
+                            children: [
+                              Icon(
+                                Icons.event_busy,
+                                size: 80,
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                "No venue available",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      : ListView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) => VenueTile(
+                              resultlist[index],
+                              (start.compareTo(end) < 0),
+                              widget.setVenue,
+                              date,
+                              context),
+                          itemCount: resultlist.length,
+                          padding: EdgeInsets.fromLTRB(0, 0, 0, 70),
+                        ),
             ],
           ),
         ),

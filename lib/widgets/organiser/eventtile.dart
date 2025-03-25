@@ -8,89 +8,110 @@ Widget EventTile(Event e, context) {
     child: ElevatedButton(
       onPressed: () {
         Navigator.push(
-            context, MaterialPageRoute(builder: (context) => ViewEventPage(event: e,)));
+            context,
+            MaterialPageRoute(
+                builder: (context) => ViewEventPage(
+                      event: e,
+                    )));
       },
       style: ElevatedButton.styleFrom(
-        foregroundColor: Colors.black,
+        foregroundColor: const Color.fromARGB(255, 0, 0, 0),
         padding: EdgeInsets.all(0),
-        overlayColor: Colors.brown,
-        backgroundColor: const Color.fromARGB(255, 177, 170, 167),
+        overlayColor: const Color.fromARGB(255, 95, 95, 95),
+        backgroundColor: const Color.fromARGB(255, 179, 178, 178),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
       ),
       child: Container(
         decoration: BoxDecoration(
             // color: const Color.fromARGB(255, 177, 170, 167),
             borderRadius: BorderRadius.circular(10)),
-        height: 120,
+        // height: 170,
         padding: EdgeInsets.symmetric(
-            horizontal: MediaQuery.of(context).size.width * 0.04, vertical: 5),
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            horizontal: 10, vertical: 10),
+        child: Row(
+          // mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  e.name,
-                  style: TextStyle(
-                    fontSize: MediaQuery.of(context).size.width * 0.04,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                Row(
-                  children: [
-                    Icon(
-                      Icons.location_on,
-                      size: MediaQuery.of(context).size.width * 0.06,
-                    ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.01,
-                    ),
-                    Text(
-                      e.venue,
-                      style: TextStyle(
-                          fontSize: MediaQuery.of(context).size.width * 0.04),
-                    ),
-                  ],
-                ),
-              ],
+            ClipRRect(
+              borderRadius: BorderRadius.circular(5),
+              child: Image.network(
+                e.img,
+                height: MediaQuery.of(context).size.width * 0.3,
+                width: MediaQuery.of(context).size.width * 0.3,
+                fit: BoxFit.cover,
+              ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
-                  children: [
-                    Icon(
-                      Icons.access_time,
-                      size: MediaQuery.of(context).size.width * 0.06,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    e.name,
+                    style: TextStyle(
+                      fontSize: MediaQuery.of(context).size.width * 0.04,
+                      fontWeight: FontWeight.w600,
                     ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.01,
-                    ),
-                    Text(
-                      "${e.start.format(context)}-${e.end.format(context)}",
-                      style: TextStyle(
-                          fontSize: MediaQuery.of(context).size.width * 0.04),
-                    )
-                  ],
-                ),
-                Row(
-                  children: [
-                    Icon(
-                      Icons.calendar_today_outlined,
-                      size: MediaQuery.of(context).size.width * 0.06,
-                    ),
-                    SizedBox(
-                      width: MediaQuery.of(context).size.width * 0.01,
-                    ),
-                    Text(
-                      "${e.date.day.toString().padLeft(2, '0')}-${e.date.month.toString().padLeft(2, '0')}-${e.date.year}",
-                      style: TextStyle(
-                          fontSize: MediaQuery.of(context).size.width * 0.04),
-                    ),
-                  ],
-                )
-              ],
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.location_on,
+                        size: MediaQuery.of(context).size.width * 0.04,
+                      ),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.01,
+                      ),
+                      Text(
+                        e.venue,
+                        style: TextStyle(
+                            fontSize: MediaQuery.of(context).size.width * 0.035),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.access_time,
+                        size: MediaQuery.of(context).size.width * 0.04,
+                      ),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.01,
+                      ),
+                      Text(
+                        "${e.start.format(context)}-${e.end.format(context)}",
+                        style: TextStyle(
+                            fontSize: MediaQuery.of(context).size.width * 0.035),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.calendar_today_outlined,
+                        size: MediaQuery.of(context).size.width * 0.04,
+                      ),
+                      SizedBox(
+                        width: MediaQuery.of(context).size.width * 0.01,
+                      ),
+                      Text(
+                        "${e.date.day.toString().padLeft(2, '0')}-${e.date.month.toString().padLeft(2, '0')}-${e.date.year}",
+                        style: TextStyle(
+                            fontSize: MediaQuery.of(context).size.width * 0.035),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
             ),
           ],
         ),

@@ -38,26 +38,7 @@ class Event {
     this.participants,
   });
 
-  /// **Factory method to create an Event from Firestore**
-  factory Event.fromFirestore(DocumentSnapshot obj) {
-    Map<String, dynamic> data = obj.data() as Map<String, dynamic>;
-    return Event(
-      name: data['name'] ?? '',
-      org: data['org'] ?? '',
-      img: data['img'] ?? '',
-      desc: data['desc'] ?? '',
-      approved: data['approved'] ?? false,
-      status: data['status'] ?? 'pending',
-      start: timestampToTimeOfDay(data['start']),
-      end: timestampToTimeOfDay(data['end']),
-      date: (data['date'] as Timestamp).toDate(),
-      venue: data['venue'],
-      maxParticipants: data['np'],
-      regFee: data['regfee']?.toDouble(),
-      participants: List<String>.from(data['participants'] ?? []),
-    );
-  }
-
+  
   Future<void> addEvent() async {
     final event = {
       'name': name,
@@ -79,7 +60,6 @@ class Event {
     await FirebaseFirestore.instance.collection('venues').doc(venue).update({'events': FieldValue.arrayUnion([name])});
   }
 
-  /// **Method to approve an event in Firestore**
   Future<void> approve() async {
     final docRef = FirebaseFirestore.instance.collection('events').doc(name);
     await docRef.update({'approved': true});
@@ -121,31 +101,30 @@ class Event {
   }
 }
 
+Event getEventFromFirestore(DocumentSnapshot obj) {
+    Map<String, dynamic> data = obj.data() as Map<String, dynamic>;
+    return Event(
+      name: data['name'] ?? '',
+      org: data['org'] ?? '',
+      img: data['img'] ?? '',
+      desc: data['desc'] ?? '',
+      approved: data['approved'] ?? false,
+      status: data['status'] ?? 'pending',
+      start: timestampToTimeOfDay(data['start']),
+      end: timestampToTimeOfDay(data['end']),
+      date: (data['date'] as Timestamp).toDate(),
+      venue: data['venue'],
+      maxParticipants: data['np'],
+      regFee: data['regfee']?.toDouble(),
+      participants: List<String>.from(data['participants'] ?? []),
+    );
+  }
+
 Future<List<Event>> getEvents() async {
   List<Event> list = [];
   QuerySnapshot querySnapshot = await events.get();
   for (var doc in querySnapshot.docs) {
-    list.add(Event.fromFirestore(doc));
+    list.add(getEventFromFirestore(doc));
   }
   return list;
-}
-
-Future<void> createEvent() async{
-  Event newEvent = Event(
-    name: "Flutter Workshop",
-    org: "GDSC",
-    img: "https://example.com/poster.jpg",
-    desc: "Learn Flutter with hands-on coding!",
-    approved: false,
-    status: "pending",
-    start: TimeOfDay(hour: 10, minute: 0),
-    end: TimeOfDay(hour: 12, minute: 0),
-    date: DateTime(2025, 4, 15),
-    venue: "Auditorium",
-    maxParticipants: 100,
-    regFee: 10.0,
-    participants: [],
-  );
-
-  newEvent.addEvent(); // Add to Firestore
 }

@@ -54,7 +54,10 @@ Widget VenueTile(Venue v, bool complete, Function(Venue?) setVenue, DateTime? da
               : Center(
                   child: ElevatedButton(
                     child: Text('Schedule'),
-                    onPressed: () {},
+                    onPressed: () async{if (date!=null) {
+                        List<Event> occupied = await v.getEventsByDate(date);
+                        dialogBox(context, occupied);
+                      }},
                   ),
                 ),
         ],

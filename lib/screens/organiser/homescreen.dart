@@ -4,6 +4,7 @@ import 'package:campus_event_app/screens/LoginScreen.dart';
 import 'package:campus_event_app/screens/organiser/createevent.dart';
 import 'package:campus_event_app/screens/organiser/notifpage.dart';
 import 'package:campus_event_app/widgets/organiser/eventtile.dart';
+import 'package:campus_event_app/widgets/organiser/shimmereventtile.dart';
 import 'package:campus_event_app/widgets/searchbar.dart';
 import 'package:flutter/material.dart';
 
@@ -19,11 +20,12 @@ class _OrganiserHomePageState extends State<OrganiserHomePage> {
   List<Event> list = [];
   List<Event> resultlist = [];
   int p = 0;
+  bool loading = true;
 
   @override
   void initState() {
     super.initState();
-    fetchData();
+    fetchData(getActive);
   }
 
   void search(String str) {
@@ -44,9 +46,11 @@ class _OrganiserHomePageState extends State<OrganiserHomePage> {
     }
   }
 
-  Future<void> fetchData() async {
+  void fetchData(Function f) async {
+    setState(() {
+      loading = true;
+    });
     String user = await getUser();
-    print(user);
     List<Event> events = await getEvents();
 
     setState(() {
@@ -54,7 +58,8 @@ class _OrganiserHomePageState extends State<OrganiserHomePage> {
       list = events;
     });
 
-    getActive(); // Run this only after list is updated
+    f(); // Run this only after list is updated
+    loading = false;
   }
 
   void getActive() {
@@ -168,7 +173,7 @@ class _OrganiserHomePageState extends State<OrganiserHomePage> {
                       overlayColor: WidgetStatePropertyAll(
                           const Color.fromARGB(36, 121, 85, 72)),
                     ),
-                    onPressed: () => {getActive()},
+                    onPressed: () => {fetchData(getActive)},
                     child: Column(
                       children: [
                         Text(
@@ -192,7 +197,7 @@ class _OrganiserHomePageState extends State<OrganiserHomePage> {
                       overlayColor: WidgetStatePropertyAll(
                           const Color.fromARGB(36, 121, 85, 72)),
                     ),
-                    onPressed: () => {getPast()},
+                    onPressed: () => {fetchData(getPast)},
                     child: Column(
                       children: [
                         Text(
@@ -216,7 +221,7 @@ class _OrganiserHomePageState extends State<OrganiserHomePage> {
                       overlayColor: WidgetStatePropertyAll(
                           const Color.fromARGB(36, 121, 85, 72)),
                     ),
-                    onPressed: () => {getPending()},
+                    onPressed: () => {fetchData(getPending)},
                     child: Column(
                       children: [
                         Text(
@@ -237,35 +242,44 @@ class _OrganiserHomePageState extends State<OrganiserHomePage> {
                   ),
                 ],
               ),
-              resultlist.isEmpty
-                  ? Padding(
-                      padding: EdgeInsets.all(40),
-                      child: Column(
-                        children: [
-                          Icon(
-                            Icons.event_busy,
-                            size: 80,
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Text(
-                            "No events found",
-                            style: TextStyle(
-                              fontSize: 20,
-                            ),
-                          ),
-                        ],
-                      ),
-                    )
-                  : ListView.builder(
+              loading
+                  ? ListView.builder(
                       physics: NeverScrollableScrollPhysics(),
                       shrinkWrap: true,
                       itemBuilder: (context, index) =>
-                          EventTile(resultlist[index], context),
-                      itemCount: resultlist.length,
+                          ShimmerEventTile(context),
+                      itemCount: 3,
                       padding: EdgeInsets.fromLTRB(0, 0, 0, 70),
-                    ),
+                    )
+                  : resultlist.isEmpty
+                      ? Padding(
+                          padding: EdgeInsets.all(40),
+                          child: Column(
+                            children: [
+                              Icon(
+                                Icons.event_busy,
+                                size: 80,
+                              ),
+                              SizedBox(
+                                height: 10,
+                              ),
+                              Text(
+                                "No events found",
+                                style: TextStyle(
+                                  fontSize: 20,
+                                ),
+                              ),
+                            ],
+                          ),
+                        )
+                      : ListView.builder(
+                          physics: NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemBuilder: (context, index) =>
+                              EventTile(resultlist[index], context),
+                          itemCount: resultlist.length,
+                          padding: EdgeInsets.fromLTRB(0, 0, 0, 70),
+                        ),
             ],
           ),
         ),

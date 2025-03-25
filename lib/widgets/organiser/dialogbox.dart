@@ -50,11 +50,14 @@ void dialogBox(context, List<Event> occupied) {
                       ),
                       padding: const EdgeInsets.symmetric(vertical: 8.0),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
-                            occupied[index].name,
-                            style: const TextStyle(fontSize: 16),
+                          Expanded(
+                            child: Text(
+                              occupied[index].name,
+                              style: const TextStyle(fontSize: 16),
+                              overflow: TextOverflow.ellipsis,
+                            ),
                           ),
                           Text(
                             "${occupied[index].start.format(context)} - ${occupied[index].end.format(context)}",

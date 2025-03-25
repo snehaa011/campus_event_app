@@ -64,7 +64,7 @@ class _ViewEventPageState extends State<ViewEventPage> {
                     children: [
                       Text(
                         "${widget.event.desc}",
-                        style: TextStyle(fontSize: 16, color: Colors.brown.shade900),
+                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color:Colors.brown.shade900),
                       ),
                       SizedBox(height: 15),
                       _buildInfoRow(Icons.location_on, "${widget.event.venue}"),
@@ -90,12 +90,12 @@ class _ViewEventPageState extends State<ViewEventPage> {
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: Row(
         children: [
-          Icon(icon, color: Colors.brown.shade700),
+          Icon(icon, color: const Color.fromARGB(255, 42, 37, 37)),
           SizedBox(width: 10),
           Expanded(
             child: Text(
               text,
-              style: TextStyle(fontSize: 16, color: Colors.brown.shade800),
+              style: TextStyle(fontSize: 16, color: const Color.fromARGB(255, 95, 64, 57)),
             ),
           ),
         ],

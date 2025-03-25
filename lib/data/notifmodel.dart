@@ -15,18 +15,9 @@ class Notif {
     required this.eventExists,
   });
 
-  factory Notif.fromFirestore(DocumentSnapshot obj) {
-    Map<String, dynamic> data = obj.data() as Map<String, dynamic>;
-    return Notif(
-      event: data['event'] ?? '',
-      msg: data['msg'] ?? '',
-      eventExists: data['eventExists'] ?? false
-    );
-  }
-
   Future<Event> getEvent() async{
     DocumentSnapshot doc = await FirebaseFirestore.instance.collection('events').doc(event).get();
-    return Event.fromFirestore(doc);
+    return getEventFromFirestore(doc);
   }
 
   bool checkIfValid(){
@@ -38,6 +29,15 @@ class Notif {
     // incase event is deleted when declined
   }
 }
+
+Notif getNotifFromFirestore(DocumentSnapshot obj) {
+    Map<String, dynamic> data = obj.data() as Map<String, dynamic>;
+    return Notif(
+      event: data['event'] ?? '',
+      msg: data['msg'] ?? '',
+      eventExists: data['eventExists'] ?? false
+    );
+  }
 
   void addNotif(String e, String m, bool ex) async {
     final n = {
@@ -53,7 +53,7 @@ class Notif {
     List<Notif> list=[];
     QuerySnapshot querySnapshot = await notiflist.get();
     for (var doc in querySnapshot.docs){
-      var n = Notif.fromFirestore(doc);
+      var n = getNotifFromFirestore(doc);
       if(n.checkIfValid()){
         list.add(n);
       }
