@@ -19,14 +19,14 @@ class StudentShimmerPopularEventBox extends StatelessWidget {
             child: Column(
               mainAxisSize: MainAxisSize.min,
               children: [
-                StudentShimmerContainer(
+                ShimmerContainer(
                   height: 25,
                   borderRadius: 5,
                 ),
                 SizedBox(
                   height: 10,
                 ),
-                StudentShimmerContainer(
+                ShimmerContainer(
                   width: double.infinity,
                   height: 200,
                   borderRadius: 0,
@@ -34,14 +34,14 @@ class StudentShimmerPopularEventBox extends StatelessWidget {
                 SizedBox(
                   height: 15,
                 ),
-                StudentShimmerContainer(
+                ShimmerContainer(
                   height: 50,
                   borderRadius: 5,
                 ),
                 SizedBox(
                   height: 15,
                 ),
-                StudentShimmerContainer(
+                ShimmerContainer(
                   height: 30,
                   borderRadius: 5,
                 ),

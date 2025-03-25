@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-class StudentShimmerContainer extends StatelessWidget {
+class ShimmerContainer extends StatelessWidget {
   final double width;
   final double height;
   final double borderRadius;
 
-  const StudentShimmerContainer({
+  const ShimmerContainer({
     super.key,
     this.width = double.infinity,
     this.height = 100.0,

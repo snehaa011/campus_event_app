@@ -75,7 +75,7 @@ class _StudentProfileState extends State<StudentProfile> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         load
-                            ? StudentShimmerContainer(
+                            ? ShimmerContainer(
                                 height: 40,
                               )
                             : Text(
@@ -92,7 +92,7 @@ class _StudentProfileState extends State<StudentProfile> {
                           height: 5,
                         ),
                         load
-                            ? StudentShimmerContainer(
+                            ? ShimmerContainer(
                                 height: 30,
                               )
                             : Text(
@@ -137,7 +137,7 @@ class _StudentProfileState extends State<StudentProfile> {
                     ),
                   ),
                   load
-                      ? StudentShimmerContainer(
+                      ? ShimmerContainer(
                           height: 26,
                         )
                       : Text(
@@ -155,7 +155,7 @@ class _StudentProfileState extends State<StudentProfile> {
                     ),
                   ),
                   load
-                      ? StudentShimmerContainer(
+                      ? ShimmerContainer(
                           height: 26,
                         )
                       : Text(

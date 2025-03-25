@@ -10,7 +10,7 @@ class StudentShimmerEventBox extends StatelessWidget {
       children: [
         ExpansionTile(
           childrenPadding: EdgeInsets.fromLTRB(15, 0, 15, 15),
-          title: StudentShimmerContainer(
+          title: ShimmerContainer(
             height: 20,
             borderRadius: 5,
           ),
@@ -27,7 +27,7 @@ class StudentShimmerEventBox extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                StudentShimmerContainer(
+                ShimmerContainer(
                   height: 100,
                   width: 100,
                   borderRadius: 0,
@@ -36,7 +36,7 @@ class StudentShimmerEventBox extends StatelessWidget {
                   width: 15,
                 ),
                 Expanded(
-                  child: StudentShimmerContainer(
+                  child: ShimmerContainer(
                     height: 100,
                     borderRadius: 0,
                   ),
@@ -46,21 +46,21 @@ class StudentShimmerEventBox extends StatelessWidget {
             SizedBox(
               height: 15,
             ),
-            StudentShimmerContainer(
+            ShimmerContainer(
               height: 25,
               borderRadius: 5,
             ),
             SizedBox(
               height: 10,
             ),
-            StudentShimmerContainer(
+            ShimmerContainer(
               height: 25,
               borderRadius: 5,
             ),
             SizedBox(
               height: 10,
             ),
-            StudentShimmerContainer(
+            ShimmerContainer(
               height: 30,
             ),
           ],

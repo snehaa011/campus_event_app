@@ -12,7 +12,43 @@ class SignInScreen extends StatelessWidget {
   final String str;
   final AuthService _authService = AuthService();
   SignInScreen(this.str, {super.key});
-  @override
+
+  void checkValidUser(String user, String str, BuildContext context) async {
+    if (str == 'organiser') {
+      bool b = await checkUser(user, 'organizers');
+      if (b) {
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (context) => OrganiserHomePage(),
+            ),
+            (Route<dynamic> route) => false);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Unauthorized user"),
+          ),
+        );
+      }
+    } else if (str == 'admin') {
+      bool b = await checkUser(user, 'admin');
+      if (b) {
+        Navigator.pushAndRemoveUntil(
+            context,
+            MaterialPageRoute(
+              builder: (context) => AdminHomePage(),
+            ),
+            (Route<dynamic> route) => false);
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(
+            content: Text("Unauthorized user"),
+          ),
+        );
+      }
+    }
+  }
+
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 212, 196, 191),
@@ -51,19 +87,9 @@ class SignInScreen extends StatelessWidget {
                         ),
                         (Route<dynamic> route) => false);
                   } else if (str == 'organiser') {
-                    Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => OrganiserHomePage(),
-                        ),
-                        (Route<dynamic> route) => false);
+                    checkValidUser(user.email as String, str, context);
                   } else if (str == 'admin') {
-                    Navigator.pushAndRemoveUntil(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => AdminHomePage(),
-                        ),
-                        (Route<dynamic> route) => false);
+                    checkValidUser(user.email as String, str, context);
                   } else {
                     Navigator.pop(context);
                   }

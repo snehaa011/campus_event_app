@@ -18,13 +18,13 @@ class StudentShimmerNotificationBox extends StatelessWidget {
             children: [
               Row(
                 children: [
-                  StudentShimmerContainer(
+                  ShimmerContainer(
                     width: 50,
                     height: 15,
                     borderRadius: 2,
                   ),
                   Spacer(),
-                  StudentShimmerContainer(
+                  ShimmerContainer(
                     width: 100,
                     height: 15,
                     borderRadius: 2,
@@ -34,7 +34,7 @@ class StudentShimmerNotificationBox extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
-              StudentShimmerContainer(
+              ShimmerContainer(
                 height: 18,
                 width: 2 * MediaQuery.of(context).size.width / 3,
                 borderRadius: 2,
@@ -42,7 +42,7 @@ class StudentShimmerNotificationBox extends StatelessWidget {
               SizedBox(
                 height: 5,
               ),
-              StudentShimmerContainer(
+              ShimmerContainer(
                 height: 18,
                 width: 100,
                 borderRadius: 2,
@@ -50,7 +50,7 @@ class StudentShimmerNotificationBox extends StatelessWidget {
               SizedBox(
                 height: 5,
               ),
-              StudentShimmerContainer(
+              ShimmerContainer(
                 height: 60,
                 width: double.infinity,
                 borderRadius: 2,
@@ -58,7 +58,7 @@ class StudentShimmerNotificationBox extends StatelessWidget {
               SizedBox(
                 height: 5,
               ),
-              StudentShimmerContainer(
+              ShimmerContainer(
                 height: 20,
                 width: 100,
                 borderRadius: 2,

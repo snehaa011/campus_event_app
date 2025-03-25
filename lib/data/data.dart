@@ -276,3 +276,10 @@ class Notify {
   Notify(this.title, this.name, this.org, this.content, this.date, this.time);
   Notify.i();
 }
+
+Future<bool> checkUser(String? docId, String collection) async {
+  if (docId == null) return false;
+  DocumentSnapshot doc =
+      await FirebaseFirestore.instance.collection(collection).doc(docId).get();
+  return doc.exists ? true : false;
+}
