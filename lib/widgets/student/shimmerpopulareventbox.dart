@@ -1,4 +1,4 @@
-import 'package:campus_event_app/widgets/student/shimmercontainer.dart';
+import 'package:campus_event_app/widgets/shimmercontainer.dart';
 import 'package:flutter/material.dart';
 
 class StudentShimmerPopularEventBox extends StatelessWidget {

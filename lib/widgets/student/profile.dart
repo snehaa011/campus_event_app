@@ -4,7 +4,7 @@ import 'package:campus_event_app/data/ashwin_test.dart';
 import 'package:campus_event_app/data/data.dart';
 import 'package:campus_event_app/screens/student/eventhistoryscreen.dart';
 import 'package:campus_event_app/widgets/student/phonebox.dart';
-import 'package:campus_event_app/widgets/student/shimmercontainer.dart';
+import 'package:campus_event_app/widgets/shimmercontainer.dart';
 import 'package:flutter/material.dart';
 
 class StudentProfile extends StatefulWidget {

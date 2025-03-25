@@ -3,7 +3,7 @@ import 'package:campus_event_app/data/data.dart';
 import 'package:campus_event_app/widgets/searchbar.dart';
 import 'package:campus_event_app/widgets/student/eventbox.dart';
 import 'package:campus_event_app/widgets/student/filter.dart';
-import 'package:campus_event_app/widgets/shimmereventbox.dart';
+import 'package:campus_event_app/widgets/student/shimmereventbox.dart';
 import 'package:flutter/material.dart';
 
 class StudentEvents extends StatefulWidget {
