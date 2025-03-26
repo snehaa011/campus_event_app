@@ -1,7 +1,7 @@
 import 'package:campus_event_app/widgets/admin/expandedTile.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import '../../data/navaneeth_test.dart';
+import '../../data/ashwin_test.dart';
 
 class EventsTile extends StatelessWidget {
   final Event events;
@@ -12,7 +12,7 @@ class EventsTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color:const Color.fromARGB(255, 255, 255, 255),
+          color: const Color.fromARGB(255, 255, 255, 255),
           borderRadius: BorderRadius.circular(10)),
       margin: EdgeInsets.all(10),
       width: MediaQuery.of(context).size.width,
@@ -24,7 +24,6 @@ class EventsTile extends StatelessWidget {
             Text(events.name,
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
             SizedBox(height: 8),
-            //Image.asset(events.img, width: 50, height: 50, fit: BoxFit.cover),
             Row(
               children: [
                 Container(
@@ -33,11 +32,15 @@ class EventsTile extends StatelessWidget {
                   decoration: BoxDecoration(
                       color: Colors.brown,
                       borderRadius: BorderRadius.circular(5)),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(5),
+                    child: Image.network(events.img,
+                        width: 50, height: 50, fit: BoxFit.cover),
+                  ),
                 ),
                 SizedBox(width: 10),
-                Container(
-                  width: 200,
-                  child: Text(content,
+                Expanded(
+                  child: Text(events.content,
                       maxLines: 4,
                       style: TextStyle(overflow: TextOverflow.ellipsis)),
                 ),
@@ -59,9 +62,9 @@ class EventsTile extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    Icon(Icons.timer),
+                    Icon(Icons.access_time),
                     Text(
-                      " ${events.start.format(context)}-${events.end?.format(context)}",
+                      " ${events.start.format(context)}",
                       style: TextStyle(
                           color: Colors.brown, fontWeight: FontWeight.w700),
                     ),
@@ -77,7 +80,7 @@ class EventsTile extends StatelessWidget {
                   children: [
                     Icon(Icons.location_pin),
                     Text(
-                      " ${events.venue.name}",
+                      " ${events.venue}",
                       style: TextStyle(
                           color: Colors.brown, fontWeight: FontWeight.w700),
                     ),
@@ -87,7 +90,7 @@ class EventsTile extends StatelessWidget {
                   children: [
                     Icon(Icons.groups),
                     Text(
-                      " ${events.noOfParticpiants}",
+                      " ${events.participants.length}",
                       style: TextStyle(
                           color: Colors.brown, fontWeight: FontWeight.w700),
                     ),
@@ -95,22 +98,30 @@ class EventsTile extends StatelessWidget {
                 ),
               ],
             ),
-    
             SizedBox(height: 10),
-    
             Center(
               child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) =>
-                                Expandedtile(eventDesc: events)));
-                  },
-                 style:ButtonStyle(shape: WidgetStatePropertyAll(RoundedRectangleBorder(borderRadius: BorderRadius.circular(5))),backgroundColor: WidgetStatePropertyAll(Colors.brown)),
-                  child: Container(
-                    width: 300,
-                    child: Center(child: Text('View Event Statstics',style: TextStyle(color: Colors.white),)))),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              Expandedtile(eventDesc: events)));
+                },
+                style: ButtonStyle(
+                    shape: WidgetStatePropertyAll(RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5))),
+                    backgroundColor: WidgetStatePropertyAll(Colors.brown)),
+                child: Container(
+                  width: 300,
+                  child: Center(
+                    child: Text(
+                      'View Event Statstics',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
+                ),
+              ),
             )
           ],
         ),

@@ -19,7 +19,7 @@ class _StudentProfileState extends State<StudentProfile> {
   UserClass user = UserClass();
   TextEditingController tc = TextEditingController();
   void fetch() async {
-    UserClass u = await student.getStudent();
+    UserClass u = await student.getStudent(currentUser?.email as String);
     print(u.history);
     if (mounted) {
       setState(() {

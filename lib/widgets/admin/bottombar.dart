@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 // ignore: must_be_immutable
 class AdminBottomBar extends StatefulWidget {
   late Function func = () {};
-   AdminBottomBar(Function f,{super.key}){
-   func = f;
+  AdminBottomBar(Function f, {super.key}) {
+    func = f;
   }
   @override
   State<AdminBottomBar> createState() => _AdminBottomBarState();
@@ -26,13 +26,13 @@ class _AdminBottomBarState extends State<AdminBottomBar> {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           IconButton(
-              onPressed: () => {
-                    setState(() {
-                      i = 0;
-                    }),
-                    widget.func(0),
-                  },
-              icon:  i == 0
+            onPressed: () => {
+              setState(() {
+                i = 0;
+              }),
+              widget.func(0),
+            },
+            icon: i == 0
                 ? Icon(
                     Icons.home,
                     color: Colors.black,

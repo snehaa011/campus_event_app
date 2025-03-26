@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 
-List<String> l1 = ["skibidi", "gooning", "edging", "rizz"];
-List<String> l2 = ["gyatt", "looksmaxxing"];
-List<String> l3 = ["kai cenat", "fanum tax"];
 var content =
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 
@@ -165,67 +162,3 @@ Event vi = Event.i(
   "https://media.istockphoto.com/id/1295274245/photo/random-multicolored-spheres-computer-generated-abstract-form-of-large-and-small-balls-3d.jpg?s=612x612&w=0&k=20&c=q7NOl28YxIIOqKu6em50VlKrg6ISFyVww_nLOCr5W_A=",
 );
 List<Event> events = [i, ii, iii, iv, v, vi];
-
-class Notify {
-  Event event = Event();
-  TimeOfDay time = TimeOfDay(hour: 0, minute: 0);
-  DateTime date = DateTime(0);
-  Notify();
-  Notify.i(Event e, TimeOfDay ti, DateTime d) {
-    event = e;
-    time = ti;
-    date = d;
-  }
-}
-
-List<Notify> notifications = [
-  Notify.i(
-    events[0],
-    TimeOfDay(hour: 09, minute: 45),
-    DateTime.now(),
-  ),
-  Notify.i(
-    events[3],
-    TimeOfDay(hour: 13, minute: 44),
-    DateTime.now(),
-  ),
-];
-
-class User {
-  String name = "",
-      email = "",
-      rollno = "",
-      batch = "",
-      branch = "",
-      phoneno = "";
-  List<Event> interested = [];
-  List<Event> registered = [];
-  List<Event> history = [iii];
-  User();
-  User.i(n, e, r, ba, br, ph) {
-    name = n;
-    email = e;
-    rollno = r;
-    batch = ba;
-    branch = br;
-    phoneno = ph;
-  }
-  void addInterested(Event e) {
-    interested.add(e);
-  }
-
-  void removeInterested(Event e) {
-    interested.remove(e);
-  }
-
-  void register(Event e) {
-    registered.add(e);
-  }
-
-  void participated(Event e) {
-    history.add(e);
-  }
-}
-
-User user = User.i("Ashwin A Nair", "ashwin_b220198cs@nitc.ac.in", "B220198CS",
-    "CS01", "CSE", "7738012855");

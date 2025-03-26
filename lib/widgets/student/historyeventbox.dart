@@ -21,7 +21,7 @@ class StudentHistoryBox extends StatelessWidget {
         ),
       ),
       subtitle: Text(
-        content,
+        event.content,
         maxLines: 2,
         style: TextStyle(
           overflow: TextOverflow.ellipsis,

@@ -72,7 +72,7 @@ class _StudentEventBoxState extends State<StudentEventBox> {
                 ),
                 Expanded(
                   child: Text(
-                    content,
+                    widget.event.content,
                     maxLines: 5,
                     style: TextStyle(
                       overflow: TextOverflow.ellipsis,

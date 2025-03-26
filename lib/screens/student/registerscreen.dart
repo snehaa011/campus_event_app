@@ -69,7 +69,7 @@ class _StudentRegisterScreenState extends State<StudentRegisterScreen> {
             ),
             Padding(
               padding: EdgeInsets.all(20),
-              child: Text(content),
+              child: Text(widget.event.content),
             ),
             Padding(
               padding: EdgeInsets.fromLTRB(20, 0, 20, 20),

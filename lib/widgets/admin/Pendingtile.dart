@@ -1,20 +1,17 @@
 import 'package:campus_event_app/widgets/admin/expandedPendingsTile.dart';
 
 import 'package:flutter/material.dart';
-import '../../data/navaneeth_test.dart';
+import '../../data/ashwin_test.dart';
 
 class Pendingtile extends StatelessWidget {
   final Event events;
-
-  const Pendingtile({super.key, required this.events});
+  Function func = () {};
+  Pendingtile({super.key, required this.events, required this.func});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.push(
-          context,
-          MaterialPageRoute(
-              builder: (context) => ExpandedPendingstile(events: events))),
+      onTap: () => func(events),
       child: Container(
         decoration: BoxDecoration(
             color: const Color.fromARGB(255, 255, 255, 255),
@@ -26,33 +23,35 @@ class Pendingtile extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              
-              //Image.asset(events.img, width: 50, height: 50, fit: BoxFit.cover),
               Container(
-              
                 height: 150,
                 width: 130,
-                decoration: BoxDecoration(color:Colors.brown,borderRadius: BorderRadiusDirectional.circular(10)),
-              
+                decoration: BoxDecoration(
+                  color: Colors.brown,
+                  borderRadius: BorderRadiusDirectional.circular(5),
+                ),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(5),
+                  child: Image.network(events.img,
+                      width: 50, height: 50, fit: BoxFit.cover),
+                ),
               ),
-                            SizedBox(width: 10),
-                             Container(width: 176,child:
-                            Column(
-                              children: [
-                                Text(events.name,  
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold,overflow: TextOverflow.ellipsis)),
-              SizedBox(height: 8),
-                               
-                                  
-                                 Text(content,
-                                                maxLines: 5,
-                                                style: TextStyle(overflow: TextOverflow.ellipsis)),
-                                
-                              ],
-                            ),
-          ),
-           
-              
+              SizedBox(width: 10),
+              Expanded(
+                child: Column(
+                  children: [
+                    Text(events.name,
+                        style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            overflow: TextOverflow.ellipsis)),
+                    SizedBox(height: 8),
+                    Text(events.content,
+                        maxLines: 5,
+                        style: TextStyle(overflow: TextOverflow.ellipsis)),
+                  ],
+                ),
+              ),
             ],
           ),
         ),

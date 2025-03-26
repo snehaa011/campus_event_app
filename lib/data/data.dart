@@ -30,9 +30,9 @@ class Student {
     return doc.exists ? true : false;
   }
 
-  Future<UserClass> getStudent() async {
+  Future<UserClass> getStudent(String email) async {
     UserClass ui = UserClass();
-    await students.doc(currentUser?.email).get().then((doc) async {
+    await students.doc(email).get().then((doc) async {
       if (doc.exists) {
         var data = doc.data() as Map<String, dynamic>;
         ui.name = data['name'];
@@ -183,14 +183,17 @@ class Student {
   Event convert(DocumentSnapshot obj) {
     Map<String, dynamic> map = obj.data() as Map<String, dynamic>;
     return Event.i(
-        map['name'],
-        map['org'],
-        TimeOfDay.fromDateTime(map['start'].toDate()),
-        map['date'].toDate(),
-        map['venue'],
-        map['np'],
-        (map['regfee'] as num).toDouble(),
-        map['img']);
+      map['name'],
+      map['org'],
+      map['desc'],
+      TimeOfDay.fromDateTime(map['start'].toDate()),
+      map['date'].toDate(),
+      map['venue'],
+      map['np'],
+      (map['regfee'] as num).toDouble(),
+      map['img'],
+      map['participants'],
+    );
   }
 }
 
@@ -201,14 +204,17 @@ class Events {
   Event convert(QueryDocumentSnapshot obj) {
     Map<String, dynamic> map = obj.data() as Map<String, dynamic>;
     return Event.i(
-        map['name'],
-        map['org'],
-        TimeOfDay.fromDateTime(map['start'].toDate()),
-        map['date'].toDate(),
-        map['venue'],
-        map['np'],
-        (map['regfee'] as num).toDouble(),
-        map['img']);
+      map['name'],
+      map['org'],
+      map['desc'],
+      TimeOfDay.fromDateTime(map['start'].toDate()),
+      map['date'].toDate(),
+      map['venue'],
+      map['np'],
+      (map['regfee'] as num).toDouble(),
+      map['img'],
+      map['participants'],
+    );
   }
 
   Future<List<Event>> getEvents() async {
@@ -224,7 +230,7 @@ class Events {
     final data = {
       'participants': FieldValue.arrayUnion([currentUser?.email])
     };
-    // check if it reached max and update staus and maybe send notif    
+    // check if it reached max and update staus and maybe send notif
     await events.doc(name).update(data);
   }
 }
@@ -260,7 +266,6 @@ class Not {
   Future<Event> getEvent(String name) async {
     CollectionReference events =
         FirebaseFirestore.instance.collection('events');
-    // DocumentSnapshot doc = await events.doc(name).get();
     QuerySnapshot querySnapshot =
         await events.where(FieldPath.documentId, isEqualTo: name).get();
     var doc = querySnapshot.docs.isNotEmpty ? querySnapshot.docs.first : null;
@@ -284,3 +289,79 @@ Future<bool> checkUser(String? docId, String collection) async {
       await FirebaseFirestore.instance.collection(collection).doc(docId).get();
   return doc.exists ? true : false;
 }
+
+class Admin {
+  CollectionReference events = FirebaseFirestore.instance.collection('events');
+  Future<List<Event>> fetchPendingEvents() async {
+    List<Event> list = [];
+    QuerySnapshot querySnapshot = await events.get();
+    for (var doc in querySnapshot.docs) {
+      if (doc.get('status') == "pending") {
+        list.add(eventer.convert(doc));
+      }
+    }
+    // print(list);
+    return list;
+  }
+
+  Future<List<Event>> fetchUpcomingEvents() async {
+    List<Event> list = [];
+    QuerySnapshot querySnapshot = await events.get();
+    for (var doc in querySnapshot.docs) {
+      if (doc.get('status') == "active") {
+        list.add(eventer.convert(doc));
+      }
+    }
+    // print(list);
+    return list;
+  }
+
+  void approveEvent(String str) async {
+    final data = {'approved': true, 'status': "active"};
+    await events.doc(str).update(data);
+  }
+
+  void declineEvent(String str) async {
+    final data = {'approved': false, 'status': "declined"};
+    await events.doc(str).update(data);
+  }
+
+  Future<List<dynamic>> getParticipants(List l) async {
+    List<dynamic> list = [];
+    for (var i in l) {
+      FirebaseFirestore.instance.collection('students').doc(i).get().then((s) {
+        list.add({
+          'name': s.data()?['name'],
+          'email': s.data()?['email'],
+        });
+      });
+    }
+    return list;
+  }
+
+  Future<List> fetchParticipants(String str) async {
+    List<dynamic> list = [];
+    await events.doc(str).get().then((s) {
+      if (s.exists) {
+        var data = s.data() as Map<String, dynamic>;
+        list = data['participants'];
+        print(list);
+        print(data['name']);
+      }
+    });
+    return getParticipants(list);
+  }
+
+  void sendNotification(String name, String msg, String org) async {
+    await FirebaseFirestore.instance
+        .collection('orgnotifs')
+        .doc("$name-$org")
+        .set({
+      'event': name,
+      'msg': msg,
+      'org': org,
+    });
+  }
+}
+
+Admin admin = Admin();

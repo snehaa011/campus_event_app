@@ -70,7 +70,7 @@ class _StudentPopularEventBoxState extends State<StudentPopularEventBox> {
                   height: 15,
                 ),
                 Text(
-                  content,
+                  widget.event.content,
                   maxLines: 5,
                   style: TextStyle(
                     overflow: TextOverflow.ellipsis,
