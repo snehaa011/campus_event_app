@@ -6,6 +6,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 User? currentUser = FirebaseAuth.instance.currentUser;
+void setUser() {
+  currentUser = FirebaseAuth.instance.currentUser;
+}
+
 Map<String, String> branch = {
   'cs': 'CSE',
   'ec': 'ECE',
@@ -59,6 +63,7 @@ class Student {
     final student = {
       'name': name,
       'email': email,
+      'img': currentUser?.photoURL,
       'rollno': email
           .substring(email.indexOf('_') + 1, email.indexOf('@'))
           .toUpperCase(),
@@ -329,10 +334,15 @@ class Admin {
   Future<List<dynamic>> getParticipants(List l) async {
     List<dynamic> list = [];
     for (var i in l) {
-      await FirebaseFirestore.instance.collection('students').doc(i).get().then((s) {
+      await FirebaseFirestore.instance
+          .collection('students')
+          .doc(i)
+          .get()
+          .then((s) {
         list.add({
           'name': s.data()?['name'],
           'email': s.data()?['email'],
+          'img': s.data()?['img'],
         });
       });
     }
