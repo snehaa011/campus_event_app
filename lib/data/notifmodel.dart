@@ -8,11 +8,13 @@ class Notif {
   String msg;
   bool eventExists;
   bool isValid = true;
+  String org;
 
   Notif({
     required this.event,
     required this.msg,
     required this.eventExists,
+    required this.org,
   });
 
   Future<Event> getEvent() async{
@@ -35,7 +37,8 @@ Notif getNotifFromFirestore(DocumentSnapshot obj) {
     return Notif(
       event: data['event'] ?? '',
       msg: data['msg'] ?? '',
-      eventExists: data['eventExists'] ?? false
+      eventExists: data['eventExists'] ?? false,
+      org: data['org']
     );
   }
 
@@ -49,12 +52,12 @@ Notif getNotifFromFirestore(DocumentSnapshot obj) {
     await notiflist.doc().set(n);
   }
 
-  Future<List<Notif>> getNotifs() async{
+  Future<List<Notif>> getNotifs(String orgname) async{
     List<Notif> list=[];
     QuerySnapshot querySnapshot = await notiflist.get();
     for (var doc in querySnapshot.docs){
       var n = getNotifFromFirestore(doc);
-      if(n.checkIfValid()){
+      if(n.checkIfValid() && n.org==orgname){
         list.add(n);
       }
     }

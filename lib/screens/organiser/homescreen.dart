@@ -51,7 +51,7 @@ class _OrganiserHomePageState extends State<OrganiserHomePage> {
       loading = true;
     });
     String user = await getUser();
-    List<Event> events = await getEvents();
+    List<Event> events = await getEvents(user);
 
     setState(() {
       orgname = user;

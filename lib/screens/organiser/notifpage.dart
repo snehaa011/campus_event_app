@@ -1,3 +1,4 @@
+import 'package:campus_event_app/data/functions.dart';
 import 'package:campus_event_app/data/notifmodel.dart';
 import 'package:campus_event_app/widgets/organiser/notifbox.dart';
 import 'package:flutter/material.dart';
@@ -19,7 +20,8 @@ class _ViewNotificationPageState extends State<ViewNotificationPage> {
   }
 
   void fetchData() async{
-    List<Notif> l = await getNotifs();
+    String user = await getUser();
+    List<Notif> l = await getNotifs(user);
     setState(() {
       list = l;
     });

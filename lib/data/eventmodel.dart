@@ -120,11 +120,15 @@ Event getEventFromFirestore(DocumentSnapshot obj) {
     );
   }
 
-Future<List<Event>> getEvents() async {
+Future<List<Event>> getEvents(String orgname) async {
   List<Event> list = [];
   QuerySnapshot querySnapshot = await events.get();
   for (var doc in querySnapshot.docs) {
-    list.add(getEventFromFirestore(doc));
+    var e= getEventFromFirestore(doc);
+    if (e.org == orgname){
+      list.add(getEventFromFirestore(doc));
+    }
+    
   }
   return list;
 }
