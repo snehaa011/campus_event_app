@@ -1,4 +1,5 @@
 import 'package:campus_event_app/data/eventmodel.dart';
+import 'package:campus_event_app/widgets/admin/participants.dart';
 import 'package:flutter/material.dart';
 
 class ViewEventPage extends StatefulWidget {
@@ -74,6 +75,26 @@ class _ViewEventPageState extends State<ViewEventPage> {
                       _buildInfoRow(Icons.person_outline, "Registered: ${widget.event.participants?.length}"),
                       _buildInfoRow(Icons.money, "Registration fees: ${widget.event.regFee}"),
                       _buildInfoRow(Icons.check_circle_outline, "Status: ${widget.event.status.toUpperCase()}"),
+                      SizedBox(height: 15),
+                      TextButton(
+                      style: ButtonStyle(
+                        overlayColor: WidgetStatePropertyAll(
+                          const Color.fromARGB(43, 121, 85, 72),
+                        ),
+                      ),
+                      onPressed: () => {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => Participants(widget.event.name),
+                          ),
+                        ),
+                      },
+                      child: Text(
+                        "View participants",
+                        style: TextStyle(fontSize: 16, color: const Color.fromARGB(255, 95, 64, 57)),
+                      ),
+                    ),
                     ],
                   ),
                 ),

@@ -329,13 +329,14 @@ class Admin {
   Future<List<dynamic>> getParticipants(List l) async {
     List<dynamic> list = [];
     for (var i in l) {
-      FirebaseFirestore.instance.collection('students').doc(i).get().then((s) {
+      await FirebaseFirestore.instance.collection('students').doc(i).get().then((s) {
         list.add({
           'name': s.data()?['name'],
           'email': s.data()?['email'],
         });
       });
     }
+    print(list);
     return list;
   }
 

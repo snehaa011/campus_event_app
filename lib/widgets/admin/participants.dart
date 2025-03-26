@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:campus_event_app/data/data.dart';
+import 'package:campus_event_app/widgets/organiser/shimmerlisttile.dart';
 import 'package:flutter/material.dart';
 
 class Participants extends StatefulWidget {
@@ -14,6 +15,7 @@ class Participants extends StatefulWidget {
 
 class _ParticipantsState extends State<Participants> {
   List<dynamic> list = [];
+  bool loading=true;
 
   void fetchParticipants() async {
     List<dynamic> l = await admin.fetchParticipants(widget.event);
@@ -22,6 +24,7 @@ class _ParticipantsState extends State<Participants> {
         list = l;
       });
     }
+    loading=false;
   }
 
   @override
@@ -46,7 +49,15 @@ class _ParticipantsState extends State<Participants> {
       backgroundColor: Color.fromARGB(255, 212, 208, 210),
       body: SingleChildScrollView(
         padding: EdgeInsets.fromLTRB(10, 20, 10, 40),
-        child: list.isEmpty
+        child: 
+        loading?
+        ListView.builder(
+                shrinkWrap: true,
+                physics: NeverScrollableScrollPhysics(),
+                itemCount: list.length,
+                itemBuilder: (context, index) => ShimmerListTile(context)
+              ):
+        list.isEmpty
             ? Center(
                 child: Text("No participants"),
               )
