@@ -13,22 +13,22 @@ class StudentHistoryBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(0, 0, 0, 10),
+      padding: EdgeInsets.fromLTRB(5, 10, 5, 0),
       child: ListTile(
-        tileColor: dd,
+        tileColor: Color.fromARGB(255, 233, 233, 233),
         contentPadding: EdgeInsets.all(10),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(5),
         ),
         leading: Icon(
           Icons.today,
-          color: d7,
+          color: d2,
         ),
         title: Text(
           event.name,
           style: TextStyle(
             fontWeight: FontWeight.bold,
-            color: Colors.white,
+            color: d1,
           ),
         ),
         subtitle: Text(
@@ -36,7 +36,7 @@ class StudentHistoryBox extends StatelessWidget {
           maxLines: 2,
           style: TextStyle(
             overflow: TextOverflow.ellipsis,
-            color: Colors.white70,
+            color: d3,
           ),
         ),
         onTap: () => Navigator.push(

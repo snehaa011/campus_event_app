@@ -53,7 +53,7 @@ class _StudentHomePageState extends State<StudentHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: d1,
+      backgroundColor: dd,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         // title: Text("Student"),

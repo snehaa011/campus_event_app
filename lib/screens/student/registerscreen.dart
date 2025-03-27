@@ -56,7 +56,7 @@ class _StudentRegisterScreenState extends State<StudentRegisterScreen> {
           ),
         ),
       ),
-      backgroundColor: d1,
+      backgroundColor: dd,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -173,15 +173,13 @@ class _StudentRegisterScreenState extends State<StudentRegisterScreen> {
                   if (DateTime.now().compareTo(widget.event.date) == -1)
                     ElevatedButton(
                       style: ButtonStyle(
-                        backgroundColor: WidgetStatePropertyAll(dd),
-                        overlayColor: WidgetStatePropertyAll(
-                            const Color.fromARGB(36, 121, 85, 72)),
+                        backgroundColor: WidgetStatePropertyAll(d5),
+                        overlayColor: WidgetStatePropertyAll(d7),
                         shape: WidgetStatePropertyAll(
                           RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10),
                           ),
                         ),
-                        surfaceTintColor: WidgetStatePropertyAll(Colors.brown),
                       ),
                       onPressed: () => {
                         if (!b)

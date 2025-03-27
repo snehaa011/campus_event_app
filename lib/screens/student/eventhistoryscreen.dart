@@ -32,7 +32,7 @@ class StudentEventHistoryScreen extends StatelessWidget {
           ),
         ),
       ),
-      backgroundColor: d1,
+      backgroundColor: dd,
       body: SingleChildScrollView(
         child: ListView.builder(
           itemCount: history.length,

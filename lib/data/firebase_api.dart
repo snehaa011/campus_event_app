@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:firebase_messaging/firebase_messaging.dart';
 
 Future<void> handleBackgroundMessage(RemoteMessage message) async {

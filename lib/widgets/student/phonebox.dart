@@ -34,7 +34,9 @@ class StudentPhoneBox extends StatelessWidget {
         controller: tc,
         enabled: b,
         keyboardType: TextInputType.number,
-        style: TextStyle(color: Colors.white70),
+        style: TextStyle(
+          color: Color.fromARGB(255, 233, 233, 233),
+        ),
         cursorColor: d7,
         autovalidateMode: AutovalidateMode.always,
         decoration: InputDecoration(
@@ -43,6 +45,10 @@ class StudentPhoneBox extends StatelessWidget {
             borderSide: BorderSide(
               color: d7,
             ),
+          ),
+          disabledBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
+            borderSide: BorderSide(color: d2),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15),

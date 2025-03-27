@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:campus_event_app/widgets/shimmercontainer.dart';
 import 'package:flutter/material.dart';
 

@@ -2,6 +2,8 @@ import 'package:campus_event_app/widgets/shimmercontainer.dart';
 import 'package:flutter/material.dart';
 
 class StudentShimmerNotificationBox extends StatelessWidget {
+  const StudentShimmerNotificationBox({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Column(

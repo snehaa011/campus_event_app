@@ -1,3 +1,5 @@
+// ignore_for_file: use_key_in_widget_constructors
+
 import 'package:campus_event_app/widgets/shimmercontainer.dart';
 import 'package:flutter/material.dart';
 

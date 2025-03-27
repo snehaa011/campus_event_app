@@ -116,7 +116,7 @@ class _StudentEventsState extends State<StudentEvents> {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      color: d1,
+      color: dd,
       child: SingleChildScrollView(
         child: Column(
           children: [

@@ -74,7 +74,7 @@ class _ViewEventPageState extends State<ViewEventPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "${widget.event.desc}",
+                        widget.event.desc,
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w500,
@@ -82,7 +82,7 @@ class _ViewEventPageState extends State<ViewEventPage> {
                         ),
                       ),
                       SizedBox(height: 15),
-                      _buildInfoRow(Icons.location_on, "${widget.event.venue}"),
+                      _buildInfoRow(Icons.location_on, widget.event.venue),
                       _buildInfoRow(Icons.access_time,
                           "${widget.event.start.format(context)} - ${widget.event.end.format(context)}"),
                       _buildInfoRow(Icons.calendar_today,

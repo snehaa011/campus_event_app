@@ -96,9 +96,9 @@ class _OrganiserHomePageState extends State<OrganiserHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: d1,
+      backgroundColor: dd,
       appBar: AppBar(
-        backgroundColor: d1,
+        backgroundColor: Colors.transparent,
         title: Text(
           orgname,
           style: TextStyle(
@@ -268,7 +268,7 @@ class _OrganiserHomePageState extends State<OrganiserHomePage> {
                               Icon(
                                 Icons.event_busy,
                                 size: 80,
-                                color: Colors.white,
+                                color: Color.fromARGB(255, 233, 233, 233),
                               ),
                               SizedBox(
                                 height: 10,
@@ -277,7 +277,7 @@ class _OrganiserHomePageState extends State<OrganiserHomePage> {
                                 "No events found",
                                 style: TextStyle(
                                   fontSize: 20,
-                                  color: Colors.white,
+                                  color: Color.fromARGB(255, 233, 233, 233),
                                 ),
                               ),
                             ],

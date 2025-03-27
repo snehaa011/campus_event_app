@@ -53,7 +53,7 @@ class _StudentProfileState extends State<StudentProfile> {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      color: d1,
+      color: dd,
       child: SingleChildScrollView(
         padding: EdgeInsets.fromLTRB(0, 0, 0, 140),
         child: Column(
@@ -63,7 +63,7 @@ class _StudentProfileState extends State<StudentProfile> {
               padding: EdgeInsets.fromLTRB(20, 30, 20, 30),
               width: double.infinity,
               decoration: BoxDecoration(
-                color: const Color.fromARGB(240, 255, 255, 255),
+                color: const Color.fromARGB(255, 233, 233, 233),
                 borderRadius: BorderRadius.circular(0),
               ),
               child: Row(
@@ -99,7 +99,7 @@ class _StudentProfileState extends State<StudentProfile> {
                             : Text(
                                 user.email,
                                 style: TextStyle(
-                                  color: d4,
+                                  color: d2,
                                   fontWeight: FontWeight.w500,
                                   fontSize: 15,
                                 ),
@@ -147,7 +147,7 @@ class _StudentProfileState extends State<StudentProfile> {
                           user.rollno,
                           style: TextStyle(
                             fontSize: 20,
-                            color: Colors.white70,
+                            color: Color.fromARGB(255, 233, 233, 233),
                           ),
                         ),
                   SizedBox(
@@ -169,7 +169,7 @@ class _StudentProfileState extends State<StudentProfile> {
                           user.branch,
                           style: TextStyle(
                             fontSize: 20,
-                            color: Colors.white70,
+                            color: Color.fromARGB(255, 233, 233, 233),
                           ),
                         ),
                   SizedBox(

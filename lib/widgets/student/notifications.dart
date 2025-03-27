@@ -37,7 +37,7 @@ class _StudentNotificationsState extends State<StudentNotifications> {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      color: d1,
+      color: dd,
       child: SingleChildScrollView(
         child: Column(
           children: [
@@ -48,7 +48,7 @@ class _StudentNotificationsState extends State<StudentNotifications> {
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 25,
-                  color: Colors.white70,
+                  color: Color.fromARGB(255, 233, 233, 233),
                 ),
               ),
             ),

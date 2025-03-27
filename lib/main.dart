@@ -1,5 +1,4 @@
 import 'package:campus_event_app/data/ashwin_test.dart';
-import 'package:campus_event_app/data/firebase_api.dart';
 import 'package:campus_event_app/screens/openscreen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';

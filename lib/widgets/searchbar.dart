@@ -34,25 +34,25 @@ class _EventSearchBarState extends State<EventSearchBar> {
       decoration: InputDecoration(
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30),
-          borderSide: BorderSide.none,
+          borderSide: BorderSide(color: d5),
         ),
         fillColor: dd,
         filled: true,
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30),
-          borderSide: BorderSide.none,
+          borderSide: BorderSide(color: d5),
         ),
         disabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30),
-          borderSide: BorderSide.none,
+          borderSide: BorderSide(color: d5),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30),
-          borderSide: BorderSide.none,
+          borderSide: BorderSide(color: d5),
         ),
         focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30),
-          borderSide: BorderSide.none,
+          borderSide: BorderSide(color: d5),
         ),
         hintText: "Search",
         hintStyle: TextStyle(

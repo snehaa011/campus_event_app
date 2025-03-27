@@ -1,3 +1,5 @@
+// ignore_for_file: no_leading_underscores_for_local_identifiers, sort_child_properties_last
+
 import 'package:campus_event_app/data/color.dart';
 import 'package:flutter/material.dart';
 
@@ -31,15 +33,15 @@ void moreInfo(BuildContext context, Function(double?) setRegFee,
                         onPressed: () {
                           Navigator.pop(context);
                         },
-                        child: Icon(
-                          Icons.close,
-                          size: 16,
-                          color: Colors.white,
-                        ),
                         style: ElevatedButton.styleFrom(
                           shape: const CircleBorder(),
                           backgroundColor: dd,
                           padding: const EdgeInsets.all(10),
+                        ),
+                        child: Icon(
+                          Icons.close,
+                          size: 16,
+                          color: Colors.white,
                         ),
                       ),
                     ],
@@ -51,7 +53,7 @@ void moreInfo(BuildContext context, Function(double?) setRegFee,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text("Maximum participants: "),
-                      Container(
+                      SizedBox(
                         width: 100,
                         child: TextFormField(
                           // onEditingComplete: () {
@@ -83,7 +85,7 @@ void moreInfo(BuildContext context, Function(double?) setRegFee,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text("Registration fees:"),
-                      Container(
+                      SizedBox(
                         width: 100,
                         child: TextFormField(
                           // onEditingComplete: () {

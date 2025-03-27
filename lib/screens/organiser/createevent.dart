@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:campus_event_app/data/color.dart';
 import 'package:campus_event_app/data/eventmodel.dart';
 import 'package:campus_event_app/data/functions.dart';
@@ -81,15 +83,12 @@ class _CreateEventState extends State<CreateEvent> {
                         hintStyle: TextStyle(color: Colors.white),
                         contentPadding: EdgeInsets.all(20),
                         focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: d5,
-                              width: 2),
+                          borderSide: BorderSide(color: d5, width: 2),
                         ),
                         enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5),
-                            borderSide: BorderSide(
-                              color: d5,
-                              width: 1),),
+                          borderRadius: BorderRadius.circular(5),
+                          borderSide: BorderSide(color: d5, width: 1),
+                        ),
                       ),
                       onEditingComplete: () {
                         name = _eventName.text;
@@ -186,15 +185,12 @@ class _CreateEventState extends State<CreateEvent> {
                         hintStyle: TextStyle(color: Colors.white),
                         contentPadding: EdgeInsets.all(20),
                         focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: d5,
-                              width: 2),
+                          borderSide: BorderSide(color: d5, width: 2),
                         ),
                         enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5),
-                            borderSide: BorderSide(
-                              color: d5,
-                              width: 1),),
+                          borderRadius: BorderRadius.circular(5),
+                          borderSide: BorderSide(color: d5, width: 1),
+                        ),
                       ),
                       onEditingComplete: () {
                         desc = _desc.text;
@@ -220,15 +216,12 @@ class _CreateEventState extends State<CreateEvent> {
                         hintStyle: TextStyle(color: Colors.white),
                         contentPadding: EdgeInsets.all(20),
                         focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                              color: d5,
-                              width: 2),
+                          borderSide: BorderSide(color: d5, width: 2),
                         ),
                         enabledBorder: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(5),
-                            borderSide: BorderSide(
-                              color: d5,
-                              width: 1),),
+                          borderRadius: BorderRadius.circular(5),
+                          borderSide: BorderSide(color: d5, width: 1),
+                        ),
                       ),
                       onEditingComplete: () {
                         img = _img.text;

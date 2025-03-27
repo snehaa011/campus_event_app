@@ -43,7 +43,7 @@ class _StudentPopularEventBoxState extends State<StudentPopularEventBox> {
           Container(
             padding: EdgeInsets.fromLTRB(10, 20, 10, 10),
             decoration: BoxDecoration(
-              color: dd,
+              color: Color.fromARGB(255, 233, 233, 233),
               borderRadius: BorderRadius.circular(10),
             ),
             child: Column(
@@ -54,7 +54,7 @@ class _StudentPopularEventBoxState extends State<StudentPopularEventBox> {
                   style: TextStyle(
                     overflow: TextOverflow.ellipsis,
                     fontSize: 20,
-                    color: d6,
+                    color: dd,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -85,7 +85,7 @@ class _StudentPopularEventBoxState extends State<StudentPopularEventBox> {
                   style: TextStyle(
                     overflow: TextOverflow.ellipsis,
                     fontWeight: FontWeight.w600,
-                    color: Colors.white60,
+                    color: d1,
                   ),
                 ),
                 SizedBox(
@@ -110,7 +110,7 @@ class _StudentPopularEventBoxState extends State<StudentPopularEventBox> {
                       child: Text(
                         "View event",
                         style: TextStyle(
-                          color: d3,
+                          color: d2,
                           fontWeight: FontWeight.w600,
                         ),
                       ),

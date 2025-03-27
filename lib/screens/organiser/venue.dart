@@ -1,5 +1,6 @@
+// ignore_for_file: avoid_print
+
 import 'package:campus_event_app/data/color.dart';
-import 'package:campus_event_app/data/functions.dart';
 import 'package:campus_event_app/data/venuemodel.dart';
 import 'package:campus_event_app/widgets/organiser/datepicker.dart';
 import 'package:campus_event_app/widgets/organiser/shimmervenuetile.dart';
@@ -26,8 +27,8 @@ class VenuePage extends StatefulWidget {
     required this.changeEnd,
     required this.changeDate,
     required this.setVenue,
-    Key? key,
-  }) : super(key: key);
+    super.key,
+  });
 
   @override
   State<VenuePage> createState() => _VenuePageState();
@@ -112,7 +113,7 @@ class _VenuePageState extends State<VenuePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: d1,
+      backgroundColor: dd,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         leading: IconButton(
@@ -145,7 +146,7 @@ class _VenuePageState extends State<VenuePage> {
                   Expanded(
                     child: createSmallButton(
                         Color.fromARGB(255, 233, 233, 233),
-                        d5,
+                        d3,
                         Icons.event,
                         'Date',
                         () => selectDate(context, setDate, date),
@@ -154,7 +155,7 @@ class _VenuePageState extends State<VenuePage> {
                   Expanded(
                     child: createSmallButton(
                         Color.fromARGB(255, 233, 233, 233),
-                        d5,
+                        d3,
                         Icons.access_alarm,
                         'Start Time',
                         () => selectTime(context, setStartTime, start),
@@ -163,7 +164,7 @@ class _VenuePageState extends State<VenuePage> {
                   Expanded(
                     child: createSmallButton(
                         Color.fromARGB(255, 233, 233, 233),
-                        d5,
+                        d3,
                         Icons.access_alarm,
                         'End Time',
                         () => selectTime(context, setEndTime, end),
@@ -181,7 +182,6 @@ class _VenuePageState extends State<VenuePage> {
                                   'Start time should be before end time!')));
                         }
                       },
-                      child: Icon(Icons.check),
                       style: ElevatedButton.styleFrom(
                           fixedSize: Size.fromHeight(50),
                           shape: RoundedRectangleBorder(
@@ -190,6 +190,7 @@ class _VenuePageState extends State<VenuePage> {
                           backgroundColor: d5,
                           foregroundColor:
                               const Color.fromARGB(255, 229, 229, 229)),
+                      child: Icon(Icons.check),
                     ),
                   )
                 ],

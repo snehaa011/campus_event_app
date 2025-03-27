@@ -19,6 +19,7 @@ class _StudentHomeState extends State<StudentHome> {
   List<Event> _list = [];
   void fetchEvents() async {
     List<Event> l = await eventer.getEvents();
+    l = l.where((i) => DateTime.now().compareTo(i.date) == -1).toList();
     if (mounted) {
       setState(() {
         list = l;
@@ -51,7 +52,7 @@ class _StudentHomeState extends State<StudentHome> {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      color: d1,
+      color: dd,
       child: SingleChildScrollView(
         padding: EdgeInsets.fromLTRB(0, 0, 0, 80),
         child: Column(

@@ -1,3 +1,5 @@
+// ignore_for_file: non_constant_identifier_names
+
 import 'package:campus_event_app/data/color.dart';
 import 'package:campus_event_app/data/eventmodel.dart';
 import 'package:campus_event_app/screens/organiser/eventpage.dart';

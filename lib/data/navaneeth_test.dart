@@ -63,7 +63,7 @@ class Event {
   bool interested = false;
   int noOfParticpiants = 1;
   double regfee = 0;
-  Event() {}
+  Event();
   Event.i(String n, String o, TimeOfDay s, TimeOfDay e, DateTime d, Venue v,
       bool i, int np, double p, String im) {
     name = n;
