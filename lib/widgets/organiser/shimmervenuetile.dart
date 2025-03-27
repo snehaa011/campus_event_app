@@ -8,7 +8,7 @@ Widget ShimmerVenueTile(context) {
       padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(10),
-          color: const Color.fromARGB(255, 202, 181, 174)),
+          color: const Color.fromARGB(255, 233, 233, 233),),
       height: 60,
       child: Row(children: [
         ShimmerContainer(height: 18, width: 80,),
