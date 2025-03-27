@@ -1,3 +1,4 @@
+import 'package:campus_event_app/data/color.dart';
 import 'package:flutter/material.dart';
 
 Future<void> selectTime(BuildContext context, Function(TimeOfDay) setTime, TimeOfDay? t) async {
@@ -5,18 +6,17 @@ Future<void> selectTime(BuildContext context, Function(TimeOfDay) setTime, TimeO
       builder: (context, child) {
         return Theme(
           data: Theme.of(context).copyWith(
-            colorScheme: const ColorScheme.light(
-              primary:
-                  Color.fromARGB(255, 82, 77, 77), // header background color
+            colorScheme: ColorScheme.light(
+              primary: d1,
               onPrimary:
                   Color.fromARGB(255, 253, 253, 253), // header text color
-              onSurface: Color.fromARGB(255, 24, 24, 24), // body text color
+              onSurface: d0, // body text color
             ),
             timePickerTheme: TimePickerThemeData(
               dayPeriodColor: WidgetStateColor.resolveWith(
                 (states) => states.contains(WidgetState.selected)
-                    ? const Color.fromARGB(255, 148, 128, 120)
-                    : const Color.fromARGB(255, 223, 223, 223),
+                    ? Colors.blueGrey
+                    : const Color.fromARGB(255, 223, 233, 233),
               ),
             ),
           ),

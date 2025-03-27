@@ -1,3 +1,4 @@
+import 'package:campus_event_app/data/color.dart';
 import 'package:flutter/material.dart';
 
 Future<void> selectDate(BuildContext context, Function(DateTime) setDate, DateTime? d) async {
@@ -5,11 +6,11 @@ Future<void> selectDate(BuildContext context, Function(DateTime) setDate, DateTi
       builder: (context, child) {
         return Theme(
           data: Theme.of(context).copyWith(
-            colorScheme: const ColorScheme.light(
+            colorScheme: ColorScheme.light(
               primary:
-                  Color.fromARGB(255, 54, 44, 43), // header background color
+                  d2, // header background color
               onPrimary: Color.fromARGB(255, 255, 255, 255), // header text color
-              onSurface: Color.fromARGB(255, 97, 88, 88), // body text color
+              onSurface: d0, // body text color
             ),
           ),
           child: child!,

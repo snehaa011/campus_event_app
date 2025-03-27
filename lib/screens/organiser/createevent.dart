@@ -72,22 +72,24 @@ class _CreateEventState extends State<CreateEvent> {
                     padding: const EdgeInsets.all(6.0),
                     child: TextFormField(
                       controller: _eventName,
-                      cursorColor: const Color.fromARGB(255, 52, 34, 31),
+                      cursorColor: d5,
                       style: TextStyle(color: Colors.white),
                       decoration: InputDecoration(
-                        filled: true,
+                        filled: false,
                         fillColor: const Color.fromARGB(255, 125, 123, 123),
                         hintText: 'Enter event name',
                         hintStyle: TextStyle(color: Colors.white),
                         contentPadding: EdgeInsets.all(20),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                              color: const Color.fromARGB(255, 52, 34, 31),
-                              width: 1.5),
+                              color: d5,
+                              width: 2),
                         ),
                         enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5),
-                            borderSide: BorderSide.none),
+                            borderSide: BorderSide(
+                              color: d5,
+                              width: 1),),
                       ),
                       onEditingComplete: () {
                         name = _eventName.text;
@@ -174,23 +176,25 @@ class _CreateEventState extends State<CreateEvent> {
                     child: TextField(
                       keyboardType: TextInputType.multiline,
                       controller: _desc,
-                      cursorColor: const Color.fromARGB(255, 52, 34, 31),
+                      cursorColor: d5,
                       maxLines: 4,
                       style: TextStyle(color: Colors.white),
                       decoration: InputDecoration(
-                        filled: true,
+                        filled: false,
                         fillColor: const Color.fromARGB(255, 125, 123, 123),
                         hintText: 'Enter description',
                         hintStyle: TextStyle(color: Colors.white),
                         contentPadding: EdgeInsets.all(20),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                              color: const Color.fromARGB(255, 52, 34, 31),
-                              width: 1.5),
+                              color: d5,
+                              width: 2),
                         ),
                         enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5),
-                            borderSide: BorderSide.none),
+                            borderSide: BorderSide(
+                              color: d5,
+                              width: 1),),
                       ),
                       onEditingComplete: () {
                         desc = _desc.text;
@@ -207,22 +211,24 @@ class _CreateEventState extends State<CreateEvent> {
                     padding: const EdgeInsets.all(6.0),
                     child: TextFormField(
                       controller: _img,
-                      cursorColor: const Color.fromARGB(255, 52, 34, 31),
+                      cursorColor: d5,
                       style: TextStyle(color: Colors.white),
                       decoration: InputDecoration(
-                        filled: true,
+                        filled: false,
                         fillColor: const Color.fromARGB(255, 125, 123, 123),
                         hintText: 'Add poster URL',
                         hintStyle: TextStyle(color: Colors.white),
                         contentPadding: EdgeInsets.all(20),
                         focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
-                              color: const Color.fromARGB(255, 52, 34, 31),
-                              width: 1.5),
+                              color: d5,
+                              width: 2),
                         ),
                         enabledBorder: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5),
-                            borderSide: BorderSide.none),
+                            borderSide: BorderSide(
+                              color: d5,
+                              width: 1),),
                       ),
                       onEditingComplete: () {
                         img = _img.text;
