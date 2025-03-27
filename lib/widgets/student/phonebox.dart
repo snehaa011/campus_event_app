@@ -1,4 +1,5 @@
 // ignore_for_file: must_be_immutable
+import 'package:campus_event_app/data/color.dart';
 import 'package:flutter/material.dart';
 
 class StudentPhoneBox extends StatelessWidget {
@@ -33,20 +34,23 @@ class StudentPhoneBox extends StatelessWidget {
         controller: tc,
         enabled: b,
         keyboardType: TextInputType.number,
-        cursorColor: Colors.grey,
+        style: TextStyle(color: Colors.white70),
+        cursorColor: d7,
         autovalidateMode: AutovalidateMode.always,
         decoration: InputDecoration(
           focusedBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15),
-            borderSide: BorderSide(color: Colors.black),
+            borderSide: BorderSide(
+              color: d7,
+            ),
           ),
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15),
-            borderSide: BorderSide(color: Colors.black),
+            borderSide: BorderSide(color: d7),
           ),
           focusedErrorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15),
-            borderSide: BorderSide(color: Colors.black),
+            borderSide: BorderSide(color: Colors.red),
           ),
           errorBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(15),

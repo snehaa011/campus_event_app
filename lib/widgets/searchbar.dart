@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:campus_event_app/data/color.dart';
 import 'package:flutter/material.dart';
 
 class EventSearchBar extends StatefulWidget {
@@ -23,6 +24,10 @@ class _EventSearchBarState extends State<EventSearchBar> {
   Widget build(BuildContext context) {
     return TextField(
       controller: tc,
+      cursorColor: d7,
+      style: TextStyle(
+        color: d7,
+      ),
       onChanged: (value) {
         setQuery(value);
       },
@@ -31,7 +36,7 @@ class _EventSearchBarState extends State<EventSearchBar> {
           borderRadius: BorderRadius.circular(30),
           borderSide: BorderSide.none,
         ),
-        fillColor: const Color.fromARGB(255, 199, 199, 199),
+        fillColor: dd,
         filled: true,
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(30),
@@ -50,8 +55,12 @@ class _EventSearchBarState extends State<EventSearchBar> {
           borderSide: BorderSide.none,
         ),
         hintText: "Search",
+        hintStyle: TextStyle(
+          color: d5,
+        ),
         prefixIcon: Icon(
           Icons.search,
+          color: d5,
         ),
       ),
     );

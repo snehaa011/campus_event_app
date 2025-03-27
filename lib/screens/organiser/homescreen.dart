@@ -1,3 +1,4 @@
+import 'package:campus_event_app/data/color.dart';
 import 'package:campus_event_app/data/functions.dart';
 import 'package:campus_event_app/data/eventmodel.dart';
 import 'package:campus_event_app/screens/LoginScreen.dart';
@@ -95,10 +96,16 @@ class _OrganiserHomePageState extends State<OrganiserHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: d1,
       appBar: AppBar(
+        backgroundColor: d1,
         title: Text(
           orgname,
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 25,
+            color: Colors.white,
+          ),
         ),
         actions: [
           IconButton(
@@ -111,7 +118,8 @@ class _OrganiserHomePageState extends State<OrganiserHomePage> {
               );
             },
             icon: Icon(
-              Icons.notifications_none,
+              Icons.notifications,
+              color: d7,
               size: 28,
             ),
           ),
@@ -126,6 +134,7 @@ class _OrganiserHomePageState extends State<OrganiserHomePage> {
             },
             icon: Icon(
               Icons.logout,
+              color: d7,
               size: 28,
             ),
           ),
@@ -137,8 +146,8 @@ class _OrganiserHomePageState extends State<OrganiserHomePage> {
         height: 60,
         child: FittedBox(
           child: FloatingActionButton(
-            backgroundColor: Colors.brown,
-            foregroundColor: Colors.white,
+            backgroundColor: d7,
+            foregroundColor: dd,
             elevation: 10,
             shape: CircleBorder(),
             onPressed: () {
@@ -181,12 +190,12 @@ class _OrganiserHomePageState extends State<OrganiserHomePage> {
                           style: TextStyle(
                             fontWeight:
                                 p == 0 ? FontWeight.bold : FontWeight.normal,
-                            color: Colors.black,
+                            color: p == 0 ? d7 : Colors.white70,
                           ),
                         ),
                         Container(
                           height: 2,
-                          color: p == 0 ? Colors.black : Colors.transparent,
+                          color: p == 0 ? d7 : Colors.transparent,
                           width: 20,
                         ),
                       ],
@@ -205,12 +214,12 @@ class _OrganiserHomePageState extends State<OrganiserHomePage> {
                           style: TextStyle(
                             fontWeight:
                                 p == 1 ? FontWeight.bold : FontWeight.normal,
-                            color: Colors.black,
+                            color: p == 1 ? d7 : Colors.white70,
                           ),
                         ),
                         Container(
                           height: 2,
-                          color: p == 1 ? Colors.black : Colors.transparent,
+                          color: p == 1 ? d7 : Colors.transparent,
                           width: 20,
                         ),
                       ],
@@ -229,12 +238,12 @@ class _OrganiserHomePageState extends State<OrganiserHomePage> {
                           style: TextStyle(
                             fontWeight:
                                 p == 2 ? FontWeight.bold : FontWeight.normal,
-                            color: Colors.black,
+                            color: p == 2 ? d7 : Colors.white70,
                           ),
                         ),
                         Container(
                           height: 2,
-                          color: p == 2 ? Colors.black : Colors.transparent,
+                          color: p == 2 ? d7 : Colors.transparent,
                           width: 20,
                         ),
                       ],
@@ -259,6 +268,7 @@ class _OrganiserHomePageState extends State<OrganiserHomePage> {
                               Icon(
                                 Icons.event_busy,
                                 size: 80,
+                                color: Colors.white,
                               ),
                               SizedBox(
                                 height: 10,
@@ -267,6 +277,7 @@ class _OrganiserHomePageState extends State<OrganiserHomePage> {
                                 "No events found",
                                 style: TextStyle(
                                   fontSize: 20,
+                                  color: Colors.white,
                                 ),
                               ),
                             ],

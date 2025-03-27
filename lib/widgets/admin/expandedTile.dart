@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 
+import 'package:campus_event_app/data/color.dart';
 import 'package:campus_event_app/widgets/admin/participants.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -13,10 +14,20 @@ class Expandedtile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 212, 208, 210),
+      backgroundColor: dd,
       appBar: AppBar(
-          // title: Text(eventDesc.name),
-          backgroundColor: Color.fromARGB(255, 212, 208, 210)),
+        // title: Text(eventDesc.name),
+        backgroundColor: Colors.transparent,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.arrow_back,
+            color: d7,
+          ),
+        ),
+      ),
       body: SingleChildScrollView(
         child: Container(
           margin: EdgeInsets.all(10),
@@ -31,80 +42,73 @@ class Expandedtile extends StatelessWidget {
                 //   "Upcoming Events",
                 //   style: TextStyle(fontSize: 27, fontWeight: FontWeight.w500),
                 // )),
-                SizedBox(height: 10),
-                Stack(
-                  children: [
-                    Container(
-                      height: 320,
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(5),
-                          color: Colors.brown),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(5),
-                        child: Image.network(
-                          eventDesc.img,
-                          width: double.infinity,
-                          height: 200,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                    Opacity(
-                      opacity: 0.5,
-                      child: Container(
-                        height: 80,
-                        width: double.infinity,
-                        decoration: BoxDecoration(
-                          color: Colors.black,
-                          borderRadius: BorderRadius.circular(5),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(20, 20, 20, 0),
-                      child: Text(
-                        eventDesc.name,
-                        style: TextStyle(
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white),
-                      ),
-                    ),
-                  ],
+                Text(
+                  eventDesc.name,
+                  style: TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
                 ),
+                SizedBox(height: 10),
+                Container(
+                  height: 320,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5), color: d4),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(5),
+                    child: Image.network(
+                      eventDesc.img,
+                      width: double.infinity,
+                      height: 200,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                ),
+
                 SizedBox(height: 10),
                 Text(
                   eventDesc.content,
                   textAlign: TextAlign.justify,
-                  style: TextStyle(fontSize: 16),
+                  style: TextStyle(
+                    fontSize: 16,
+                    color: const Color.fromARGB(242, 255, 255, 255),
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
-                SizedBox(height: 8),
+                SizedBox(height: 10),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Row(
                       children: [
-                        Icon(Icons.calendar_month),
+                        Icon(
+                          Icons.calendar_month,
+                          color: d4,
+                        ),
                         Text(
                           "  ${DateFormat('MMMMd').format(eventDesc.date)}",
                           style: TextStyle(
-                            color: Colors.brown,
+                            color: d4,
                             fontWeight: FontWeight.w700,
                             fontSize: 18,
                           ),
                         ),
                       ],
+                    ),
+                    SizedBox(
+                      height: 10,
                     ),
                     Row(
                       children: [
                         Icon(
                           Icons.access_time,
+                          color: d4,
                         ),
                         Text(
                           "  ${eventDesc.start.format(context)}",
                           style: TextStyle(
-                            color: Colors.brown,
+                            color: d4,
                             fontWeight: FontWeight.w700,
                             fontSize: 18,
                           ),
@@ -119,11 +123,14 @@ class Expandedtile extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        Icon(Icons.location_pin),
+                        Icon(
+                          Icons.location_pin,
+                          color: d4,
+                        ),
                         Text(
                           "  ${eventDesc.venue}",
                           style: TextStyle(
-                            color: Colors.brown,
+                            color: d4,
                             fontWeight: FontWeight.w700,
                             fontSize: 18,
                           ),
@@ -133,41 +140,51 @@ class Expandedtile extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Icon(Icons.groups),
+                        Icon(
+                          Icons.groups,
+                          color: d4,
+                        ),
                         Text(
                           " ${eventDesc.participants.length}",
                           style: TextStyle(
-                            color: Colors.brown,
+                            color: d4,
                             fontWeight: FontWeight.w700,
                             fontSize: 18,
                           ),
                         ),
                       ],
                     ),
-                    TextButton(
-                      style: ButtonStyle(
-                        overlayColor: WidgetStatePropertyAll(
-                          const Color.fromARGB(43, 121, 85, 72),
-                        ),
-                      ),
-                      onPressed: () => {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Participants(eventDesc.name),
-                          ),
-                        ),
-                      },
-                      child: Text(
-                        "Show participants",
-                        style: TextStyle(
-                          color: Colors.brown,
-                        ),
-                      ),
-                    ),
                   ],
                 ),
                 SizedBox(height: 10),
+                GestureDetector(
+                  onTap: () => {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Participants(eventDesc.name),
+                      ),
+                    ),
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: d3,
+                    ),
+                    padding: EdgeInsets.all(10),
+                    width: double.infinity,
+                    child: Center(
+                      child: Text(
+                        "Show participants",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 15,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),

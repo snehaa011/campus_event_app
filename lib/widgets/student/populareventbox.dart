@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:campus_event_app/data/ashwin_test.dart';
+import 'package:campus_event_app/data/color.dart';
 import 'package:campus_event_app/data/data.dart';
 import 'package:campus_event_app/screens/student/registerscreen.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +43,7 @@ class _StudentPopularEventBoxState extends State<StudentPopularEventBox> {
           Container(
             padding: EdgeInsets.fromLTRB(10, 20, 10, 10),
             decoration: BoxDecoration(
-              color: Color.fromARGB(255, 223, 223, 223),
+              color: dd,
               borderRadius: BorderRadius.circular(10),
             ),
             child: Column(
@@ -50,7 +51,12 @@ class _StudentPopularEventBoxState extends State<StudentPopularEventBox> {
               children: [
                 Text(
                   widget.event.name,
-                  style: TextStyle(fontSize: 20),
+                  style: TextStyle(
+                    overflow: TextOverflow.ellipsis,
+                    fontSize: 20,
+                    color: d6,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 SizedBox(
                   height: 10,
@@ -58,8 +64,12 @@ class _StudentPopularEventBoxState extends State<StudentPopularEventBox> {
                 Container(
                   width: double.infinity,
                   height: 200,
-                  color: Colors.brown,
+                  decoration: BoxDecoration(
+                    color: d1,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
                   child: ClipRRect(
+                    borderRadius: BorderRadius.circular(5),
                     child: Image.network(
                       widget.event.img,
                       fit: BoxFit.cover,
@@ -74,6 +84,8 @@ class _StudentPopularEventBoxState extends State<StudentPopularEventBox> {
                   maxLines: 5,
                   style: TextStyle(
                     overflow: TextOverflow.ellipsis,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white60,
                   ),
                 ),
                 SizedBox(
@@ -84,8 +96,7 @@ class _StudentPopularEventBoxState extends State<StudentPopularEventBox> {
                   children: [
                     TextButton(
                       style: ButtonStyle(
-                        overlayColor: WidgetStatePropertyAll(
-                            const Color.fromARGB(36, 121, 85, 72)),
+                        overlayColor: WidgetStatePropertyAll(d7),
                       ),
                       onPressed: () => {
                         Navigator.push(
@@ -99,7 +110,8 @@ class _StudentPopularEventBoxState extends State<StudentPopularEventBox> {
                       child: Text(
                         "View event",
                         style: TextStyle(
-                          color: Colors.brown,
+                          color: d3,
+                          fontWeight: FontWeight.w600,
                         ),
                       ),
                     ),

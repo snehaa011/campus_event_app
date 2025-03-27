@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print
 
+import 'package:campus_event_app/data/color.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -94,7 +95,7 @@ void fetchDocument() async {
 }
 
 ButtonStyle bs = ButtonStyle(
-  backgroundColor: WidgetStatePropertyAll(Colors.brown),
+  backgroundColor: WidgetStatePropertyAll(d2),
   overlayColor: WidgetStatePropertyAll(const Color.fromARGB(36, 121, 85, 72)),
   shape: WidgetStatePropertyAll(
     RoundedRectangleBorder(
@@ -105,14 +106,6 @@ ButtonStyle bs = ButtonStyle(
 );
 ButtonStyle lgn = ButtonStyle(
   backgroundColor: WidgetStatePropertyAll(
-    Colors.brown,
-  ),
-  padding: WidgetStatePropertyAll(
-    EdgeInsets.fromLTRB(50, 20, 50, 20),
-  ),
-  shape: WidgetStatePropertyAll(
-    RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(10),
-    ),
+    d3,
   ),
 );

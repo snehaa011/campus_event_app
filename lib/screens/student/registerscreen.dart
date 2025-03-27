@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:campus_event_app/data/ashwin_test.dart';
+import 'package:campus_event_app/data/color.dart';
 import 'package:campus_event_app/data/data.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -38,10 +39,24 @@ class _StudentRegisterScreenState extends State<StudentRegisterScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        title: Text("Register"),
+        backgroundColor: Colors.transparent,
+        title: Text(
+          "Register",
+          style: TextStyle(
+            color: d7,
+          ),
+        ),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.arrow_back,
+            color: d7,
+          ),
+        ),
       ),
-      backgroundColor: Colors.white,
+      backgroundColor: d1,
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,23 +68,31 @@ class _StudentRegisterScreenState extends State<StudentRegisterScreen> {
                 style: TextStyle(
                   fontSize: 25,
                   fontWeight: FontWeight.w800,
+                  color: Colors.white,
                 ),
               ),
             ),
             Container(
               color: Colors.brown,
-              height: 200,
+              // height: 200,
               width: double.infinity,
               child: ClipRRect(
                 child: Image.network(
                   widget.event.img,
-                  fit: BoxFit.cover,
+                  width: double.infinity,
+                  fit: BoxFit.fitHeight,
                 ),
               ),
             ),
             Padding(
               padding: EdgeInsets.all(20),
-              child: Text(widget.event.content),
+              child: Text(
+                widget.event.content,
+                style: TextStyle(
+                  color: const Color.fromARGB(218, 245, 245, 245),
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
             ),
             Padding(
               padding: EdgeInsets.fromLTRB(20, 0, 20, 20),
@@ -77,17 +100,35 @@ class _StudentRegisterScreenState extends State<StudentRegisterScreen> {
                 children: [
                   Row(
                     children: [
-                      Icon(Icons.calendar_today),
+                      Icon(
+                        Icons.calendar_today,
+                        color: d7,
+                      ),
                       SizedBox(
                         width: 5,
                       ),
-                      Text(DateFormat('yMMMd').format(widget.event.date)),
+                      Text(
+                        DateFormat('yMMMd').format(widget.event.date),
+                        style: TextStyle(
+                          color: d7,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                       Spacer(),
-                      Icon(Icons.alarm),
+                      Icon(
+                        Icons.access_time,
+                        color: d7,
+                      ),
                       SizedBox(
                         width: 5,
                       ),
-                      Text(widget.event.start.format(context)),
+                      Text(
+                        widget.event.start.format(context),
+                        style: TextStyle(
+                          color: d7,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ],
                   ),
                   SizedBox(
@@ -95,12 +136,35 @@ class _StudentRegisterScreenState extends State<StudentRegisterScreen> {
                   ),
                   Row(
                     children: [
-                      Icon(Icons.location_on),
+                      Icon(
+                        Icons.location_on,
+                        color: d7,
+                      ),
                       SizedBox(
                         width: 5,
                       ),
-                      Text(widget.event.venue),
+                      Text(
+                        widget.event.venue,
+                        style: TextStyle(
+                          color: d7,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                       Spacer(),
+                      Icon(
+                        Icons.person,
+                        color: d7,
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text(
+                        widget.event.org,
+                        style: TextStyle(
+                          color: d7,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ],
                   ),
                   SizedBox(
@@ -109,7 +173,7 @@ class _StudentRegisterScreenState extends State<StudentRegisterScreen> {
                   if (DateTime.now().compareTo(widget.event.date) == -1)
                     ElevatedButton(
                       style: ButtonStyle(
-                        backgroundColor: WidgetStatePropertyAll(Colors.brown),
+                        backgroundColor: WidgetStatePropertyAll(dd),
                         overlayColor: WidgetStatePropertyAll(
                             const Color.fromARGB(36, 121, 85, 72)),
                         shape: WidgetStatePropertyAll(

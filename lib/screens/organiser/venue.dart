@@ -1,3 +1,4 @@
+import 'package:campus_event_app/data/color.dart';
 import 'package:campus_event_app/data/functions.dart';
 import 'package:campus_event_app/data/venuemodel.dart';
 import 'package:campus_event_app/widgets/organiser/datepicker.dart';
@@ -89,7 +90,7 @@ class _VenuePageState extends State<VenuePage> {
     setState(() {
       loading = true;
     });
-    
+
     allvenue = await getVenues();
     Set<Venue> s = {};
     for (var v in allvenue) {
@@ -105,19 +106,31 @@ class _VenuePageState extends State<VenuePage> {
         print(v.name);
       }
     });
-    loading=false;
+    loading = false;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: d1,
       appBar: AppBar(
-          leading: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: Icon(Icons.arrow_back)),
-          title: Text('Select venue')),
+        backgroundColor: Colors.transparent,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.arrow_back,
+            color: d7,
+          ),
+        ),
+        title: Text(
+          'Select venue',
+          style: TextStyle(
+            color: d7,
+          ),
+        ),
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(10.0),
@@ -131,8 +144,8 @@ class _VenuePageState extends State<VenuePage> {
                 children: [
                   Expanded(
                     child: createSmallButton(
-                        Colors.white,
-                        Colors.brown,
+                        Color.fromARGB(255, 233, 233, 233),
+                        d5,
                         Icons.event,
                         'Date',
                         () => selectDate(context, setDate, date),
@@ -140,8 +153,8 @@ class _VenuePageState extends State<VenuePage> {
                   ),
                   Expanded(
                     child: createSmallButton(
-                        Colors.white,
-                        Colors.brown,
+                        Color.fromARGB(255, 233, 233, 233),
+                        d5,
                         Icons.access_alarm,
                         'Start Time',
                         () => selectTime(context, setStartTime, start),
@@ -149,8 +162,8 @@ class _VenuePageState extends State<VenuePage> {
                   ),
                   Expanded(
                     child: createSmallButton(
-                        Colors.white,
-                        Colors.brown,
+                        Color.fromARGB(255, 233, 233, 233),
+                        d5,
                         Icons.access_alarm,
                         'End Time',
                         () => selectTime(context, setEndTime, end),
@@ -174,8 +187,7 @@ class _VenuePageState extends State<VenuePage> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(50)),
                           padding: EdgeInsets.all(2),
-                          backgroundColor:
-                              const Color.fromARGB(255, 64, 49, 44),
+                          backgroundColor: d5,
                           foregroundColor:
                               const Color.fromARGB(255, 229, 229, 229)),
                     ),
@@ -198,6 +210,7 @@ class _VenuePageState extends State<VenuePage> {
                             children: [
                               Icon(
                                 Icons.event_busy,
+                                color: Colors.white,
                                 size: 80,
                               ),
                               SizedBox(
@@ -207,6 +220,7 @@ class _VenuePageState extends State<VenuePage> {
                                 "No venue available",
                                 style: TextStyle(
                                   fontSize: 20,
+                                  color: Colors.white,
                                 ),
                               ),
                             ],

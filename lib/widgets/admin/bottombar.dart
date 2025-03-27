@@ -1,3 +1,4 @@
+import 'package:campus_event_app/data/color.dart';
 import 'package:flutter/material.dart';
 
 // ignore: must_be_immutable
@@ -18,7 +19,7 @@ class _AdminBottomBarState extends State<AdminBottomBar> {
       height: 75,
       width: double.infinity,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: dd,
         shape: BoxShape.rectangle,
         borderRadius: BorderRadius.circular(15),
       ),
@@ -35,10 +36,13 @@ class _AdminBottomBarState extends State<AdminBottomBar> {
             icon: i == 0
                 ? Icon(
                     Icons.home,
-                    color: Colors.black,
+                    color: d7,
                     size: 30,
                   )
-                : Icon(Icons.home_outlined),
+                : Icon(
+                    Icons.home_outlined,
+                    color: Colors.grey,
+                  ),
           ),
           IconButton(
             onPressed: () => {
@@ -50,10 +54,13 @@ class _AdminBottomBarState extends State<AdminBottomBar> {
             icon: i == 1
                 ? Icon(
                     Icons.event,
-                    color: Colors.black,
+                    color: d7,
                     size: 30,
                   )
-                : Icon(Icons.event_outlined),
+                : Icon(
+                    Icons.event_outlined,
+                    color: Colors.grey,
+                  ),
           ),
         ],
       ),

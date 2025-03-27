@@ -1,4 +1,5 @@
 import 'package:campus_event_app/data/ashwin_test.dart';
+import 'package:campus_event_app/data/color.dart';
 import 'package:campus_event_app/data/data.dart';
 import 'package:campus_event_app/widgets/searchbar.dart';
 import 'package:campus_event_app/widgets/student/eventcarousel.dart';
@@ -50,7 +51,7 @@ class _StudentHomeState extends State<StudentHome> {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      color: Colors.white,
+      color: d1,
       child: SingleChildScrollView(
         padding: EdgeInsets.fromLTRB(0, 0, 0, 80),
         child: Column(
@@ -63,7 +64,7 @@ class _StudentHomeState extends State<StudentHome> {
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 35,
-                  color: Colors.black,
+                  color: Colors.white,
                 ),
               ),
             ),
@@ -77,7 +78,7 @@ class _StudentHomeState extends State<StudentHome> {
                 "Popular Events",
                 style: TextStyle(
                   fontSize: 18,
-                  color: Colors.black,
+                  color: Colors.white,
                   fontWeight: FontWeight.w800,
                 ),
               ),

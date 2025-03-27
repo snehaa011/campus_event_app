@@ -1,4 +1,5 @@
 import 'package:campus_event_app/data/ashwin_test.dart';
+import 'package:campus_event_app/data/color.dart';
 import 'package:campus_event_app/screens/LoginScreen.dart';
 import 'package:campus_event_app/widgets/admin/bottombar.dart';
 import 'package:campus_event_app/widgets/admin/eventstats.dart';
@@ -35,14 +36,15 @@ class _AdminHomePageState extends State<AdminHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: dd,
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 212, 208, 210),
+        backgroundColor: Colors.transparent,
         // title: Text("Admin"),
         actions: [
           TextButton(
             style: ButtonStyle(
               overlayColor: WidgetStatePropertyAll(
-                Color.fromARGB(43, 121, 85, 72),
+                d7,
               ),
             ),
             onPressed: () {
@@ -56,7 +58,7 @@ class _AdminHomePageState extends State<AdminHomePage> {
             child: Text(
               "Logout",
               style: TextStyle(
-                color: Colors.brown,
+                color: d7,
               ),
             ),
           ),

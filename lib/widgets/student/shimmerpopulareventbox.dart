@@ -1,3 +1,4 @@
+import 'package:campus_event_app/data/color.dart';
 import 'package:campus_event_app/widgets/shimmercontainer.dart';
 import 'package:flutter/material.dart';
 
@@ -13,7 +14,7 @@ class StudentShimmerPopularEventBox extends StatelessWidget {
           Container(
             padding: EdgeInsets.fromLTRB(10, 20, 10, 10),
             decoration: BoxDecoration(
-              color: Color.fromARGB(255, 223, 223, 223),
+              color: dd,
               borderRadius: BorderRadius.circular(10),
             ),
             child: Column(

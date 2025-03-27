@@ -1,7 +1,9 @@
-// ignore_for_file: must_be_immutable
+// ignore_for_file: must_be_immutable, avoid_print
 
+import 'package:campus_event_app/data/color.dart';
 import 'package:campus_event_app/data/data.dart';
 import 'package:campus_event_app/widgets/admin/eventsTile.dart';
+import 'package:campus_event_app/widgets/admin/shimmereventtile.dart';
 
 import 'package:flutter/material.dart';
 
@@ -19,10 +21,12 @@ class _EventStatsPageState extends State<EventStatsPage> {
   bool load = true;
   void fetchUpcomingEvents() async {
     List<Event> l = await admin.fetchUpcomingEvents();
-    setState(() {
-      list = l;
-      load = false;
-    });
+    if (mounted) {
+      setState(() {
+        list = l;
+        load = false;
+      });
+    }
     print(l);
   }
 
@@ -38,21 +42,29 @@ class _EventStatsPageState extends State<EventStatsPage> {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      decoration:
-          BoxDecoration(color: const Color.fromARGB(255, 212, 208, 210)),
+      decoration: BoxDecoration(
+        color: dd,
+      ),
       child: SingleChildScrollView(
         child: Column(
           children: [
             Center(
                 child: Text(
               'Upcoming Events',
-              style: TextStyle(fontSize: 27, fontWeight: FontWeight.w500),
+              style: TextStyle(
+                fontSize: 27,
+                fontWeight: FontWeight.w500,
+                color: d6,
+              ),
             )),
-            SizedBox(height: 10),
-            SizedBox(height: 10),
+            SizedBox(height: 20),
             load
-                ? Center(
-                    child: CircularProgressIndicator(),
+                ? ListView.builder(
+                    itemCount: 3,
+                    itemBuilder: (context, index) => AdminShimmerEventTile(),
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, 70),
                   )
                 : ListView.builder(
                     physics: NeverScrollableScrollPhysics(),

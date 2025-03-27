@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:campus_event_app/data/ashwin_test.dart';
+import 'package:campus_event_app/data/color.dart';
 import 'package:flutter/material.dart';
 
 class StudentFilter extends StatelessWidget {
@@ -17,7 +18,7 @@ class StudentFilter extends StatelessWidget {
         child: ElevatedButton(
           onPressed: () => {func(org[index])},
           style: ButtonStyle(
-            backgroundColor: WidgetStatePropertyAll(Colors.brown),
+            backgroundColor: WidgetStatePropertyAll(d6),
             shape: WidgetStatePropertyAll(
               CircleBorder(),
             ),
@@ -25,7 +26,7 @@ class StudentFilter extends StatelessWidget {
           child: Text(
             org[index],
             style: TextStyle(
-              color: Colors.white,
+              color: d1,
             ),
           ),
         ),

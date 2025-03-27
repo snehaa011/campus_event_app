@@ -1,3 +1,4 @@
+import 'package:campus_event_app/data/color.dart';
 import 'package:campus_event_app/data/data.dart';
 import 'package:campus_event_app/widgets/student/notificationbox.dart';
 import 'package:campus_event_app/widgets/student/shimmernotificationbox.dart';
@@ -36,7 +37,7 @@ class _StudentNotificationsState extends State<StudentNotifications> {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      color: Colors.white,
+      color: d1,
       child: SingleChildScrollView(
         child: Column(
           children: [
@@ -44,7 +45,11 @@ class _StudentNotificationsState extends State<StudentNotifications> {
               padding: EdgeInsets.all(20),
               child: Text(
                 "Updates",
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 25,
+                  color: Colors.white70,
+                ),
               ),
             ),
             load

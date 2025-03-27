@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:campus_event_app/data/ashwin_test.dart';
+import 'package:campus_event_app/data/color.dart';
 import 'package:campus_event_app/data/data.dart';
 import 'package:campus_event_app/screens/student/registerscreen.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +43,13 @@ class _StudentEventBoxState extends State<StudentEventBox> {
       children: [
         ExpansionTile(
           childrenPadding: EdgeInsets.fromLTRB(15, 0, 15, 15),
-          title: Text(widget.event.name),
+          title: Text(
+            widget.event.name,
+            style: TextStyle(
+              color: dd,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
           backgroundColor: const Color.fromARGB(255, 223, 223, 223),
           initiallyExpanded: true,
           collapsedBackgroundColor: const Color.fromARGB(255, 223, 223, 223),
@@ -59,8 +66,12 @@ class _StudentEventBoxState extends State<StudentEventBox> {
                 Container(
                   width: 100,
                   height: 100,
-                  color: Colors.brown,
+                  decoration: BoxDecoration(
+                    color: dd,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
                   child: ClipRRect(
+                    borderRadius: BorderRadius.circular(5),
                     child: Image.network(
                       widget.event.img,
                       fit: BoxFit.cover,
@@ -110,6 +121,11 @@ class _StudentEventBoxState extends State<StudentEventBox> {
                 ),
                 Text(widget.event.venue),
                 Spacer(),
+                Icon(Icons.person),
+                SizedBox(
+                  width: 5,
+                ),
+                Text(widget.event.org),
               ],
             ),
             SizedBox(

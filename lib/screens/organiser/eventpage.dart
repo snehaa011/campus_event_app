@@ -1,3 +1,4 @@
+import 'package:campus_event_app/data/color.dart';
 import 'package:campus_event_app/data/eventmodel.dart';
 import 'package:campus_event_app/widgets/admin/participants.dart';
 import 'package:flutter/material.dart';
@@ -16,10 +17,19 @@ class _ViewEventPageState extends State<ViewEventPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Event Details"),
-        backgroundColor: Colors.brown.shade700,
-        foregroundColor: Colors.white,
+        backgroundColor: d1,
+        foregroundColor: d7,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.arrow_back,
+            color: d7,
+          ),
+        ),
       ),
-      backgroundColor: Colors.brown.shade50,
+      backgroundColor: d1,
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(20.0),
@@ -34,7 +44,7 @@ class _ViewEventPageState extends State<ViewEventPage> {
                       style: TextStyle(
                         fontSize: 28,
                         fontWeight: FontWeight.bold,
-                        color: Colors.brown.shade800,
+                        color: Colors.white,
                       ),
                       textAlign: TextAlign.center,
                     ),
@@ -53,7 +63,7 @@ class _ViewEventPageState extends State<ViewEventPage> {
               ),
               SizedBox(height: 20),
               Card(
-                color: Colors.white,
+                color: const Color.fromARGB(242, 255, 255, 255),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),
@@ -65,36 +75,50 @@ class _ViewEventPageState extends State<ViewEventPage> {
                     children: [
                       Text(
                         "${widget.event.desc}",
-                        style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500, color:Colors.brown.shade900),
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: dd,
+                        ),
                       ),
                       SizedBox(height: 15),
                       _buildInfoRow(Icons.location_on, "${widget.event.venue}"),
-                      _buildInfoRow(Icons.access_time, "${widget.event.start.format(context)} - ${widget.event.end.format(context)}"),
-                      _buildInfoRow(Icons.calendar_today, "${widget.event.date.day.toString().padLeft(2, '0')}-${widget.event.date.month.toString().padLeft(2, '0')}-${widget.event.date.year}"),
-                      _buildInfoRow(Icons.people, "Max Participants: ${widget.event.maxParticipants}"),
-                      _buildInfoRow(Icons.person_outline, "Registered: ${widget.event.participants?.length}"),
-                      _buildInfoRow(Icons.money, "Registration fees: ${widget.event.regFee}"),
-                      _buildInfoRow(Icons.check_circle_outline, "Status: ${widget.event.status.toUpperCase()}"),
+                      _buildInfoRow(Icons.access_time,
+                          "${widget.event.start.format(context)} - ${widget.event.end.format(context)}"),
+                      _buildInfoRow(Icons.calendar_today,
+                          "${widget.event.date.day.toString().padLeft(2, '0')}-${widget.event.date.month.toString().padLeft(2, '0')}-${widget.event.date.year}"),
+                      _buildInfoRow(Icons.people,
+                          "Max Participants: ${widget.event.maxParticipants}"),
+                      _buildInfoRow(Icons.person_outline,
+                          "Registered: ${widget.event.participants?.length}"),
+                      _buildInfoRow(Icons.money,
+                          "Registration fees: ${widget.event.regFee}"),
+                      _buildInfoRow(Icons.check_circle_outline,
+                          "Status: ${widget.event.status.toUpperCase()}"),
                       SizedBox(height: 15),
                       TextButton(
-                      style: ButtonStyle(
-                        overlayColor: WidgetStatePropertyAll(
-                          const Color.fromARGB(43, 121, 85, 72),
-                        ),
-                      ),
-                      onPressed: () => {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Participants(widget.event.name),
+                        style: ButtonStyle(
+                          overlayColor: WidgetStatePropertyAll(
+                            const Color.fromARGB(43, 121, 85, 72),
                           ),
                         ),
-                      },
-                      child: Text(
-                        "View participants",
-                        style: TextStyle(fontSize: 16, color: const Color.fromARGB(255, 95, 64, 57)),
+                        onPressed: () => {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) =>
+                                  Participants(widget.event.name),
+                            ),
+                          ),
+                        },
+                        child: Text(
+                          "View participants",
+                          style: TextStyle(
+                            fontSize: 16,
+                            color: d1,
+                          ),
+                        ),
                       ),
-                    ),
                     ],
                   ),
                 ),
@@ -111,12 +135,12 @@ class _ViewEventPageState extends State<ViewEventPage> {
       padding: const EdgeInsets.symmetric(vertical: 5),
       child: Row(
         children: [
-          Icon(icon, color: const Color.fromARGB(255, 42, 37, 37)),
+          Icon(icon, color: d6),
           SizedBox(width: 10),
           Expanded(
             child: Text(
               text,
-              style: TextStyle(fontSize: 16, color: const Color.fromARGB(255, 95, 64, 57)),
+              style: TextStyle(fontSize: 16, color: dd),
             ),
           ),
         ],

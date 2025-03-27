@@ -1,4 +1,5 @@
 import 'package:campus_event_app/data/ashwin_test.dart';
+import 'package:campus_event_app/data/color.dart';
 import 'package:campus_event_app/data/data.dart';
 import 'package:campus_event_app/widgets/searchbar.dart';
 import 'package:campus_event_app/widgets/student/eventbox.dart';
@@ -115,7 +116,7 @@ class _StudentEventsState extends State<StudentEvents> {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      color: Colors.white,
+      color: d1,
       child: SingleChildScrollView(
         child: Column(
           children: [
@@ -141,12 +142,12 @@ class _StudentEventsState extends State<StudentEvents> {
                         style: TextStyle(
                           fontWeight:
                               i == 0 ? FontWeight.bold : FontWeight.normal,
-                          color: Colors.black,
+                          color: i == 0 ? d7 : Colors.white54,
                         ),
                       ),
                       Container(
                         height: 2,
-                        color: i == 0 ? Colors.black : Colors.transparent,
+                        color: i == 0 ? d7 : Colors.transparent,
                         width: 20,
                       ),
                     ],
@@ -167,12 +168,12 @@ class _StudentEventsState extends State<StudentEvents> {
                         style: TextStyle(
                           fontWeight:
                               i == 1 ? FontWeight.bold : FontWeight.normal,
-                          color: Colors.black,
+                          color: i == 1 ? d7 : Colors.white54,
                         ),
                       ),
                       Container(
                         height: 2,
-                        color: i == 1 ? Colors.black : Colors.transparent,
+                        color: i == 1 ? d7 : Colors.transparent,
                         width: 20,
                       ),
                     ],
@@ -193,12 +194,12 @@ class _StudentEventsState extends State<StudentEvents> {
                         style: TextStyle(
                           fontWeight:
                               i == 2 ? FontWeight.bold : FontWeight.normal,
-                          color: Colors.black,
+                          color: i == 2 ? d7 : Colors.white54,
                         ),
                       ),
                       Container(
                         height: 2,
-                        color: i == 2 ? Colors.black : Colors.transparent,
+                        color: i == 2 ? d7 : Colors.transparent,
                         width: 20,
                       ),
                     ],
@@ -231,6 +232,7 @@ class _StudentEventsState extends State<StudentEvents> {
                             Icon(
                               Icons.event_busy,
                               size: 80,
+                              color: Color.fromARGB(255, 233, 233, 233),
                             ),
                             SizedBox(
                               height: 10,
@@ -239,6 +241,7 @@ class _StudentEventsState extends State<StudentEvents> {
                               "No events found",
                               style: TextStyle(
                                 fontSize: 20,
+                                color: Color.fromARGB(255, 233, 233, 233),
                               ),
                             ),
                           ],

@@ -1,6 +1,7 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:campus_event_app/data/ashwin_test.dart';
+import 'package:campus_event_app/data/color.dart';
 import 'package:campus_event_app/data/data.dart';
 import 'package:campus_event_app/screens/student/registerscreen.dart';
 import 'package:flutter/material.dart';
@@ -37,26 +38,29 @@ class StudentNotificationBox extends StatelessWidget {
                   Container(
                     padding: EdgeInsets.fromLTRB(10, 2, 10, 2),
                     decoration: BoxDecoration(
-                      color: Colors.yellow,
+                      color: d7,
                       borderRadius: BorderRadius.circular(5),
                     ),
                     child: Text(
                       not.org,
-                      style:
-                          TextStyle(fontSize: 11, fontWeight: FontWeight.bold),
+                      style: TextStyle(
+                        fontSize: 11,
+                        fontWeight: FontWeight.bold,
+                        color: dd,
+                      ),
                     ),
                   ),
                   Spacer(),
                   Text(
                     DateFormat('MMMEd').format(not.date),
-                    style: TextStyle(color: Colors.grey),
+                    style: TextStyle(color: Colors.blueGrey),
                   ),
                   SizedBox(
                     width: 8,
                   ),
                   Text(
                     not.time.format(context),
-                    style: TextStyle(color: Colors.grey),
+                    style: TextStyle(color: Colors.blueGrey),
                   ),
                 ],
               ),
@@ -66,6 +70,7 @@ class StudentNotificationBox extends StatelessWidget {
               Text(
                 not.title,
                 style: TextStyle(
+                  color: dd,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -75,7 +80,7 @@ class StudentNotificationBox extends StatelessWidget {
               Text(
                 not.name,
                 style: TextStyle(
-                  fontWeight: FontWeight.w400,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
               SizedBox(
@@ -83,6 +88,9 @@ class StudentNotificationBox extends StatelessWidget {
               ),
               Text(
                 not.content,
+                style: TextStyle(
+                  color: d1,
+                ),
                 // maxLines: 1,
               ),
               TextButton(
@@ -105,7 +113,7 @@ class StudentNotificationBox extends StatelessWidget {
                 child: Text(
                   "Go to event",
                   style: TextStyle(
-                    color: Colors.brown,
+                    color: d2,
                   ),
                 ),
               ),

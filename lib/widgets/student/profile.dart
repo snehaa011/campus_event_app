@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors_in_immutables, avoid_print
 
 import 'package:campus_event_app/data/ashwin_test.dart';
+import 'package:campus_event_app/data/color.dart';
 import 'package:campus_event_app/data/data.dart';
 import 'package:campus_event_app/screens/student/eventhistoryscreen.dart';
 import 'package:campus_event_app/widgets/student/phonebox.dart';
@@ -52,7 +53,7 @@ class _StudentProfileState extends State<StudentProfile> {
     return Container(
       height: double.infinity,
       width: double.infinity,
-      color: Colors.white,
+      color: d1,
       child: SingleChildScrollView(
         padding: EdgeInsets.fromLTRB(0, 0, 0, 140),
         child: Column(
@@ -62,7 +63,7 @@ class _StudentProfileState extends State<StudentProfile> {
               padding: EdgeInsets.fromLTRB(20, 30, 20, 30),
               width: double.infinity,
               decoration: BoxDecoration(
-                color: Colors.brown,
+                color: const Color.fromARGB(240, 255, 255, 255),
                 borderRadius: BorderRadius.circular(0),
               ),
               child: Row(
@@ -82,7 +83,7 @@ class _StudentProfileState extends State<StudentProfile> {
                                 user.name,
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.white,
+                                  color: dd,
                                   fontSize: 25,
                                   overflow: TextOverflow.ellipsis,
                                 ),
@@ -98,7 +99,8 @@ class _StudentProfileState extends State<StudentProfile> {
                             : Text(
                                 user.email,
                                 style: TextStyle(
-                                  color: Colors.white,
+                                  color: d4,
+                                  fontWeight: FontWeight.w500,
                                   fontSize: 15,
                                 ),
                               ),
@@ -132,6 +134,7 @@ class _StudentProfileState extends State<StudentProfile> {
                   Text(
                     "Roll No.",
                     style: TextStyle(
+                      color: d6,
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
                     ),
@@ -142,7 +145,10 @@ class _StudentProfileState extends State<StudentProfile> {
                         )
                       : Text(
                           user.rollno,
-                          style: TextStyle(fontSize: 20),
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white70,
+                          ),
                         ),
                   SizedBox(
                     height: 10,
@@ -150,6 +156,7 @@ class _StudentProfileState extends State<StudentProfile> {
                   Text(
                     "Branch",
                     style: TextStyle(
+                      color: d6,
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
                     ),
@@ -160,7 +167,10 @@ class _StudentProfileState extends State<StudentProfile> {
                         )
                       : Text(
                           user.branch,
-                          style: TextStyle(fontSize: 20),
+                          style: TextStyle(
+                            fontSize: 20,
+                            color: Colors.white70,
+                          ),
                         ),
                   SizedBox(
                     height: 10,
@@ -178,6 +188,7 @@ class _StudentProfileState extends State<StudentProfile> {
                           Text(
                             "Phone No.",
                             style: TextStyle(
+                              color: d6,
                               fontWeight: FontWeight.bold,
                               fontSize: 20,
                             ),
@@ -193,7 +204,7 @@ class _StudentProfileState extends State<StudentProfile> {
                       ),
                       ElevatedButton(
                         style: ButtonStyle(
-                          backgroundColor: WidgetStatePropertyAll(Colors.brown),
+                          backgroundColor: WidgetStatePropertyAll(d5),
                           shape: WidgetStatePropertyAll(
                             CircleBorder(),
                           ),
@@ -218,9 +229,7 @@ class _StudentProfileState extends State<StudentProfile> {
               padding: EdgeInsets.all(10),
               child: TextButton(
                 style: ButtonStyle(
-                  overlayColor: WidgetStatePropertyAll(
-                      const Color.fromARGB(36, 121, 85, 72)),
-                  surfaceTintColor: WidgetStatePropertyAll(Colors.brown),
+                  overlayColor: WidgetStatePropertyAll(d7),
                 ),
                 onPressed: () => {
                   Navigator.push(
@@ -233,7 +242,9 @@ class _StudentProfileState extends State<StudentProfile> {
                 },
                 child: Text(
                   "View event history",
-                  style: TextStyle(color: Colors.brown),
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),

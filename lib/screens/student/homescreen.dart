@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'package:campus_event_app/auth_service.dart';
+import 'package:campus_event_app/data/color.dart';
 import 'package:campus_event_app/screens/loginscreen.dart';
 import 'package:campus_event_app/widgets/student/bottombar.dart';
 import 'package:campus_event_app/widgets/student/events.dart';
@@ -12,6 +13,7 @@ import 'package:flutter/material.dart';
 class StudentHomePage extends StatefulWidget {
   StudentHomePage({super.key});
   final AuthService _authService = AuthService();
+
   @override
   State<StudentHomePage> createState() => _StudentHomePageState();
 }
@@ -51,9 +53,9 @@ class _StudentHomePageState extends State<StudentHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 255, 255, 255),
+      backgroundColor: d1,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: Colors.transparent,
         // title: Text("Student"),
         actions: [
           if (v == 3)
@@ -70,7 +72,7 @@ class _StudentHomePageState extends State<StudentHomePage> {
               child: Text(
                 "Logout",
                 style: TextStyle(
-                  color: Colors.brown,
+                  color: d7,
                 ),
               ),
             ),

@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:campus_event_app/data/color.dart';
 import 'package:campus_event_app/data/eventmodel.dart';
 import 'package:campus_event_app/data/notifmodel.dart';
 import 'package:campus_event_app/screens/organiser/eventpage.dart';
@@ -11,9 +12,10 @@ class NotificationBox extends StatelessWidget {
   NotificationBox(Notif n, {super.key}) {
     not = n;
   }
-  void fetchData() async{
+  void fetchData() async {
     e = await not.getEvent();
   }
+
   @override
   Widget build(BuildContext context) {
     fetchData();
@@ -23,7 +25,7 @@ class NotificationBox extends StatelessWidget {
         padding: EdgeInsets.fromLTRB(20, 20, 20, 10),
         width: double.infinity,
         decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 240, 240, 240),
+          color: const Color.fromARGB(255, 233, 233, 233),
           borderRadius: BorderRadius.circular(15),
         ),
         child: Column(
@@ -55,7 +57,7 @@ class NotificationBox extends StatelessWidget {
               child: Text(
                 "Go to event",
                 style: TextStyle(
-                  color: Colors.brown,
+                  color: d3,
                 ),
               ),
             ),

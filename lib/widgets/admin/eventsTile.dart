@@ -1,3 +1,6 @@
+// ignore_for_file: file_names
+
+import 'package:campus_event_app/data/color.dart';
 import 'package:campus_event_app/widgets/admin/expandedTile.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -12,8 +15,9 @@ class EventsTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 255, 255, 255),
-          borderRadius: BorderRadius.circular(10)),
+        color: const Color.fromARGB(255, 233, 233, 233),
+        borderRadius: BorderRadius.circular(10),
+      ),
       margin: EdgeInsets.all(10),
       width: MediaQuery.of(context).size.width,
       child: Padding(
@@ -21,8 +25,26 @@ class EventsTile extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(events.name,
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+            Row(
+              children: [
+                Text(
+                  events.name,
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                Spacer(),
+                Text(
+                  events.org,
+                  style: TextStyle(
+                    color: d1,
+                    fontWeight: FontWeight.w400,
+                  ),
+                )
+              ],
+            ),
             SizedBox(height: 8),
             Row(
               children: [
@@ -30,8 +52,9 @@ class EventsTile extends StatelessWidget {
                   height: 100,
                   width: 100,
                   decoration: BoxDecoration(
-                      color: Colors.brown,
-                      borderRadius: BorderRadius.circular(5)),
+                    color: d1,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(5),
                     child: Image.network(events.img,
@@ -40,9 +63,14 @@ class EventsTile extends StatelessWidget {
                 ),
                 SizedBox(width: 10),
                 Expanded(
-                  child: Text(events.content,
-                      maxLines: 4,
-                      style: TextStyle(overflow: TextOverflow.ellipsis)),
+                  child: Text(
+                    events.content,
+                    maxLines: 4,
+                    style: TextStyle(
+                      overflow: TextOverflow.ellipsis,
+                      color: d1,
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -52,21 +80,31 @@ class EventsTile extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Icon(Icons.calendar_month),
+                    Icon(
+                      Icons.calendar_month,
+                      color: d1,
+                    ),
                     Text(
                       " ${DateFormat('MMMMd').format(events.date)}",
                       style: TextStyle(
-                          color: Colors.brown, fontWeight: FontWeight.w700),
+                        color: d1,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                   ],
                 ),
                 Row(
                   children: [
-                    Icon(Icons.access_time),
+                    Icon(
+                      Icons.access_time,
+                      color: d1,
+                    ),
                     Text(
                       " ${events.start.format(context)}",
                       style: TextStyle(
-                          color: Colors.brown, fontWeight: FontWeight.w700),
+                        color: d1,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                   ],
                 ),
@@ -78,21 +116,31 @@ class EventsTile extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    Icon(Icons.location_pin),
+                    Icon(
+                      Icons.location_pin,
+                      color: d1,
+                    ),
                     Text(
                       " ${events.venue}",
                       style: TextStyle(
-                          color: Colors.brown, fontWeight: FontWeight.w700),
+                        color: d1,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                   ],
                 ),
                 Row(
                   children: [
-                    Icon(Icons.groups),
+                    Icon(
+                      Icons.groups,
+                      color: d1,
+                    ),
                     Text(
                       " ${events.participants.length}",
                       style: TextStyle(
-                          color: Colors.brown, fontWeight: FontWeight.w700),
+                        color: d1,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                   ],
                 ),
@@ -103,20 +151,25 @@ class EventsTile extends StatelessWidget {
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              Expandedtile(eventDesc: events)));
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => Expandedtile(eventDesc: events),
+                    ),
+                  );
                 },
                 style: ButtonStyle(
-                    shape: WidgetStatePropertyAll(RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(5))),
-                    backgroundColor: WidgetStatePropertyAll(Colors.brown)),
-                child: Container(
-                  width: 300,
+                  shape: WidgetStatePropertyAll(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                  ),
+                  backgroundColor: WidgetStatePropertyAll(d3),
+                ),
+                child: SizedBox(
+                  width: double.infinity,
                   child: Center(
                     child: Text(
-                      'View Event Statstics',
+                      'View Event Statistics',
                       style: TextStyle(color: Colors.white),
                     ),
                   ),

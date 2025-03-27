@@ -1,9 +1,11 @@
+import 'package:campus_event_app/data/color.dart';
 import 'package:flutter/material.dart';
 
-void moreInfo(
-    BuildContext context, Function(double?) setRegFee, Function(int?) setMp, double? fee, int? mp) {
-  final TextEditingController _mp = TextEditingController(text: mp!=null? mp.toString(): ""),
-      _fees = TextEditingController(text: fee!=null? fee.toString(): "");
+void moreInfo(BuildContext context, Function(double?) setRegFee,
+    Function(int?) setMp, double? fee, int? mp) {
+  final TextEditingController _mp =
+          TextEditingController(text: mp != null ? mp.toString() : ""),
+      _fees = TextEditingController(text: fee != null ? fee.toString() : "");
   showModalBottomSheet(
       context: context,
       builder: (context) {
@@ -11,6 +13,10 @@ void moreInfo(
           builder: (context, setState) {
             return Container(
               height: 400,
+              decoration: BoxDecoration(
+                color: Color.fromARGB(255, 233, 233, 233),
+                borderRadius: BorderRadius.circular(15),
+              ),
               padding: EdgeInsets.all(20),
               child: Column(
                 children: [
@@ -28,10 +34,11 @@ void moreInfo(
                         child: Icon(
                           Icons.close,
                           size: 16,
-                          color: const Color.fromARGB(255, 47, 45, 45),
+                          color: Colors.white,
                         ),
                         style: ElevatedButton.styleFrom(
                           shape: const CircleBorder(),
+                          backgroundColor: dd,
                           padding: const EdgeInsets.all(10),
                         ),
                       ),
@@ -48,7 +55,7 @@ void moreInfo(
                         width: 100,
                         child: TextFormField(
                           // onEditingComplete: () {
-                            
+
                           //   setMp(int.tryParse(_mp.text));
                           // },
                           // onFieldSubmitted: (value) {
@@ -58,7 +65,13 @@ void moreInfo(
                           controller: _mp,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: d3,
+                              ),
+                            ),
                           ),
+                          cursorColor: dd,
                         ),
                       )
                     ],
@@ -84,7 +97,13 @@ void moreInfo(
                           controller: _fees,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color: d3,
+                              ),
+                            ),
                           ),
+                          cursorColor: dd,
                         ),
                       )
                     ],
@@ -98,10 +117,17 @@ void moreInfo(
                       setRegFee(double.tryParse(_fees.text));
                       Navigator.pop(context);
                     },
-                    child: Text('Done'),
+                    child: Text(
+                      'Done',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
                     style: ElevatedButton.styleFrom(
                       minimumSize:
                           Size(double.infinity, 50), // Full-width button
+                      overlayColor: d7,
+                      backgroundColor: d5,
                     ),
                   )
                 ],
